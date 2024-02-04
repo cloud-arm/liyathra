@@ -19,7 +19,17 @@
 </head>
 
 <body class="bg-light customer" style="overflow-y: scroll;">
-    <div class="container flex my-3">
+
+    <div class="container-fluid container-md mt-4">
+        <div class="box px-2 mb-0 mt-3 ">
+            <div class="box-header px-0 mb-0">
+                <a class="nav-link border-0 btn fs-1 d-md-none" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i></a>
+                <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-block" aria-current="page" href="index.php"><i class="fa-solid fa-house me-2"></i>Home</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container flex mb-3">
         <div class="box room-container">
             <div class="box-body room " style="padding: 30px 10px;">
                 <div class="logo flex">
@@ -39,7 +49,7 @@
                     <h2>Enter appointment time</h2>
                     <div class="form-group">
                         <label>Time*</label>
-                        <input type="text" name="time"  value="<?php echo date("H:i"); ?>" autocomplete="off" required class="form-input" placeholder="HH:mm">
+                        <input type="text" name="time" value="<?php echo date("H:i"); ?>" autocomplete="off" required class="form-input" placeholder="HH:mm">
                     </div>
 
                     <h2>Click service type here</h2>
