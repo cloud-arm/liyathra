@@ -305,19 +305,6 @@
         </li>
 		  
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i> <span>SUB MENU</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-           </span>
-         </a>
-          <ul class="treeview-menu">
-          <li><a href="inspection.php"><i class="fa fa-circle-o text-aqua"></i>Inspection</a></li>
-          <li><a href="sales.php?id=qt<?php echo date("ymdhis");?>"><i class="fa fa-circle-o text-aqua"></i>Quotations</a></li>
-          <li><a href="credit_rp.php"><i class="fa fa-circle-o text-aqua"></i>Credit</a></li>
-          </ul>
-        </li>
 
         <li class="header">CLOUD ARM SERVICE</li>
 
