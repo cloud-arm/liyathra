@@ -19,6 +19,7 @@
     for ($i = 0; $row = $result->fetch(); $i++) {
         $invo = $row['invoice_no'];
         $type_name = $row['type_name'];
+        $type = $row['job_type'];
     }
 
     ?>
