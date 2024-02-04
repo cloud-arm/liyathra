@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+<link rel="stylesheet" href="css/datepik.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CLOUD ARM</title>
@@ -16,6 +17,7 @@
     $invo = $_GET['invo'];
 
     ?>
+   
 </head>
 
 <body class="bg-light customer" style="overflow-y: scroll;">
@@ -43,13 +45,13 @@
                     <h2>Enter appointment date</h2>
                     <div class="form-group">
                         <label>Date*</label>
-                        <input type="text" name="date" value="<?php echo date("Y-m-d"); ?>" autocomplete="off" required class="form-input" placeholder="YYYY-mm-dd">
+                        <input type="text" name="date" value="<?php echo date("Y-m-d"); ?>" autocomplete="off" required class="form-input" placeholder="YYYY-mm-dd" id="d1"  onclick="calender('d1')">
                     </div>
 
                     <h2>Enter appointment time</h2>
                     <div class="form-group">
                         <label>Time*</label>
-                        <input type="text" name="time" value="<?php echo date("H:i"); ?>" autocomplete="off" required class="form-input" placeholder="HH:mm">
+                        <input type="text" name="time" value="<?php echo date("H.i"); ?>" autocomplete="off" required class="form-input" placeholder="HH:mm">
                     </div>
 
                     <h2>Click service type here</h2>
@@ -183,5 +185,5 @@
         });
     </script>
 </body>
-
+<script src="js/datepik.js"></script>
 </html>
