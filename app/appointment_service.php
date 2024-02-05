@@ -11,66 +11,45 @@
     include("../connect.php");
     date_default_timezone_set("Asia/Colombo");
 
-    $job = $_GET['id'];
-
-    $result = $db->prepare("SELECT * FROM job WHERE id = '$job' ");
+    $invo = $_GET['invo'];
+    $result = $db->prepare("SELECT * FROM job WHERE invoice_no = '$invo' ");
     $result->bindParam(':id', $res);
     $result->execute();
     for ($i = 0; $row = $result->fetch(); $i++) {
-        $invo = $row['invoice_no'];
-        $type_name = $row['type_name'];
-        $type = $row['job_type'];
+        $job = $row['id'];
     }
-
     ?>
 </head>
 
 <body class="bg-light customer" style="overflow-y: scroll;">
-    <div class="container-fluid container-md">
-        <div class="box px-0 mb-0">
-            <div class="box-header px-0">
+
+    <div class="container-fluid container-md mt-4">
+        <div class="box px-2 mb-0 mt-3 ">
+            <div class="box-header px-0 mb-0">
                 <a class="nav-link border-0 btn fs-1 d-md-none" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i></a>
-                <a class="nav-link border-0 btn fs-1 d-md-none" aria-current="page" href="invoice.php?id=<?php echo $job ?>&invo=<?php echo $invo ?>"><i class="fa-solid fa-sliders"></i></a>
+                <a class="nav-link border-0 btn fs-1 d-md-none" aria-current="page" href="appointment_data.php?id=<?php echo $job ?>&invo=<?php echo $invo ?>&end=0"><i class="fa-solid fa-table"></i></a>
                 <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-block" aria-current="page" href="index.php"><i class="fa-solid fa-house me-2"></i>Home</a>
-                <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-block" aria-current="page" href="invoice.php?id=<?php echo $job ?>&invo=<?php echo $invo ?>"><i class="fa-solid fa-sliders me-2"></i>Invoice</a>
+                <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-block" aria-current="page" href="appointment_data.php?id=<?php echo $job ?>&invo=<?php echo $invo ?>&end=0"><i class="fa-solid fa-table me-2"></i></i>Details</a>
             </div>
         </div>
     </div>
 
-
-    <div class="container-fluid d-none">
-        <div class="box room-container mt-0">
-            <div class="box-body room mt-0">
-                <form action="order_save.php" class="w-100" method="POST">
-                    <h2>Add Supporter here</h2>
-                    <div class="flex w-100">
-                        <div class="form-group w-100 me-0">
-                            <label>Supporter</label>
-                            <select name="sub_emp" class="form-input">
-                                <?php
-                                $result = $db->prepare('SELECT * FROM Employees ');
-                                $result->bindParam(':id', $res);
-                                $result->execute();
-                                for ($i = 0; $row = $result->fetch(); $i++) { ?>
-                                    <option value="<?php echo $row['id']  ?>">
-                                        <?php echo $row['name']  ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                        <div class="form-group me-0">
-                            <input class="cate-info active" type="submit" value="Save" style="margin-bottom: -15px;padding: 5px 10px;color: rgb(var(--bg-white));font-weight: 600;font-size: 18px;">
-                            <input type="hidden" name="type" value="sub_emp">
-                        </div>
-                    </div>
-                </form>
+    <div class="container-fluid down-up" id="down-up" style="transform: translateY(101%);">
+        <div id="container" onclick="containerDown()"></div>
+        <div class="up-content">
+            <span class="closer"></span>
+            <div class="content">
+                <div class="cont-box ">
+                    <h5 class="top" id="top">Test1</h5>
+                    <h6 class="sub-top" id="sub-top">Test</h6>
+                    <input type="hidden" id="p_id" value="">
+                </div>
+                <div class="cont-box">
+                    <h6>Enter customer agree price</h5>
+                        <input type="number" id="price" step=".01" onkeyup="check()" value="0.00" autocomplete="off" class="form-input w-100 ">
+                </div>
+                <button disabled class="btn" id="odr_btn" onclick="sales_add_list()">Order Now</button>
             </div>
-        </div>
-    </div>
-
-
-    <div class="container-fluid bg-none">
-        <div class="container-fluid my-4">
-            <h1 class="fs-2 fw-semibold m_had"><span><?php echo $type_name ?> </span> </h1>
         </div>
     </div>
 
@@ -85,9 +64,7 @@
 
                 for ($i = 0; $row = $result->fetch(); $i++) { ?>
                     <td>
-                        <div class="cate-info cat_fill click_fun <?php if ($type == $row['id']) {
-                                                                        echo 'active';
-                                                                    } ?>" value="<?php echo $row['id'] ?>">
+                        <div class="cate-info cat_fill click_fun" value="<?php echo $row['id'] ?>">
                             <span><?php echo $row['name'] ?></span>
                         </div>
                     </td>
@@ -111,7 +88,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script>
-        $(document).ready(function() {
+        $('.closer').click(function() {
+            $('#down-up').css("transform", "translateY(101%)");
+        });
+
+        function check() {
+            let val = $('#price').val();
+            if (val > 0) {
+                $('#odr_btn').removeAttr('disabled');
+            } else {
+                $('#odr_btn').attr('disabled', '');
+            }
+        }
+
+        function sales_add_list() {
+            let id = document.getElementById('p_id').value;
+            let price = document.getElementById('price').value;
             var xmlhttp;
             if (window.XMLHttpRequest) {
                 xmlhttp = new XMLHttpRequest();
@@ -124,8 +116,29 @@
                 }
             }
 
-            xmlhttp.open("GET", "item_get.php?unit=1&invo=<?php echo $invo; ?>&type=<?php echo $type; ?>", true);
+            xmlhttp.open("GET", "appointment_sales_add.php?id=" + id + "&invo=<?php echo $invo ?>&price=" + price, true);
             xmlhttp.send();
+
+            containerDown();
+        }
+
+        function open_model(id, p_name, p_code) {
+            $('#p_id').val(id);
+            $('#top').text(p_name);
+            $('#sub-top').text(p_code);
+            $('#down-up').css('transform', "translateY(0)");
+        }
+
+        function containerDown() {
+            $('#down-up').css("transition", "transform 0.75s ease 0.2s");
+            $('#down-up').css("transform", "translateY(101%)");
+        }
+
+        $(document).ready(function() {
+
+            $('input[type="number"]').focus(function() {
+                $(this).select();
+            });
 
             $(".cat_fill").click(function() {
                 var type = $(this).attr("value");
@@ -142,7 +155,7 @@
                     }
                 }
 
-                xmlhttp.open("GET", "item_get.php?unit=1&invo=<?php echo $invo; ?>&type=" + type, true);
+                xmlhttp.open("GET", "appointment_item_get.php?unit=1&invo=<?php echo $invo; ?>&type=" + type, true);
                 xmlhttp.send();
             });
 

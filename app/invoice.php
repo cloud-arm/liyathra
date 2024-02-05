@@ -9,7 +9,7 @@
     include("head.php");
     include("../connect.php");
     date_default_timezone_set("Asia/Colombo");
-    $room_id = $_GET['id'];
+    $job = $_GET['id'];
     $invo = $_GET['invo'];
 
     $sql = "SELECT sum(amount) FROM sales_list WHERE invoice_no='$invo'";                    
@@ -27,8 +27,8 @@
     <div class="container-fluid mb-3">
         <div class="box">
             <div class="box-header">
-                <a class="nav-link border-0 btn fs-1 d-md-none" aria-current="page" href="order.php?id=<?php echo $room_id?>&invo=<?php echo $invo?>"><i class="fa-solid fa-chevron-left"></i></a>
-                <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-flex align-items-center" aria-current="page" href="order.php?id=<?php echo $room_id?>&invo=<?php echo $invo?>"><i class="fa-solid fa-chevron-left me-2"></i> Back</a>
+                <a class="nav-link border-0 btn fs-1 d-md-none" aria-current="page" href="<?php if(isset($_GET['end'])){ ?>appointment_service.php?invo=<?php echo $invo; }else{ ?>order.php?id=<?php echo $job; }?>"><i class="fa-solid fa-chevron-left"></i></a>
+                <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-flex align-items-center" aria-current="page" href="<?php if(isset($_GET['end'])){ ?>appointment_service.php?invo=<?php echo $invo; }else{ ?>order.php?id=<?php echo $job; }?>"><i class="fa-solid fa-chevron-left me-2"></i> Back</a>
                 <h4 class="fs-4 m-0 text-center w-100">Invoice</h4>
                 <a href="bill_print.php?id=<?php echo $_GET['invo'] ?>"><button class="btn btn-info">Print</button></a>
                 
