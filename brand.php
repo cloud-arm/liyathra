@@ -174,10 +174,10 @@ $id=$_GET['id'];
 
                                             <td align="center">
                                                 <a href="#" id="<?php echo $row['id']; ?>" class="dll_btn btn btn-danger" title="Click to Delete">
-                                                    <i class="fa-regular fa-trash-can"></i>
+                                                    <i class="fa fa-trash"></i>
                                                 </a>
                                                 <a href="brand.php?id=<?php echo $row['id']; ?>" class="up_btn btn btn-warning" title="Click to Delete">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                    <i class="fa fa-pencil"></i>
                                                 </a>
                                             </td>
 
