@@ -20,7 +20,7 @@ date_default_timezone_set("Asia/Colombo");
         include_once("sidebar.php");
     }
 
-    $id = 0;
+    $id = $_GET['id'];
     $date = date('Y-m-d H:i:s');
 
     $result = $db->prepare("SELECT * FROM product  WHERE product_id = :id ");
@@ -52,7 +52,7 @@ date_default_timezone_set("Asia/Colombo");
         <!-- Main content -->
         <section class="content">
 
-            
+            <?php if ($id == 0) { ?>
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title">Product ADD</h3>
@@ -107,7 +107,7 @@ date_default_timezone_set("Asia/Colombo");
 
                                 <div class="col-md-3" style="height: 70px;display: flex;align-items: end;">
                                     <div class="form-group">
-                                        <input type="hidden" value="0">
+                                        <input type="hidden" name="id" value="0">
                                         <input type="submit" class="btn btn-info" value="Save">
                                     </div>
                                 </div>
@@ -117,8 +117,82 @@ date_default_timezone_set("Asia/Colombo");
 
                     </div>
                 </div>
-            
-                
+            <?php } else { ?>
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Product Update</h3>
+                    </div>
+
+                    <!-- /.box-header -->
+                    <div class="box-body d-block">
+                        <form method="post" action="product_save.php">
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Item Type</label>
+                                        <select class="form-control" name="type" id="pro_sel" style="width: 100%;" onchange="select_type()" tabindex="2">
+                                            <option <?php if ($type == 'Service') {
+                                                        echo 'selected';
+                                                    } ?>>Service</option>
+                                            <option <?php if ($type == 'Materials') {
+                                                        echo 'selected';
+                                                    } ?>>Materials</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3" id="serve_type" style="display: <?php if ($type == 'Service') {
+                                                                                            echo 'block';
+                                                                                        } else {
+                                                                                            echo 'none';
+                                                                                        } ?>;">
+                                    <div class="form-group">
+                                        <label>Service Type</label>
+                                        <select class="form-control" name="serve_type" style="width: 100%;" tabindex="3">
+                                            <?php
+                                            $result = $db->prepare("SELECT * FROM job_type ");
+                                            $result->bindParam(':userid', $ttr);
+                                            $result->execute();
+                                            for ($i = 0; $row = $result->fetch(); $i++) {
+                                            ?>
+                                                <option <?php if ($job_type == $row['id']) {
+                                                            echo 'selected';
+                                                        } ?> value="<?php echo $row['id']; ?>"> <?php echo $row['name']; ?> </option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" name="name" value="<?php echo $name; ?>" class="form-control" tabindex="1" autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Price</label>
+                                        <input type="number" step=".01" value="<?php echo $sell; ?>" name="price" class="form-control" tabindex="4" autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3" style="height: 70px;display: flex;align-items: end;">
+                                    <div class="form-group">
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                        <input type="submit" class="btn btn-info" value="Update">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            <?php } ?>
         </section>
 
 
@@ -162,7 +236,8 @@ date_default_timezone_set("Asia/Colombo");
                                     <td style="width: 100px;">
                                         <a href="#" id="<?php echo $row['product_id']; ?>" class="delbutton btn btn-danger" title="Click to Delete">
                                             <i class="fa fa-trash"></i></a>
-                                        
+                                        <a href="product.php?id=<?php echo $row['product_id']; ?>" class="btn btn-danger" title="Click to Update">
+                                            <i class="fa fa-pencil"></i></a>
                                     </td>
                                 </tr>
                             <?php }   ?>
@@ -218,11 +293,11 @@ date_default_timezone_set("Asia/Colombo");
                         success: function() {}
                     });
                     $(this).parents(".record").animate({
-                        backgroundColor: "#fbc7c7"
-                    }, "fast")
-                    .animate({
-                        opacity: "hide"
-                    }, "slow");
+                            backgroundColor: "#fbc7c7"
+                        }, "fast")
+                        .animate({
+                            opacity: "hide"
+                        }, "slow");
 
                 }
 
@@ -231,8 +306,6 @@ date_default_timezone_set("Asia/Colombo");
             });
 
         });
-
-
 
         $(function() {
             $("#example1").DataTable();

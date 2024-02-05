@@ -1,7 +1,7 @@
 <div class="wrapper">
- 
-		  
-		  
+
+
+
   <header class="main-header">
     <!-- Logo -->
     <a href="index.php" class="logo">
@@ -20,37 +20,37 @@
         <span class="icon-bar"></span>
       </a>
 
-	  
-	  
-	   <?php
-		include('connect.php');
- date_default_timezone_set("Asia/Colombo");
-                  $date =  date("Y/m/d");						
-				$count=0;	
-			?>
-	  
-	  
-	  
-	  
+
+
+      <?php
+      include('connect.php');
+      date_default_timezone_set("Asia/Colombo");
+      $date =  date("Y/m/d");
+      $count = 0;
+      ?>
+
+
+
+
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
 
           <!-- Notifications: style can be found in dropdown.less -->
-		  
-		  
-		  <?php
-		  
-		include('connect.php');
- date_default_timezone_set("Asia/Colombo");
-                  $date =  date("Y/m/d");		
-				$rowcount123 = 0;			
-				$ttre = 0;
-                //$tre=$ttre-$rowcount123;
-				$rv=0;
-				$rate=0;				
-			?>
-  
+
+
+          <?php
+
+          include('connect.php');
+          date_default_timezone_set("Asia/Colombo");
+          $date =  date("Y/m/d");
+          $rowcount123 = 0;
+          $ttre = 0;
+          //$tre=$ttre-$rowcount123;
+          $rv = 0;
+          $rate = 0;
+          ?>
+
 
           <!-- Tasks: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
@@ -66,26 +66,26 @@
             </ul>
           </li>
 
-          
-          
+
+
 
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php echo $_SESSION['SESS_FIRST_NAME'];?></span>
+              <span class="hidden-xs"><?php echo $_SESSION['SESS_FIRST_NAME']; ?></span>
             </a>
             <ul class="dropdown-menu user">
               <!-- User image -->
               <li class="user-header">
                 <div>
-                  <span class="badge"><i class="glyphicon glyphicon-user"></i><?php echo $_SESSION['SESS_LAST_NAME'];?></span>
+                  <span class="badge"><i class="glyphicon glyphicon-user"></i><?php echo $_SESSION['SESS_LAST_NAME']; ?></span>
                 </div>
                 <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
               </li>
               <!-- Menu Body -->
               <li class="user-body">
-                <p>    <?php echo $_SESSION['SESS_FIRST_NAME'];?></p>
+                <p> <?php echo $_SESSION['SESS_FIRST_NAME']; ?></p>
                 <small>Member since Nov. 2023</small>
               </li>
               <!-- Menu Footer-->
@@ -113,213 +113,205 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
-		
-      
+
+
       <!-- search form -->
 
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-		  
-		  
-		  
-		<li>
-          <a  href="index.php">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            <span class="pull-right-container">
-			
-            </span>
-          </a>
-        </li> 
-		  
-		  <?php if($_SESSION['SESS_FIRST_NAME']=="Mr.Chaminda"){ ?>
-		  <li>
-          <a  href="stock.php">
-            <i class="fa fa-cubes"></i> <span>Stock</span>
-            <span class="pull-right-container">
-            </span>
-          </a>
-        </li>
-		  
-		   <li>
-          <a  href="stock_up.php">
-            <i class="fa fa-cubes"></i> <span>Stock Update</span>
-            <span class="pull-right-container">
-            </span>
-          </a>
-        </li>
-		  
-		  <li>
-          <a  href="stock_re.php">
-            <i class="fa fa-cubes"></i> <span> Re Order Stock</span>
-            <span class="pull-right-container">
-            </span>
-          </a>
-        </li>
-		  
-		  
-		  <li class="treeview">
-          <a href="#">
-            <i class="fa fa-line-chart"></i> <span>Report</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-           </span>
-        </a>
-          <ul class="treeview-menu">
-        
-		<li><a href="stock_up_rp.php?d1=<?php echo date("Y-m-d");?>&d2=<?php echo date("Y-m-d");?>"><i class="fa fa-circle-o text-yellow"></i> Stock up Report</a></li>
-           
-          </ul>
-        </li>
-		  
-		  <?php }else{ ?>
-		  
-		  
-		  
-		  <li class="treeview">
-          <a href="#">
-            <i class="fa fa-group"></i> <span>Customer</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-           </span>
-        </a>
-          <ul class="treeview-menu">
-            <li><a href="cus.php"><i class="fa fa-circle-o text-yellow"></i> Add customer</a></li>
-            <li><a href="cus_view.php"><i class="fa fa-circle-o text-aqua"></i> View customer</a></li>
-          </ul>
-        </li>
-		   <li class="treeview">
-          <a href="#">
-            <i class="fa fa-wrench"></i> <span>Product & Service</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-           </span>
-        </a>
-          <ul class="treeview-menu">
-            <li><a href="product.php"><i class="fa fa-circle-o text-yellow"></i> Add Product</a></li>
-            <li><a href="product_view.php"><i class="fa fa-circle-o text-aqua"></i> View Product</a></li>
-          </ul>
-        </li>
-		<li>
-          <a  href="sales1.php">
-            <i class="fa fa-file-text-o"></i> <span>Sales</span>
-            <span class="pull-right-container">
-			
-            </span>
-          </a>
-        </li>
-		 
-		  
 
 
-		  
-		  <li>
-          <a  href="expenses.php?type=all&dates=<?php echo date("Y").'%2F'.date("m").'%2F01';?>+-+<?php echo date("Y").'%2F'.date("m").'%2F'.date("d");?>">
-            <i class="fa fa-dollar"></i> <span>Expenses</span>
-            <span class="pull-right-container">
-			
-            </span>
-          </a>
-        </li>
-
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-cubes"></i> <span>Stock</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-           </span>
-        </a>
-          <ul class="treeview-menu">
-            <li><a href="stock.php"><i class="fa fa-circle-o text-yellow"></i>Stock View</a></li>
-            <li><a href="stock_up.php"><i class="fa fa-circle-o text-aqua"></i>Stock Update</a></li>
-          </ul>
-        </li>
-
-
-		  
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i> <span>HR</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-           </span>
-         </a>
-          <ul class="treeview-menu">
-             <li><a href="hr_employee.php"><i class="fa fa-user text-yellow"></i>Employee</a></li>
-            <li><a href="hr_attendance.php?emp=all&dates=<?php echo date("Y").'%2F'.date("m").'%2F01';?>+-+<?php echo date("Y").'%2F'.date("m").'%2F'.date("d");?>"><i class="fa  fa-500px text-yellow"></i>Attendance</a></li>
-            <li><a href="hr_allowances.php"><i class="fa fa-star-o text-yellow"></i>Allowances</a></li>
-            <li><a href="hr_salary_advance.php"><i class="fa fa-money text-yellow"></i>Advance</a></li>
-            <li><a href="hr_loan.php"><i class="fa fa-university text-yellow"></i>Loan</a></li>
-            <li><a href="hr_payroll.php"><i class="fa fa-list-alt text-red"></i>Payroll </a></li>
-          </ul>
-        </li>
-		  
-	    <li class="treeview">
-          <a href="#">
-            <i class="fa fa-wrench"></i> <span>Supplier</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-           </span>
-         </a>
-          <ul class="treeview-menu">
-             <li><a href="sales.php?id=pu<?php echo date("ymdhis");?>"><i class="fa fa-circle-o text-yellow"></i>GRN</a></li>
-            <li><a href="supplier.php"><i class="fa fa-circle-o text-yellow"></i>Supplier</a></li>
-            <li><a href="grn_payment.php"><i class="fa fa-circle-o text-red"></i>payment</a></li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-line-chart"></i> 
-                <span>Report</span>
-                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-              </a>
-                  <ul class="treeview-menu">
-                    <li><a href="grn_payment_rp.php?dates=<?php echo date("Y").'/'.date("m").'/'.date("d");?>-<?php echo date("Y").'/'.date("m").'/'.date("d");?>"><i class="fa fa-circle-o text-aqua"></i> Payment Record</a></li>
-                  </ul>
-            </li>
-          </ul>
-        </li>
-		  
-		  
-
-		  
-		  <li class="treeview">
-          <a href="#">
-            <i class="fa fa-line-chart"></i> <span>Report</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-           </span>
-        </a>
-          <ul class="treeview-menu">
-            <li><a href="sales_rp.php?d1=<?php echo date("Y-m-d");?>&d2=<?php echo date("Y-m-d");?>"><i class="fa fa-circle-o text-red"></i> Sales Report</a></li>
-			  
-	<li><a href="purchases_rp.php?d1=<?php echo date("Y-m-d");?>&d2=<?php echo date("Y-m-d");?>"><i class="fa fa-circle-o text-yellow"></i> Purchases Report</a></li>
-  <li><a href="pnl_rp.php?d1=<?php echo date("Y-m");?>-01&d2=<?php echo date("Y-m");?>-31"><i class="fa fa-circle-o text-yellow"></i> PNL Report</a></li>
-	<li><a href="inventory_rp.php?d1=<?php echo date("Y-m-d");?>&d2=<?php echo date("Y-m-d");?>"><i class="fa fa-circle-o text-yellow"></i> Inventory Report</a></li>
-		<li><a href="sms_rp.php?d1=<?php echo date("Y-m-d");?>&d2=<?php echo date("Y-m-d");?>"><i class="fa fa-circle-o text-yellow"></i> SMS Report</a></li>
-		<li><a href="stock_up_rp.php?d1=<?php echo date("Y-m-d");?>&d2=<?php echo date("Y-m-d");?>"><i class="fa fa-circle-o text-yellow"></i> Stock up Report</a></li>
-			  
-<li><a href="stock_rp.php"><i class="fa fa-circle-o text-yellow"></i> Stock Value Report</a></li>
-			  
-          </ul>
-        </li>
-		  
-
-
-        <li class="header">CLOUD ARM SERVICE</li>
 
         <li>
-          <a  href="cloud_arm_service.php">
-            <i class="fa fa-commenting"></i> <span>SERVICE REQUEST</span>
+          <a href="index.php">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
-			
+
             </span>
           </a>
         </li>
 
-          </ul>
-        </li> 
-        
-        <?php } ?>
+        <?php if ($_SESSION['SESS_FIRST_NAME'] == "Mr.Chaminda") { ?>
+          <li>
+            <a href="stock.php">
+              <i class="fa fa-cubes"></i> <span>Stock</span>
+              <span class="pull-right-container">
+              </span>
+            </a>
+          </li>
+
+          <li>
+            <a href="stock_up.php">
+              <i class="fa fa-cubes"></i> <span>Stock Update</span>
+              <span class="pull-right-container">
+              </span>
+            </a>
+          </li>
+
+          <li>
+            <a href="stock_re.php">
+              <i class="fa fa-cubes"></i> <span> Re Order Stock</span>
+              <span class="pull-right-container">
+              </span>
+            </a>
+          </li>
+
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-line-chart"></i> <span>Report</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+
+              <li><a href="stock_up_rp.php?d1=<?php echo date("Y-m-d"); ?>&d2=<?php echo date("Y-m-d"); ?>"><i class="fa fa-circle-o text-yellow"></i> Stock up Report</a></li>
+
+            </ul>
+          </li>
+
+        <?php } else { ?>
+
+
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-group"></i> <span>Customer</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="cus.php"><i class="fa fa-circle-o text-yellow"></i> Add customer</a></li>
+              <li><a href="cus_view.php"><i class="fa fa-circle-o text-aqua"></i> View customer</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="product.php?id=0">
+              <i class="fa fa-wrench"></i> <span>Product & Service</span>
+              <span class="pull-right-container"></span>
+            </a>
+          </li>
+          <li>
+            <a href="sales1.php">
+              <i class="fa fa-file-text-o"></i> <span>Sales</span>
+              <span class="pull-right-container"></span>
+            </a>
+          </li>
+
+
+
+
+
+          <li>
+            <a href="expenses.php?type=all&dates=<?php echo date("Y") . '%2F' . date("m") . '%2F01'; ?>+-+<?php echo date("Y") . '%2F' . date("m") . '%2F' . date("d"); ?>">
+              <i class="fa fa-dollar"></i> <span>Expenses</span>
+              <span class="pull-right-container">
+
+              </span>
+            </a>
+          </li>
+
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-cubes"></i> <span>Stock</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="stock.php"><i class="fa fa-circle-o text-yellow"></i>Stock View</a></li>
+              <li><a href="stock_up.php"><i class="fa fa-circle-o text-aqua"></i>Stock Update</a></li>
+            </ul>
+          </li>
+
+
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-user"></i> <span>HR</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="hr_employee.php"><i class="fa fa-user text-yellow"></i>Employee</a></li>
+              <li><a href="hr_attendance.php?emp=all&dates=<?php echo date("Y") . '%2F' . date("m") . '%2F01'; ?>+-+<?php echo date("Y") . '%2F' . date("m") . '%2F' . date("d"); ?>"><i class="fa  fa-500px text-yellow"></i>Attendance</a></li>
+              <li><a href="hr_allowances.php"><i class="fa fa-star-o text-yellow"></i>Allowances</a></li>
+              <li><a href="hr_salary_advance.php"><i class="fa fa-money text-yellow"></i>Advance</a></li>
+              <li><a href="hr_loan.php"><i class="fa fa-university text-yellow"></i>Loan</a></li>
+              <li><a href="hr_payroll.php"><i class="fa fa-list-alt text-red"></i>Payroll </a></li>
+            </ul>
+          </li>
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-wrench"></i> <span>Supplier</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="sales.php?id=pu<?php echo date("ymdhis"); ?>"><i class="fa fa-circle-o text-yellow"></i>GRN</a></li>
+              <li><a href="supplier.php"><i class="fa fa-circle-o text-yellow"></i>Supplier</a></li>
+              <li><a href="grn_payment.php"><i class="fa fa-circle-o text-red"></i>payment</a></li>
+              <li class="treeview">
+                <a href="#">
+                  <i class="fa fa-line-chart"></i>
+                  <span>Report</span>
+                  <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a href="grn_payment_rp.php?dates=<?php echo date("Y") . '/' . date("m") . '/' . date("d"); ?>-<?php echo date("Y") . '/' . date("m") . '/' . date("d"); ?>"><i class="fa fa-circle-o text-aqua"></i> Payment Record</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+
+
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-line-chart"></i> <span>Report</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="sales_rp.php?d1=<?php echo date("Y-m-d"); ?>&d2=<?php echo date("Y-m-d"); ?>"><i class="fa fa-circle-o text-red"></i> Sales Report</a></li>
+
+              <li><a href="purchases_rp.php?d1=<?php echo date("Y-m-d"); ?>&d2=<?php echo date("Y-m-d"); ?>"><i class="fa fa-circle-o text-yellow"></i> Purchases Report</a></li>
+              <li><a href="pnl_rp.php?d1=<?php echo date("Y-m"); ?>-01&d2=<?php echo date("Y-m"); ?>-31"><i class="fa fa-circle-o text-yellow"></i> PNL Report</a></li>
+              <li><a href="inventory_rp.php?d1=<?php echo date("Y-m-d"); ?>&d2=<?php echo date("Y-m-d"); ?>"><i class="fa fa-circle-o text-yellow"></i> Inventory Report</a></li>
+              <li><a href="sms_rp.php?d1=<?php echo date("Y-m-d"); ?>&d2=<?php echo date("Y-m-d"); ?>"><i class="fa fa-circle-o text-yellow"></i> SMS Report</a></li>
+              <li><a href="stock_up_rp.php?d1=<?php echo date("Y-m-d"); ?>&d2=<?php echo date("Y-m-d"); ?>"><i class="fa fa-circle-o text-yellow"></i> Stock up Report</a></li>
+
+              <li><a href="stock_rp.php"><i class="fa fa-circle-o text-yellow"></i> Stock Value Report</a></li>
+
+            </ul>
+          </li>
+
+
+
+          <li class="header">CLOUD ARM SERVICE</li>
+
+          <li>
+            <a href="cloud_arm_service.php">
+              <i class="fa fa-commenting"></i> <span>SERVICE REQUEST</span>
+              <span class="pull-right-container">
+
+              </span>
+            </a>
+          </li>
+
       </ul>
+      </li>
+
+    <?php } ?>
+    </ul>
     </section>

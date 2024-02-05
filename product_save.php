@@ -8,6 +8,7 @@ $un = $_SESSION['SESS_FIRST_NAME'];
 
 $date = date('Y-m-d H:i:s');
 
+$id = $_POST['id'];
 $name = $_POST['name'];
 $type = $_POST['type'];
 $amount = $_POST['price'];
@@ -26,12 +27,17 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     $type_name = $row['name'];
 }
 
+if ($id == 0) {
+
+    $sql = "INSERT INTO product (name,job_type,type_name,sell,type,time) VALUES (?,?,?,?,?,?)";
+    $q = $db->prepare($sql);
+    $q->execute(array($name, $serve_type, $type_name, $amount, $type, $date));
+} else {
+
+    $sql = "UPDATE  product SET name = ?, job_type = ?, type_name = ?, sell = ?, type = ? WHERE product_id = ?";
+    $ql = $db->prepare($sql);
+    $ql->execute(array($name, $serve_type, $type_name, $amount, $type, $id));
+}
 
 
-$sql = "INSERT INTO product (name,job_type,type_name,sell,type,time) VALUES (?,?,?,?,?,?)";
-$q = $db->prepare($sql);
-$q->execute(array($name, $serve_type, $type_name, $amount, $type, $date));
-
-
-
-header("location: product.php");
+header("location: product.php?id=0");
