@@ -5,8 +5,7 @@
     <strong>Copyright &copy; <a href="http://cloudarmsoft.com">CLOUD ARM</a>.</strong> 
   </footer>
 
-    <!-- Dark Theme Btn-->
-    <script src="https://dev.colorbiz.org/ashen/cdn/main/dist/js/dark_theme_btn.js"></script>
+
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->

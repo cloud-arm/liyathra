@@ -32,6 +32,21 @@ if ($id == 0) {
     $sql = "INSERT INTO product (name,job_type,type_name,sell,type,time) VALUES (?,?,?,?,?,?)";
     $q = $db->prepare($sql);
     $q->execute(array($name, $serve_type, $type_name, $amount, $type, $date));
+
+
+    $result = $db->prepare('SELECT * FROM product ORDER BY product_id DESC LIMIT 1');
+    $result->bindParam(':id', $res);
+    $result->execute();
+    for($i=0; $row = $result->fetch(); $i++){ $id=$row['product_id']; }
+    
+    if ($type == 'Service') {
+        $sql = 'UPDATE  use_product SET main_product =? WHERE type=? AND main_product=? ';
+        $ql = $db->prepare($sql);
+        $ql->execute(array($id,'1', '0'));
+    }
+
+
+
 } else {
 
     $sql = "UPDATE  product SET name = ?, job_type = ?, type_name = ?, sell = ?, type = ? WHERE product_id = ?";
