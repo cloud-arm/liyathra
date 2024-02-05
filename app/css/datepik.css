@@ -9,20 +9,22 @@
   top: 0;
   background: rgba(0, 0, 0, 0.5);
 }
+
 .main {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  color: rgb(196, 192, 192);
-  background: #2b2142;
+  width: 90%;
+  color: rgb(var(--bg-white));
+  background: rgb(var(--bg-theme));
   font-family: "Raleway", sans-serif;
   text-align: center;
-  border-radius: 25px;
+  border-radius: 20px;
   letter-spacing: 1px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   display: none;
+  padding: 10px 0px;
 }
 .month {
   text-align: center;

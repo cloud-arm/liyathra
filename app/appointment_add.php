@@ -45,7 +45,7 @@
                     <h2>Enter appointment date</h2>
                     <div class="form-group">
                         <label>Date*</label>
-                        <input type="text" name="date" value="<?php echo date("Y-m-d"); ?>" autocomplete="off" required class="form-input" placeholder="YYYY-mm-dd" id="d1" onclick="calender('d1')">
+                        <input type="text" name="date" readonly value="<?php echo date("Y-m-d"); ?>" autocomplete="off" required class="form-input" placeholder="YYYY-mm-dd" id="d1" onclick="calender('d1')">
                     </div>
 
                     <h2>Enter appointment time</h2>

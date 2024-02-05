@@ -697,7 +697,7 @@ input::-webkit-inner-spin-button {
   margin: 10px 0;
 }
 
-svg {
+label svg {
   fill: rgb(var(--bg-gray));
   height: 4rem;
   width: 4rem;
