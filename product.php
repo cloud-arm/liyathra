@@ -86,112 +86,102 @@ date_default_timezone_set("Asia/Colombo");
                     <!-- /.box-header -->
                     <div class="box-body d-block">
                         <form method="post" action="product_save.php">
-                        <div class="row">
-                        <div class="col-md-6">
-                        <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Item Type</label>
-                                    <select class="form-control" name="type" id="pro_sel" style="width: 100%;"
-                                        onchange="select_type()" tabindex="2">
-                                        <option>Service</option>
-                                        <option>Materials</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6" id="serve_type">
-                                <div class="form-group">
-                                    <label>Service Type</label>
-                                    <select class="form-control" name="serve_type" style="width: 100%;" tabindex="3">
-                                        <?php
-                                            $result = $db->prepare("SELECT * FROM job_type ");
-                                            $result->bindParam(':userid', $ttr);
-                                            $result->execute();
-                                            for ($i = 0; $row = $result->fetch(); $i++) {
-                                            ?>
-                                        <option value="<?php echo $row['id']; ?>"> <?php echo $row['name']; ?> </option>
-                                        <?php
-                                            }
-                                            ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <input type="text" name="name" class="form-control" tabindex="1" autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Price</label>
-                                    <input type="number" step=".01" value="0.00" name="price" class="form-control"
-                                        tabindex="4" autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="col-md-6" style="height: 70px;display: flex;align-items: end;">
-                                <div class="form-group">
-                                    <input type="hidden" name="id" value="0">
-                                    <input type="submit" class="btn btn-info" value="Save">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                        <div class="col-md-12" style="background-color: #272727;" id="serve_type2">
-                                <h3>Use Materials</h3>
+                            <div class="row">
                                 <div class="col-md-6">
-                                    <select class="form-control select2" name="category" style="width: 100%;" id="mat">
-
-                                        <?php
-                                        $result = $db->prepare("SELECT * FROM product WHERE type='Materials' ");
-		                                    $result->bindParam(':userid', $res);
-		                                    $result->execute();
-		                                    for($i=0; $row = $result->fetch(); $i++){
-	                                        ?>
-                                        <option value="<?php echo $row['product_id'];?>">
-                                            <?php echo $row['name']; ?>
-                                        </option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                                <div class="col-md-3"><input class="form-control" type="text" name="qty" id="qty"
-                                        width="50%">
-                                </div>
-                                <div class="col-md-3"><b class="btn btn-info" onclick="matadd(1)">ADD</b></div>
-                                <div class="col-md-12">
-
-                                    <div class="form-group" id="sub_list">
-                                        <table width='100%' class='table'>
-                                            <?php $result = $db->prepare("SELECT * FROM use_product WHERE main_product ='' ");
-                                                $result->bindParam(':userid', $res);
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Item Type</label>
+                                            <select class="form-control" name="type" id="pro_sel" style="width: 100%;" onchange="select_type()" tabindex="2">
+                                                <option>Service</option>
+                                                <option>Materials</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="serve_type">
+                                        <div class="form-group">
+                                            <label>Service Type</label>
+                                            <select class="form-control" name="serve_type" style="width: 100%;" tabindex="3">
+                                                <?php
+                                                $result = $db->prepare("SELECT * FROM job_type ");
+                                                $result->bindParam(':userid', $ttr);
                                                 $result->execute();
-                                                for($i=0; $row = $result->fetch(); $i++){
-                                                 ?>
-                                            <tr>
-                                                <td><?php echo $row['product_name']; ?>
-                                                </td>
-                                                <td><?php echo $row['qty']; ?></td>
-                                                <td><b class="btn btn-danger dllpack" id="<?php echo $row['id']; ?>"
-                                                        onclick="dll(<?php echo $row['id']; ?>)"><i
-                                                            class="icon-trash">x</i></b>
-                                                </td>
-                                            </tr>
+                                                for ($i = 0; $row = $result->fetch(); $i++) {
+                                                ?>
+                                                    <option value="<?php echo $row['id']; ?>"> <?php echo $row['name']; ?> </option>
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
 
-                                            <?php } ?>
-                                        </table>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input type="text" name="name" class="form-control" tabindex="1" autocomplete="off">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Price</label>
+                                            <input type="number" step=".01" value="0.00" name="price" class="form-control" tabindex="4" autocomplete="off">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6" style="height: 70px;display: flex;align-items: end;">
+                                        <div class="form-group">
+                                            <input type="hidden" name="id" value="0">
+                                            <input type="submit" class="btn btn-info" value="Save">
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-12" style="background-color: #272727;" id="serve_type2">
+                                        <h3>Use Materials</h3>
+                                        <div class="col-md-6">
+                                            <select class="form-control select2" name="category" style="width: 100%;" id="mat">
+
+                                                <?php
+                                                $result = $db->prepare("SELECT * FROM product WHERE type='Materials' ");
+                                                $result->bindParam(':userid', $res);
+                                                $result->execute();
+                                                for ($i = 0; $row = $result->fetch(); $i++) {
+                                                ?>
+                                                    <option value="<?php echo $row['product_id']; ?>">
+                                                        <?php echo $row['name']; ?>
+                                                    </option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3"><input class="form-control" type="text" name="qty" id="qty" width="50%">
+                                        </div>
+                                        <div class="col-md-3"><button class="btn btn-info" onclick="matadd(1)">ADD</button></div>
+                                        <div class="col-md-12">
+
+                                            <div class="form-group" id="sub_list">
+                                                <table width='100%' class='table'>
+                                                    <?php $result = $db->prepare("SELECT * FROM use_product WHERE main_product ='' ");
+                                                    $result->bindParam(':userid', $res);
+                                                    $result->execute();
+                                                    for ($i = 0; $row = $result->fetch(); $i++) {
+                                                    ?>
+                                                        <tr>
+                                                            <td><?php echo $row['product_name']; ?>
+                                                            </td>
+                                                            <td><?php echo $row['qty']; ?></td>
+                                                            <td><b class="btn btn-danger dllpack" id="<?php echo $row['id']; ?>" onclick="dll(<?php echo $row['id']; ?>)"><i class="icon-trash">x</i></b>
+                                                            </td>
+                                                        </tr>
+
+                                                    <?php } ?>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                        </div>
-
-                           
-
-                            
-                           
-
-                        </div>
                         </form>
 
                     </div>
@@ -389,49 +379,47 @@ date_default_timezone_set("Asia/Colombo");
     <?php include("script.php"); ?>
 
     <script type="text/javascript">
+        function matadd(type) {
 
+            var mat = document.getElementById("mat").value;
+            var qty = document.getElementById("qty").value;
+            var xmlhttp;
 
-function matadd(type) {
-    
-    var mat = document.getElementById("mat").value;
-    var qty = document.getElementById("qty").value;
-    var xmlhttp;
+            if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else { // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("sub_list").innerHTML = xmlhttp.responseText;
+                }
+            }
 
-    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp = new XMLHttpRequest();
-    } else { // code for IE6, IE5
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            document.getElementById("sub_list").innerHTML = xmlhttp.responseText;
+            xmlhttp.open("GET", "product_sub_list_add.php?mat=" + mat + "&qty=" + qty + "&type=" + type, true);
+            xmlhttp.send();
+            console.log(mat);
+            document.getElementById("qty").value = "";
         }
-    }
 
-    xmlhttp.open("GET", "product_sub_list_add.php?mat=" + mat + "&qty=" + qty+"&type="+type, true);
-    xmlhttp.send();
-    console.log(mat);
-    document.getElementById("qty").value="";
-}
+        function dll(did) {
 
-function dll(did) {
+            var xmlhttp;
 
-var xmlhttp;
+            if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else { // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("sub_list").innerHTML = xmlhttp.responseText;
+                }
+            }
 
-if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp = new XMLHttpRequest();
-} else { // code for IE6, IE5
-    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-}
-xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        document.getElementById("sub_list").innerHTML = xmlhttp.responseText;
-    }
-}
-
-xmlhttp.open("GET", "material_dll.php?id=" + did, true);
-xmlhttp.send();
-}
+            xmlhttp.open("GET", "material_dll.php?id=" + did, true);
+            xmlhttp.send();
+        }
 
 
 

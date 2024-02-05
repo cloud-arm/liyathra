@@ -26,9 +26,9 @@
     <div class="container-fluid container-md mt-4">
         <div class="box px-2 mb-0 mt-3 ">
             <div class="box-header px-0 mb-0">
-                <a class="nav-link border-0 btn fs-1 d-md-none" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i></a>
+                <a class="nav-link border-0 btn fs-1 d-md-none" style="visibility: hidden;" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i></a>
                 <a class="nav-link border-0 btn fs-1 d-md-none" aria-current="page" href="appointment_data.php?id=<?php echo $job ?>&invo=<?php echo $invo ?>&end=0"><i class="fa-solid fa-table"></i></a>
-                <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-block" aria-current="page" href="index.php"><i class="fa-solid fa-house me-2"></i>Home</a>
+                <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-block" style="visibility: hidden;" aria-current="page" href="index.php"><i class="fa-solid fa-house me-2"></i>Home</a>
                 <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-block" aria-current="page" href="appointment_data.php?id=<?php echo $job ?>&invo=<?php echo $invo ?>&end=0"><i class="fa-solid fa-table me-2"></i></i>Details</a>
             </div>
         </div>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="cont-box">
                     <h6>Enter customer agree price</h5>
-                        <input type="number" id="price" step=".01" onkeyup="check()" value="0.00" autocomplete="off" class="form-input w-100 ">
+                        <input type="number" id="price" step=".01" onkeyup="check()" placeholder="0.00" autocomplete="off" class="form-input w-100 ">
                 </div>
                 <button disabled class="btn" id="odr_btn" onclick="sales_add_list()">Order Now</button>
             </div>
@@ -120,6 +120,7 @@
             xmlhttp.send();
 
             containerDown();
+            $('#price').val('');
         }
 
         function open_model(id, p_name, p_code) {
