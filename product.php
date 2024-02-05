@@ -68,7 +68,7 @@ date_default_timezone_set("Asia/Colombo");
                                         $result->execute();
                                         for ($i = 0; $row = $result->fetch(); $i++) {
                                         ?>
-                                            <option value="<?php echo $id = $row['id']; ?>"> <?php echo $row['name']; ?> </option>
+                                            <option value="<?php echo $row['id']; ?>"> <?php echo $row['name']; ?> </option>
                                         <?php
                                         }
                                         ?>
@@ -87,6 +87,12 @@ date_default_timezone_set("Asia/Colombo");
                                 <div class="form-group">
                                     <label>Price</label>
                                     <input type="number" step=".01" name="price" class="form-control" tabindex="4" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3" style="height: 70px;display: flex;align-items: end;" >
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-info" value="Save">
                                 </div>
                             </div>
 
