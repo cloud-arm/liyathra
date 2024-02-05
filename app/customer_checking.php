@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="form-group" style="margin-top: 50px;">
-                        <input type="submit" id="btn" class="form-input" value="Continue">
+                        <input type="submit" id="btn" class="form-input" disabled value="Continue">
                         <input type="hidden" name="emp" value="<?php echo $user; ?>">
                         <input type="hidden" name="type" value="cus_check">
                     </div>
@@ -72,16 +72,24 @@
                 $('#mobile').removeAttr('readonly');
             }
 
+            if (count >= 10) {
+                $('#btn').removeAttr('disabled');
+            } else {
+                $('#btn').attr('disabled', '');
+            }
+
             if (val.charAt(0) == 0 && val.charAt(1) == 7) {
                 $('#mobile').css('outline', '2px solid rgb(var(--bg-theme))');
             } else {
                 $('#mobile').css('outline', '2px solid red');
+                $('#btn').attr('disabled', '');
             }
 
             if (event.which == 8) {
                 $($('#mobile')).val(
                     function(index, value) {
                         return value.substr(0, value.length - 1);
+                        $('#btn').attr('disabled', '');
                     })
             }
         }

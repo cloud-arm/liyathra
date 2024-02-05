@@ -721,3 +721,9 @@ textarea.form-input {
   min-height: 80px;
   resize: none;
 }
+
+.btn[disabled],
+button[disabled],
+input[type="submit"][disabled] {
+  opacity: 0.5;
+}

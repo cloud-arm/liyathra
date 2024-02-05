@@ -27,21 +27,6 @@
                         <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Orders
-                            </a>
-                            <ul class="dropdown-menu border-0">
-                                <li><a class="dropdown-item" href="#">Table 01</a></li>
-                                <li><a class="dropdown-item" href="#">Table 02</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Table 01</a></li>
-                                <li><a class="dropdown-item" href="#">Table 02</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Table 01</a></li>
-                                <li><a class="dropdown-item" href="#">Table 02</a></li>
-                            </ul>
-                        </li>
                     </ul>
                 </div>
             </div>
