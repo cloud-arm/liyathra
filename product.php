@@ -19,6 +19,21 @@ date_default_timezone_set("Asia/Colombo");
 
         include_once("sidebar.php");
     }
+
+    $id = 0;
+    $date = date('Y-m-d H:i:s');
+
+    $result = $db->prepare("SELECT * FROM product  WHERE product_id = :id ");
+    $result->bindParam(':id', $id);
+    $result->execute();
+    for ($i = 0; $row = $result->fetch(); $i++) {
+        $name = $row['name'];
+        $job_type = $row['job_type'];
+        $type_name = $row['type_name'];
+        $sell = $row['sell'];
+        $type = $row['type'];
+    }
+
     ?>
 
     <!-- /.sidebar -->
@@ -29,7 +44,7 @@ date_default_timezone_set("Asia/Colombo");
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Product
+                PRODUCT
                 <small>Preview</small>
             </h1>
         </section>
@@ -37,70 +52,73 @@ date_default_timezone_set("Asia/Colombo");
         <!-- Main content -->
         <section class="content">
 
-            <!-- SELECT2 EXAMPLE -->
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Product </h3>
+            
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Product ADD</h3>
+                    </div>
+
+                    <!-- /.box-header -->
+                    <div class="box-body d-block">
+                        <form method="post" action="product_save.php">
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Item Type</label>
+                                        <select class="form-control" name="type" id="pro_sel" style="width: 100%;" onchange="select_type()" tabindex="2">
+                                            <option>Service</option>
+                                            <option>Materials</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3" id="serve_type">
+                                    <div class="form-group">
+                                        <label>Service Type</label>
+                                        <select class="form-control" name="serve_type" style="width: 100%;" tabindex="3">
+                                            <?php
+                                            $result = $db->prepare("SELECT * FROM job_type ");
+                                            $result->bindParam(':userid', $ttr);
+                                            $result->execute();
+                                            for ($i = 0; $row = $result->fetch(); $i++) {
+                                            ?>
+                                                <option value="<?php echo $row['id']; ?>"> <?php echo $row['name']; ?> </option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" name="name" class="form-control" tabindex="1" autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Price</label>
+                                        <input type="number" step=".01" value="0.00" name="price" class="form-control" tabindex="4" autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3" style="height: 70px;display: flex;align-items: end;">
+                                    <div class="form-group">
+                                        <input type="hidden" value="0">
+                                        <input type="submit" class="btn btn-info" value="Save">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
                 </div>
-
-                <!-- /.box-header -->
-                <div class="box-body d-block">
-                    <form method="post" action="product_save.php">
-                        <div class="row">
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Item Type</label>
-                                    <select class="form-control" name="type" id="pro_sel" style="width: 100%;" onchange="select_type()" tabindex="2">
-                                        <option>Service</option>
-                                        <option>Materials</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3" id="serve_type">
-                                <div class="form-group">
-                                    <label>Service Type</label>
-                                    <select class="form-control" name="serve_type" style="width: 100%;" tabindex="3">
-                                        <?php
-                                        $result = $db->prepare("SELECT * FROM job_type ");
-                                        $result->bindParam(':userid', $ttr);
-                                        $result->execute();
-                                        for ($i = 0; $row = $result->fetch(); $i++) {
-                                        ?>
-                                            <option value="<?php echo $row['id']; ?>"> <?php echo $row['name']; ?> </option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <input type="text" name="name" class="form-control" tabindex="1" autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Price</label>
-                                    <input type="number" step=".01" name="price" class="form-control" tabindex="4" autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="col-md-3" style="height: 70px;display: flex;align-items: end;">
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-info" value="Save">
-                                </div>
-                            </div>
-
-                        </div>
-                    </form>
-
-                </div>
-            </div>
+            
+                
         </section>
 
 
@@ -141,8 +159,10 @@ date_default_timezone_set("Asia/Colombo");
                                     <td><?php echo $row['type']; ?> </td>
                                     <td><?php echo $row['type_name']; ?> </td>
                                     <td><?php echo $row['sell'];  ?></td>
-                                    <td><a href="#" id="<?php echo $row['id']; ?>" class="delbutton btn btn-danger" title="Click to Delete">
-                                            <i class="icon-trash">x</i></a>
+                                    <td style="width: 100px;">
+                                        <a href="#" id="<?php echo $row['product_id']; ?>" class="delbutton btn btn-danger" title="Click to Delete">
+                                            <i class="fa fa-trash"></i></a>
+                                        
                                     </td>
                                 </tr>
                             <?php }   ?>
@@ -197,11 +217,12 @@ date_default_timezone_set("Asia/Colombo");
                         data: info,
                         success: function() {}
                     });
-                    $(this).parents(".record").css({
-                        'opacity': '0.5',
-                        'cursor': 'default'
-                    })
-                    $(this).remove();
+                    $(this).parents(".record").animate({
+                        backgroundColor: "#fbc7c7"
+                    }, "fast")
+                    .animate({
+                        opacity: "hide"
+                    }, "slow");
 
                 }
 
