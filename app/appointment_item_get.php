@@ -52,5 +52,21 @@ if ($unit == 1) {
 
         <?php }
     }
+} else
+
+if ($unit == 2) {
+
+    $invo = $_GET['invo'];
+    $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' ");
+    $result->bindParam(':id', $date);
+    $result->execute();
+    for ($i = 0; $row = $result->fetch(); $i++) { ?>
+
+        <div class="sale-info record_<?php echo $row['id'] ?>">
+            <span><?php echo $row['name'] ?></span>
+            <span onclick="btn_dll(<?php echo $row['id'] ?>)" style="color: #d90000;"><i class="fa-solid fa-xmark me-3"></i></span>
+        </div>
+
+<?php }
 }
 ?>

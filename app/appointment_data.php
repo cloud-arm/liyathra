@@ -43,12 +43,11 @@
                     <h1>Confirmation </h1>
                 </div>
 
-                <p>Please enter appointment date & time, service & service type </p>
+                <p>Appointment data sheet </p>
 
                 <h2><i class="fa-solid fa-user mx-3"></i><?php echo $customer; ?></h2>
 
                 <h2><i class="fa-solid fa-phone mx-3"></i><?php echo $contact; ?></h2>
-
 
                 <h2><i class="fa-solid fa-table-list mx-3"></i>Service</h2>
 

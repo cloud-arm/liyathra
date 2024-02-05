@@ -53,20 +53,7 @@
         </div>
     </div>
 
-    <div class="container-lg box-body category " style="flex-direction: column; gap: 10px;">
-        <?php
-        $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' ");
-        $result->bindParam(':id', $date);
-        $result->execute();
-        for ($i = 0; $row = $result->fetch(); $i++) { ?>
-
-            <div class="sale-info record">
-                <span><?php echo $row['name'] ?></span>
-                <span class="btn_dll" id="<?php echo $row['id'] ?>" style="color: #d90000;"><i class="fa-solid fa-xmark me-3"></i></span>
-            </div>
-
-        <?php } ?>
-    </div>
+    <div class="container-lg box-body category " style="flex-direction: column; gap: 10px;" id="sales_list"></div>
 
     <div class="container-lg box-body category mt-5" style="overflow-x: scroll;">
         <table>
@@ -266,31 +253,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script>
-        $(function() {
-            $(".btn_dll").click(function() {
-                var element = $(this);
-                var del_id = element.attr("id");
-                var info = 'id=' + del_id;
-                if (confirm("Sure you want to delete this Collection? There is NO undo!")) {
-                    $.ajax({
-                        type: "GET",
-                        url: "sales_list_dll.php",
-                        data: info,
-                        success: function(res) {
-                            console.log(res);
-                        }
-                    });
-                    $(this).parents(".record").animate({
-                            backgroundColor: "#fbc7c7"
-                        }, "fast")
-                        .animate({
-                            opacity: "hide"
-                        }, "slow");
-                }
-                return false;
-            });
-        });
-
+        function btn_dll(id) {
+            var info = 'id=' + id;
+            if (confirm("Sure you want to delete this Collection? There is NO undo!")) {
+                $.ajax({
+                    type: "GET",
+                    url: "sales_list_dll.php",
+                    data: info,
+                    success: function(res) {
+                        console.log(res);
+                    }
+                });
+                $(".record_" + id).animate({
+                        backgroundColor: "#fbc7c7"
+                    }, "fast")
+                    .animate({
+                        opacity: "hide"
+                    }, "slow");
+            }
+            return false;
+        }
         $('.closer').click(function() {
             $('#down-up').css("transform", "translateY(101%)");
         });
@@ -316,6 +298,7 @@
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                     document.getElementById("cat-box").innerHTML = xmlhttp.responseText;
+
                 }
             }
 
@@ -361,6 +344,8 @@
             xmlhttp.open("GET", "appointment_item_get.php?unit=1&invo=<?php echo $invo; ?>&type=" + type, true);
             xmlhttp.send();
 
+            sales_get();
+
             $(".cat_fill").click(function() {
                 var type = $(this).attr("value");
 
@@ -379,6 +364,23 @@
                 xmlhttp.open("GET", "appointment_item_get.php?unit=1&invo=<?php echo $invo; ?>&type=" + type, true);
                 xmlhttp.send();
             });
+
+            function sales_get() {
+                var xmlhttp;
+                if (window.XMLHttpRequest) {
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        document.getElementById("sales_list").innerHTML = xmlhttp.responseText;
+                    }
+                }
+
+                xmlhttp.open("GET", "appointment_item_get.php?unit=2&invo=<?php echo $invo; ?>", true);
+                xmlhttp.send();
+            }
 
 
             $(".click_fun").click(function() {
