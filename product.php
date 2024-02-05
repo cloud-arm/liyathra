@@ -48,16 +48,9 @@ date_default_timezone_set("Asia/Colombo");
                     <form method="post" action="product_save.php">
                         <div class="row">
 
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <input type="text" name="name" class="form-control" tabindex="1" autocomplete="off">
-                                </div>
-                            </div>
-
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Product Type</label>
+                                    <label>Item Type</label>
                                     <select class="form-control" name="type" id="pro_sel" style="width: 100%;" onchange="select_type()" tabindex="2">
                                         <option>Service</option>
                                         <option>Materials</option>
@@ -80,6 +73,13 @@ date_default_timezone_set("Asia/Colombo");
                                         }
                                         ?>
                                     </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" name="name" class="form-control" tabindex="1" autocomplete="off">
                                 </div>
                             </div>
 
