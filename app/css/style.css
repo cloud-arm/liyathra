@@ -738,3 +738,14 @@ button[disabled],
 input[type="submit"][disabled] {
   opacity: 0.5;
 }
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+table td,
+table th{
+  color: rgb(var(--bg-black));
+}
