@@ -39,6 +39,30 @@ date_default_timezone_set("Asia/Colombo");
     <!-- /.sidebar -->
     </aside>
 
+    <style>
+        .container-up {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            background-color: rgb(var(--bg-content-light), 0.1);
+        }
+
+        .container-cl {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+
+        .d-none {
+            display: none;
+        }
+    </style>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -56,6 +80,7 @@ date_default_timezone_set("Asia/Colombo");
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title">Product ADD</h3>
+                        <button class="btn btn-info" onclick="new_brand()">New Brand</button>
                     </div>
 
                     <!-- /.box-header -->
@@ -121,6 +146,9 @@ date_default_timezone_set("Asia/Colombo");
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title">Product Update</h3>
+                        <div class="box-tools pull-right">
+                            <a href="product.php?id=0" class="btn btn-info pull-right" style="border: 0;"> <i class="fa fa-times" style="font-size: 20px;"></i> </a>
+                        </div>
                     </div>
 
                     <!-- /.box-header -->
@@ -247,13 +275,61 @@ date_default_timezone_set("Asia/Colombo");
             </div>
 
         </section>
-        <!-- /.content -->
+
+
+        <div class="container-up d-none" id="container_up">
+            <div class="container-cl" onclick=" click_cl()"></div>
+            <div class="row">
+                <div class="col-md-12" style="background-color: rgb(var(--bg-content-wrapper));border-radius: 10px;">
+
+                    <div class="box box-success d-none" id="new_brand">
+                        <div class="box-header with-border">
+                            <h3 class="box-title w-100">Add Brand </h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-info  pull-right " style="font-size: 20px; border: 0;"><i onclick=" click_cl()" class="fa fa-times" style="font-size: 20px; border: 0;"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="box-body d-block">
+                            <form method="POST" action="brand_save.php" class="w-100">
+                                <div class="row" style="display: flex; align-items: end;">
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label>Brand Name</label>
+                                            <input type="text" name="name" class="form-control" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label>Brand Img</label>
+                                            <label class="form-control" style="display: inline-block; cursor: pointer;">
+                                                <input type="file" id="img" accept=".jpg, .jpeg, .png" name="img" style="display: none" autocomplete="off">
+                                                <i class="fa fa-cloud-upload"></i> Upload Img
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <input type="hidden" name="id" value="0">
+                                            <input type="hidden" name="end" value="0">
+                                            <input type="submit" value="Save" class="btn btn-success">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- /.content-wrapper -->
     <?php include("dounbr.php"); ?>
 
     <div class="control-sidebar-bg"></div>
+
     </div>
 
     <?php include("script.php"); ?>
@@ -270,8 +346,21 @@ date_default_timezone_set("Asia/Colombo");
 
         }
 
+        function new_brand() {
+            $("#new_brand").removeClass("d-none");
+
+            $("#container_up").removeClass("d-none");
+        }
+
+        function click_cl() {
+            $("#container_up").addClass("d-none");
+        }
 
         $(function() {
+
+            $('input[type="number"]').focus(function() {
+                $(this).select();
+            });
 
 
             $(".delbutton").click(function() {
@@ -308,8 +397,8 @@ date_default_timezone_set("Asia/Colombo");
         });
 
         $(function() {
-            $("#example1").DataTable();
-            $('#example').DataTable({
+            $("#example").DataTable();
+            $('#example1').DataTable({
                 "paging": true,
                 "lengthChange": true,
                 "searching": true,
