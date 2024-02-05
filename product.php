@@ -90,7 +90,7 @@ date_default_timezone_set("Asia/Colombo");
                                 </div>
                             </div>
 
-                            <div class="col-md-3" style="height: 70px;display: flex;align-items: end;" >
+                            <div class="col-md-3" style="height: 70px;display: flex;align-items: end;">
                                 <div class="form-group">
                                     <input type="submit" class="btn btn-info" value="Save">
                                 </div>
@@ -136,7 +136,7 @@ date_default_timezone_set("Asia/Colombo");
                             for ($i = 0; $row = $result->fetch(); $i++) { ?>
 
                                 <tr class="record">
-                                    <td><?php echo $row['id'];   ?> </td>
+                                    <td><?php echo $row['product_id'];   ?> </td>
                                     <td><?php echo $row['name'];   ?> </td>
                                     <td><?php echo $row['type']; ?> </td>
                                     <td><?php echo $row['type_name']; ?> </td>
