@@ -124,6 +124,17 @@
   width: 75px;
 }
 
+.sale-info {
+  padding: 5px 10px;
+  border: 2px solid rgb(var(--bg-theme));
+  display: inline-flex;
+  justify-content: space-between;
+  border-radius: 20px;
+  color: rgb(var(--bg-theme));
+  font-weight: 600;
+  background-color: rgb(var(--bg-white));
+}
+
 .room-info .room-box.first span {
   font-size: 20px;
   color: rgb(var(--bg-black));
@@ -693,9 +704,9 @@ svg {
   margin: 0.3rem;
 }
 
-input[class="type"]:hover + svg,
-input[class="type"]:checked + svg,
-input[class="type"]:focus + svg {
+input.type:hover + svg,
+input.type:checked + svg,
+input.type:focus + svg {
   fill: rgb(var(--bg-theme));
 }
 
