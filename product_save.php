@@ -23,14 +23,14 @@ $result = $db->prepare("SELECT * FROM job_type  WHERE id = :id ");
 $result->bindParam(':id', $serve_type);
 $result->execute();
 for ($i = 0; $row = $result->fetch(); $i++) {
-    $type_name = $r['name'];
+    $type_name = $row['name'];
 }
 
 
 
 $sql = "INSERT INTO product (name,job_type,type_name,sell,type,time) VALUES (?,?,?,?,?,?)";
 $q = $db->prepare($sql);
-$q->execute(array($date, $serve_type, $type_name, $amount, $type, $date));
+$q->execute(array($name, $serve_type, $type_name, $amount, $type, $date));
 
 
 
