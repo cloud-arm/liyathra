@@ -204,6 +204,7 @@
 
 .info-box .info-foot {
   width: 100%;
+  gap: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -441,6 +442,7 @@
   font-size: 12px;
   padding: 5px 8px 3px;
   background-color: rgb(var(--bg-theme));
+  color: rgb(var(--bg-white));
   border-radius: 15px;
 }
 
@@ -527,7 +529,6 @@
   padding: 9px 16px;
   opacity: 0.8;
   right: 0;
-  margin-right: 22px;
   transition: transform 0.5s ease 0.2s;
   transform: translateX(132%);
 }
@@ -747,6 +748,6 @@ input[type="submit"][disabled] {
 }
 
 table td,
-table th{
+table th {
   color: rgb(var(--bg-black));
 }
