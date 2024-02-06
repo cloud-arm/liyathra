@@ -21,7 +21,6 @@
         $name = $row['name'];
     }
 
-
     ?>
 </head>
 
@@ -31,6 +30,28 @@
         <div class="container-fluid my-4">
             <h1 class="fs-2 fw-semibold m_had"><span><?php echo $name ?> </span> </h1>
         </div>
+    </div>
+
+    <div class="container-lg box-body category mt-5 room-container" style="overflow-x: scroll;">
+        <table>
+            <tr id="mate-box">
+                <?php
+                $result = $db->prepare("SELECT * FROM use_product WHERE main_product = '$pro_id' ");
+                $result->bindParam(':id', $res);
+                $result->execute();
+                for ($i = 0; $row = $result->fetch(); $i++) { ?>
+
+                    <td>
+                        <div class="mate click_fun cate-info" onclick="get_product('<?php echo $row['product_id'] ?>')">
+                            <?php echo $row['product_name']; ?>
+                        </div>
+                    </td>
+
+                <?php
+                }
+                ?>
+            </tr>
+        </table>
     </div>
 
     <div class="container-fluid mb-3">
@@ -67,7 +88,7 @@
             }
         }
 
-        $(document).ready(function() {
+        function get_product(id) {
             var xmlhttp;
             if (window.XMLHttpRequest) {
                 xmlhttp = new XMLHttpRequest();
@@ -80,9 +101,16 @@
                 }
             }
 
-            xmlhttp.open("GET", "item_get.php?unit=2&invo=<?php echo $invo; ?>&id=<?php echo $pro_id; ?>", true);
+            xmlhttp.open("GET", "item_get.php?unit=2&invo=<?php echo $invo; ?>&id=" + id, true);
             xmlhttp.send();
+        }
 
+        $(document).ready(function() {
+
+            $(".click_fun").click(function() {
+                $(".click_fun").removeClass("active");
+                $(this).addClass("active");
+            });
 
         });
 

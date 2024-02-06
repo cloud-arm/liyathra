@@ -344,12 +344,6 @@
                     xmlhttp.send();
                 }
             });
-
-
-            $(".click_fun").click(function() {
-                $(".click_fun").removeClass("active");
-                $(this).addClass("active");
-            });
         });
     </script>
 </body>

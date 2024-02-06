@@ -105,6 +105,14 @@
   border: 2px solid rgb(var(--bg-theme));
 }
 
+.cate-info.mate {
+  background-color: rgb(var(--bg-white));
+}
+
+.cate-info.mate.active {
+  color: rgb(var(--bg-white));
+}
+
 .room-info.active,
 .cate-info.active {
   background-color: rgb(var(--bg-theme));
@@ -636,7 +644,7 @@ input::-webkit-inner-spin-button {
 }
 
 .customer .form-btn,
-  .customer .form-input[type="submit"] {
+.customer .form-input[type="submit"] {
   background-color: rgb(var(--bg-theme));
   color: rgb(var(--bg-white));
   width: 100%;
