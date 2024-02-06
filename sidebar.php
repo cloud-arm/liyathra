@@ -207,7 +207,7 @@
 
 
           <li>
-            <a href="expenses.php?type=all&dates=<?php echo date("Y") . '%2F' . date("m") . '%2F01'; ?>+-+<?php echo date("Y") . '%2F' . date("m") . '%2F' . date("d"); ?>">
+            <a href="expenses.php?id=exp<?php echo date("ymdhis"); ?>&year=<?php echo date("Y"); ?>&month=<?php echo date("m"); ?>">
               <i class="fa fa-dollar"></i> <span>Expenses</span>
               <span class="pull-right-container">
 
@@ -250,33 +250,6 @@
 
           <li class="treeview">
             <a href="#">
-              <i class="fa fa-wrench"></i> <span>Supplier</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="sales.php?id=pu<?php echo date("ymdhis"); ?>"><i class="fa fa-circle-o text-yellow"></i>GRN</a></li>
-              <li><a href="supplier.php"><i class="fa fa-circle-o text-yellow"></i>Supplier</a></li>
-              <li><a href="grn_payment.php"><i class="fa fa-circle-o text-red"></i>payment</a></li>
-              <li class="treeview">
-                <a href="#">
-                  <i class="fa fa-line-chart"></i>
-                  <span>Report</span>
-                  <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                </a>
-                <ul class="treeview-menu">
-                  <li><a href="grn_payment_rp.php?dates=<?php echo date("Y") . '/' . date("m") . '/' . date("d"); ?>-<?php echo date("Y") . '/' . date("m") . '/' . date("d"); ?>"><i class="fa fa-circle-o text-aqua"></i> Payment Record</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-
-
-
-
-          <li class="treeview">
-            <a href="#">
               <i class="fa fa-line-chart"></i> <span>Report</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -296,6 +269,35 @@
             </ul>
           </li>
 
+          <li class="header">Purchases DEPARTMENT</li>
+
+          <li class="treeview">
+            <a href="#"><i class="fa fa-cubes"></i><span>Purchases</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="grn.php?id=<?php echo date("ymdhis"); ?>"><i class="fa fa-circle-o text-yellow"></i> GRN</a></li>
+              <li><a href="grn_supply.php?id=0"><i class="fa fa-circle-o text-yellow"></i> Suppliers</a></li>
+              <li><a href="grn_payment.php"><i class="fa fa-circle-o text-yellow"></i> Payment</a></li>
+              <li><a href="grn_return.php?id=<?php echo date("ymdhis"); ?>"><i class="fa fa-circle-o text-yellow"></i> GRN Return</a></li>
+              <li><a href="grn_order.php?id=<?php echo date("ymdhis"); ?>"><i class="fa fa-circle-o text-yellow"></i> Purchase Order</a></li>
+              <li class="treeview">
+                <a href="#">
+                  <i class="fa fa-line-chart"></i>
+                  <span>Report</span>
+                  <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a href="grn_rp.php?year=<?php echo date("Y"); ?>&month=<?php echo date("m"); ?>"><i class="fa fa-circle-o text-aqua"></i> GRN Record</a></li>
+                  <li><a href="grn_payment_rp.php?dates=<?php echo date("Y") . '/' . date("m") . '/' . date("d"); ?>-<?php echo date("Y") . '/' . date("m") . '/' . date("d"); ?>"><i class="fa fa-circle-o text-aqua"></i> Payment Record</a></li>
+                  <li><a href="grn_return_rp.php?year=<?php echo date("Y"); ?>&month=<?php echo date("m"); ?>"><i class="fa fa-circle-o text-aqua"></i> Return Record</a></li>
+                  <li><a href="grn_order_rp.php?year=<?php echo date("Y"); ?>&month=<?php echo date("m"); ?>"><i class="fa fa-circle-o text-aqua"></i> Order Record</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
 
 
           <li class="header">CLOUD ARM SERVICE</li>
