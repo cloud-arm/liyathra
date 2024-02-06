@@ -95,9 +95,8 @@ if ($unit == 2) {
                         </div>
                     </div>
                 </div>
-                <div class="info-foot">
-                    <span class="price">LKR. <?php echo $row['sell'] ?></span>
-                    <a class="fav" style="color: rgb(var(--bg-black));" href="product_add.php?id=<?php echo $row['product_id']; ?>&invo=<?php echo $invo; ?>">
+                <div class="dlt-box d-md-none" id="dlt-<?php echo $row['id']; ?>" value="<?php echo $row['id']; ?>" onclick="sales_add_list(<?php echo $row['id']; ?>)">
+                    <a href="#<?php echo $row['id']; ?>" id="<?php echo $row['id']; ?>" class="nav-link">
                         <i class="fa-solid fa-cart-plus"></i>
                     </a>
                 </div>
@@ -126,7 +125,7 @@ if ($unit == 3) {
             $path = 'product_img/' . $img;
         }
         ?>
-        <div class="col-6 col-sm-4 col-md-4 col-lg-4">
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
             <div class="info-box">
                 <span class="head"><?php echo $row['name']; ?></span>
                 <span class="sub-head"><?php echo $row['code'] ?></span>
@@ -135,9 +134,9 @@ if ($unit == 3) {
                 </div>
                 <div class="info-foot">
                     <span class="price">LKR. <?php echo $row['sell'] ?></span>
-                    <span class="fav" onclick="open_model('<?php echo $row['product_id'] ?>','<?php echo $row['name'] ?>','<?php echo $row['code'] ?>','<?php echo $row['sell'] ?>')">
+                    <a class="fav" style="color: rgb(var(--bg-black));" href="product_add.php?id=<?php echo $row['product_id']; ?>&invo=<?php echo $invo; ?>">
                         <i class="fa-solid fa-cart-plus"></i>
-                    </span>
+                    </a>
                 </div>
             </div>
         </div>
