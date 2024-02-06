@@ -125,7 +125,7 @@ if ($unit == 3) {
             $path = 'product_img/' . $img;
         }
         ?>
-        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+        <div class="col-6 col-sm-4 col-md-4 col-lg-4">
             <div class="info-box">
                 <span class="head"><?php echo $row['name']; ?></span>
                 <span class="sub-head"><?php echo $row['code'] ?></span>
