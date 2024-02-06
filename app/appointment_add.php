@@ -20,13 +20,13 @@
 
 </head>
 
-<body class="bg-light customer" style="--bg-background: 255 180 255; overflow-y: scroll;">
+<body class="bg-light customer" style="--bg-background: 131, 109, 130; overflow-y: scroll;">
 
     <div class="container-fluid container-md mt-4">
         <div class="box px-2 mb-0 mt-3 ">
             <div class="box-header px-0 mb-0">
                 <a class="nav-link border-0 btn fs-1 d-md-none" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i></a>
-                <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-block" aria-current="page" href="index.php"><i class="fa-solid fa-house me-2"></i>Home</a>
+                <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-block" aria-current="page" href="index.php"><i  class="fa-solid fa-house me-2"></i>Home</a>
             </div>
         </div>
     </div>
