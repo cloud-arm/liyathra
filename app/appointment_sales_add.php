@@ -28,9 +28,9 @@ $emp = 0;
 $sup_emp = 0;
 
 // query
-$sql = "INSERT INTO sales_list (invoice_no,product_id,qty,amount,name,price,profit,code,dic,date,emp,sup_emp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+$sql = "INSERT INTO sales_list (invoice_no,product_id,qty,amount,name,price,profit,code,dic,date,emp,sup_emp,type) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 $q = $db->prepare($sql);
-$q->execute(array($invo,$pro_id,$qty,$price,$name,$price,$profit,$code,$discount,$date,$emp,$sup_emp));
+$q->execute(array($invo,$pro_id,$qty,$price,$name,$price,$profit,$code,$discount,$date,$emp,$sup_emp, 'Service'));
 
 
 header("location: appointment_item_get.php?unit=1&invo=$invo&type=$type");

@@ -7,22 +7,10 @@ include("../connect.php");
 $id = $_REQUEST['id'];
 $invo = $_REQUEST['invo'];
 $qty = $_REQUEST['qty'];
-
 $main_id = $_REQUEST['pro_id'];
+$sev_id = $_REQUEST['sev'];
 
-
-$result = $db->prepare("SELECT * FROM job WHERE invoice_no= :id");
-$result->bindParam(':id', $invo);
-$result->execute();
-for ($i = 0; $row = $result->fetch(); $i++) {
-	$act = $row['action'];
-}
-
-if ($act == 'pending') {
-	$sql = 'UPDATE job SET action =? WHERE invoice_no = ? ';
-	$ql = $db->prepare($sql);
-	$ql->execute(array('active', $invo));
-}
+$met_id = $main_id;
 
 $date = date("Y-m-d");
 $discount = 0;
@@ -45,9 +33,9 @@ $profit = ($sell - $cost) * $qty;
 
 
 // query
-$sql = "INSERT INTO sales_list (invoice_no,product_id,qty,amount,name,price,profit,code,dic,date,view) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+$sql = "INSERT INTO sales_list (invoice_no,product_id,qty,amount,name,price,profit,code,dic,date,view,service_id,met_id,type,action) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 $q = $db->prepare($sql);
-$q->execute(array($invo, $pro_id, $qty, $amount, $name, $sell, $profit, $code, $discount, $date, 1));
+$q->execute(array($invo, $pro_id, $qty, $amount, $name, $sell, $profit, $code, $discount, $date, 1, $sev_id, $met_id, 'Materials',1));
 
 
 header("location: item_get.php?unit=2&invo=$invo&id=$main_id");

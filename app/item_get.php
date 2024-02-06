@@ -74,11 +74,11 @@ if ($unit == 2) {
         if ($ch == 0) { ?>
 
             <div class="col-12 col-md-6 col-lg-4 record ajk_sdy">
-                <div class="info-box" id="info-<?php echo $r_id =$row['id']; ?>">
+                <div class="info-box" id="info-<?php echo $r_id = $row['id']; ?>">
                     <div class="row w-100">
                         <div class="col-3">
                             <div class="inb_img-box">
-                                <img src="img/chicken.png" alt="">
+                                <img src="" alt="">
                             </div>
                         </div>
                         <div class="col-9 as_jdk">
@@ -87,7 +87,8 @@ if ($unit == 2) {
                             </div>
                             <div class="info-foot">
                                 <div class="qty-box">
-                                    <input type="number" step=".01" class="qty form-input" id="qty_<?php echo $row['id']; ?>">
+                                    <label for="">Qty*</label>
+                                    <input type="number" step=".01" class="qty form-input mx-2" id="qty_<?php echo $row['id']; ?>">
                                     <input type="hidden" id="pid_<?php echo $row['id']; ?>" value="<?php echo $id; ?>">
                                 </div>
                                 <span class="bin btn" onclick="cartClick('<?php echo $row['id']; ?>')">Add</span>
@@ -95,7 +96,7 @@ if ($unit == 2) {
                         </div>
                     </div>
                 </div>
-                <div class="dlt-box d-md-none" id="dlt-<?php echo $row['id']; ?>"  onclick="sales_add_list('<?php echo $row['id']; ?>')">
+                <div class="dlt-box d-md-none" id="dlt-<?php echo $row['id']; ?>" onclick="sales_add_list('<?php echo $row['id']; ?>')">
                     <a href="#" id="<?php echo $row['id']; ?>" class="nav-link">
                         <i class="fa-solid fa-cart-plus"></i>
                     </a>
@@ -133,7 +134,7 @@ if ($unit == 3) {
                     <img src="<?php echo $path; ?>" alt="">
                 </div>
                 <div class="info-foot">
-                    <span class="price">LKR. <?php echo $row['sell'] ?></span>
+                    <span class="price">LKR. <?php echo $row['amount'] ?></span>
                     <a class="fav" style="color: rgb(var(--bg-black));" href="product_add.php?id=<?php echo $row['product_id']; ?>&invo=<?php echo $invo; ?>">
                         <i class="fa-solid fa-cart-plus"></i>
                     </a>
@@ -141,6 +142,6 @@ if ($unit == 3) {
             </div>
         </div>
 
-    <?php
+<?php
     }
 }  ?>
