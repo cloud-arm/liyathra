@@ -14,11 +14,19 @@
     $pro_id = $_GET['id'];
     $invo = $_GET['invo'];
 
-    $result = $db->prepare("SELECT * FROM product WHERE product_id = '$pro_id' ");
-    $result->bindParam(':id', $res);
+    $result = $db->prepare("SELECT * FROM product WHERE product_id = :id ");
+    $result->bindParam(':id', $pro_id);
     $result->execute();
     for ($i = 0; $row = $result->fetch(); $i++) {
         $name = $row['name'];
+    }
+
+
+    $result = $db->prepare("SELECT * FROM job WHERE invoice_no =:id ");
+    $result->bindParam(':id', $invo);
+    $result->execute();
+    for ($i = 0; $row = $result->fetch(); $i++) {
+        $job = $row['id'];
     }
 
     ?>
@@ -63,7 +71,7 @@
     </div>
 
     <div class="container-fluid mb-3 flex">
-        <a href="order.php?id=<?php echo $_GET['id'] . '&invo=' . $_GET['invo']; ?>" class="cate-info active" style="width: 90%;justify-content: center;font-size: 25px; color: rgb(var(--bg-white)); font-weight: 600;">Next</a>
+        <a href="order.php?id=<?php echo $job; ?>" class="cate-info active" style="width: 90%;justify-content: center;font-size: 25px; color: rgb(var(--bg-white)); font-weight: 600;">Next</a>
     </div>
 
 
@@ -73,6 +81,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script>
+        var main_id = 0;
+
         function cartClick(id) {
             let info_box = $('#info-' + id);
             let dlt_box = $('#dlt-' + id);
@@ -89,6 +99,7 @@
         }
 
         function get_product(id) {
+            main_id = id;
             var xmlhttp;
             if (window.XMLHttpRequest) {
                 xmlhttp = new XMLHttpRequest();
@@ -129,7 +140,7 @@
                 }
             }
 
-            xmlhttp.open("GET", "sales_add.php?id=" + p_id + "&invo=<?php echo $invo ?>&qty=" + qty + "&pro_id=<?php echo $pro_id; ?>", true);
+            xmlhttp.open("GET", "sales_add.php?id=" + p_id + "&invo=<?php echo $invo ?>&qty=" + qty + "&pro_id=" + main_id, true);
             xmlhttp.send();
 
         }

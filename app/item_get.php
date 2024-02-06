@@ -74,7 +74,7 @@ if ($unit == 2) {
         if ($ch == 0) { ?>
 
             <div class="col-12 col-md-6 col-lg-4 record ajk_sdy">
-                <div class="info-box" id="info-<?php echo $row['id']; ?>">
+                <div class="info-box" id="info-<?php echo $r_id =$row['id']; ?>">
                     <div class="row w-100">
                         <div class="col-3">
                             <div class="inb_img-box">
@@ -95,8 +95,8 @@ if ($unit == 2) {
                         </div>
                     </div>
                 </div>
-                <div class="dlt-box d-md-none" id="dlt-<?php echo $row['id']; ?>" value="<?php echo $row['id']; ?>" onclick="sales_add_list(<?php echo $row['id']; ?>)">
-                    <a href="#<?php echo $row['id']; ?>" id="<?php echo $row['id']; ?>" class="nav-link">
+                <div class="dlt-box d-md-none" id="dlt-<?php echo $row['id']; ?>"  onclick="sales_add_list('<?php echo $row['id']; ?>')">
+                    <a href="#" id="<?php echo $row['id']; ?>" class="nav-link">
                         <i class="fa-solid fa-cart-plus"></i>
                     </a>
                 </div>
@@ -111,7 +111,7 @@ if ($unit == 3) {
     $invo = $_GET['invo'];
 
 
-    $sql = "SELECT * FROM sales_list JOIN product ON product.product_id = sales_list.product_id WHERE  sales_list.invoice_no = '$invo' ";
+    $sql = "SELECT * FROM sales_list JOIN product ON product.product_id = sales_list.product_id WHERE  sales_list.invoice_no = '$invo' AND view = 0 ";
 
     $result = $db->prepare($sql);
     $result->bindParam(':userid', $date);
