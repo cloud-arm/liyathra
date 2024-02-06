@@ -83,7 +83,7 @@ if ($unit == 2) {
                         </div>
                         <div class="col-9 as_jdk">
                             <div class="i_n_b">
-                                <span class="head"><?php echo $row['name'] ?></span>
+                                <span class="head"><?php echo $row['product_name'] ?></span>
                             </div>
                             <div class="info-foot">
                                 <div class="qty-box">
