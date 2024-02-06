@@ -88,7 +88,7 @@ if ($unit == 2) {
                             <div class="info-foot">
                                 <div class="qty-box">
                                     <input type="number" step=".01" class="qty form-input" id="qty_<?php echo $row['id']; ?>">
-                                    <input type="hidden"  id="pid_<?php echo $row['id']; ?>" value="<?php echo $id; ?>">
+                                    <input type="hidden" id="pid_<?php echo $row['id']; ?>" value="<?php echo $id; ?>">
                                 </div>
                                 <span class="bin btn" onclick="cartClick('<?php echo $row['id']; ?>')">Add</span>
                             </div>
@@ -102,6 +102,45 @@ if ($unit == 2) {
                 </div>
             </div>
 
-<?php }
+        <?php }
+    }
+} else
+
+if ($unit == 3) {
+
+    $invo = $_GET['invo'];
+
+
+    $sql = "SELECT * FROM sales_list JOIN product ON product.product_id = sales_list.product_id WHERE  sales_list.invoice_no = '$invo' ";
+
+    $result = $db->prepare($sql);
+    $result->bindParam(':userid', $date);
+    $result->execute();
+
+    for ($i = 0; $row = $result->fetch(); $i++) {
+        $img = $row['img'];
+        if ($img == '') {
+            $path = 'img/rice.png';
+        } else {
+            $path = 'product_img/' . $img;
+        }
+        ?>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <div class="info-box">
+                <span class="head"><?php echo $row['name']; ?></span>
+                <span class="sub-head"><?php echo $row['code'] ?></span>
+                <div class="img-box">
+                    <img src="<?php echo $path; ?>" alt="">
+                </div>
+                <div class="info-foot">
+                    <span class="price">LKR. <?php echo $row['sell'] ?></span>
+                    <span class="fav" onclick="open_model('<?php echo $row['product_id'] ?>','<?php echo $row['name'] ?>','<?php echo $row['code'] ?>','<?php echo $row['sell'] ?>')">
+                        <i class="fa-solid fa-cart-plus"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+<?php
     }
 } ?>
