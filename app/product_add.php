@@ -42,7 +42,7 @@
     </div>
 
     <div class="container-fluid mb-3 flex">
-        <a href="index.php" class="cate-info active" style="width: 90%;justify-content: center;font-size: 25px; color: rgb(var(--bg-white)); font-weight: 600;">Next</a>
+        <a href="order.php?id=<?php echo $_GET['id'] . '&invo=' . $_GET['invo']; ?>" class="cate-info active" style="width: 90%;justify-content: center;font-size: 25px; color: rgb(var(--bg-white)); font-weight: 600;">Next</a>
     </div>
 
 

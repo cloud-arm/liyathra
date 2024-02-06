@@ -25,7 +25,7 @@ if ($type == 'active') {
     $ql = $db->prepare($sql);
     $ql->execute(array('active', $id));
 
-    header("location: index.php");
+    header("location: order.php?id=$id");
 }
 
 if ($type == 'cancel') {
