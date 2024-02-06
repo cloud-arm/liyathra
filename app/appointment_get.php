@@ -13,7 +13,7 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     $con = $row['action'];
 
 ?>
-    <div class="col-4 col-md-3 col-lg-2">
+    <div class="col-4 col-sm-4 col-md-3 col-lg-2">
         <a href="order.php?id=<?php echo $row['id'] ?>" class="nav-link">
             <div class="room" <?php if ($con == 'active') { ?> style="background-color: rgb(var(--bg-theme));" <?php } ?>>
                 <span style="font-size: 12px;"><?php echo $row['app_date'] . ' <br> Time: ' . $row['app_time']; ?> </span>

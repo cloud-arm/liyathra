@@ -26,7 +26,7 @@
 
     
 
-    <div style="marging: 10px;">
+    <div style="margin: 10px;">
         <table border="1" cellspacing="1"  width="100%">
             <thead>
                 <tr>

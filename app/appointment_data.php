@@ -34,7 +34,7 @@
 
 </head>
 
-<body class="bg-light customer" style="overflow-y: scroll;">
+<body class="bg-light customer" style="--bg-background: 255 180 255; overflow-y: scroll;">
 
     <div class="container flex mb-3">
         <div class="box room-container">

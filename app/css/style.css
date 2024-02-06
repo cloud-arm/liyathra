@@ -1,5 +1,6 @@
 :root {
   --bg-white: 256, 256, 256;
+  --bg-background: 234, 233, 236;
   --bg-light: 234, 233, 236;
   --bg-black: 0, 0, 0;
   --bg-dark: 51, 48, 46;
@@ -8,7 +9,7 @@
 }
 
 .bg-light {
-  background-color: rgb(var(--bg-light)) !important;
+  background-color: rgb(var(--bg-background)) !important;
 }
 
 .bg-theme {

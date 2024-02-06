@@ -34,7 +34,7 @@ if ($unit == 1) {
         }
         if ($ch == 0) {
 ?>
-            <div class="col-6 col-sm-4 col-md-4 col-lg-4">
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
                 <div class="info-box">
                     <span class="head"><?php echo $row['name']; ?></span>
                     <span class="sub-head"><?php echo $row['code'] ?></span>
