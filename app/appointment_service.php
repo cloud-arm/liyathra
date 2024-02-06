@@ -27,9 +27,9 @@
         <div class="box px-2 mb-0 mt-3 ">
             <div class="box-header px-0 mb-0">
                 <a class="nav-link border-0 btn fs-1 d-md-none" style="visibility: hidden;" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i></a>
-                <a class="nav-link border-0 btn fs-1 d-md-none" aria-current="page" href="appointment_data.php?id=<?php echo $job ?>&invo=<?php echo $invo ?>"><i class="fa-solid fa-table"></i></a>
+                <a class="nav-link border-0 btn fs-1 d-md-none" aria-current="page" href="appointment_data.php?id=<?php echo $job ?>"><i class="fa-solid fa-table"></i></a>
                 <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-block" style="visibility: hidden;" aria-current="page" href="index.php"><i class="fa-solid fa-house me-2"></i>Home</a>
-                <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-block" aria-current="page" href="appointment_data.php?id=<?php echo $job ?>&invo=<?php echo $invo ?>"><i class="fa-solid fa-table me-2"></i></i>Details</a>
+                <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-block" aria-current="page" href="appointment_data.php?id=<?php echo $job ?>"><i class="fa-solid fa-table me-2"></i></i>Details</a>
             </div>
         </div>
     </div>

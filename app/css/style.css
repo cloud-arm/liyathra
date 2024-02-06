@@ -635,7 +635,8 @@ input::-webkit-inner-spin-button {
   border-radius: 10px;
 }
 
-.customer .form-input[type="submit"] {
+.customer .form-btn,
+  .customer .form-input[type="submit"] {
   background-color: rgb(var(--bg-theme));
   color: rgb(var(--bg-white));
   width: 100%;
