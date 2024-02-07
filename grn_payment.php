@@ -1,46 +1,47 @@
 <!DOCTYPE html>
 <html>
-<?php 
+<?php
 include("head.php");
 include("connect.php");
 date_default_timezone_set("Asia/Colombo");
 ?>
 
 <body class="hold-transition skin-blue sidebar-mini">
-    <?php 
-include_once("auth.php");
-$r=$_SESSION['SESS_LAST_NAME'];
+    <?php
+    include_once("auth.php");
+    $r = $_SESSION['SESS_LAST_NAME'];
 
-if($r =='Cashier'){
-header("location: app/");
-}
-if($r =='admin'){
-include_once("sidebar.php");
-}
+    if ($r == 'Cashier') {
+        header("location: app/");
+    }
+    if ($r == 'admin') {
+        include_once("sidebar.php");
+    }
 
-?>
+    ?>
 
-<link rel="stylesheet" href="datepicker.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="datepicker.css" type="text/css" media="all" />
     <script src="datepicker.js" type="text/javascript"></script>
     <script src="datepicker.ui.min.js" type="text/javascript"></script>
     <script type="text/javascript">
-    $(function() {
-        $("#datepicker1").datepicker({
-            dateFormat: 'yy/mm/dd'
-        });
-        $("#datepicker2").datepicker({
-            dateFormat: 'yy/mm/dd'
-        });
+        $(function() {
+            $("#datepicker1").datepicker({
+                dateFormat: 'yy/mm/dd'
+            });
+            $("#datepicker2").datepicker({
+                dateFormat: 'yy/mm/dd'
+            });
 
-    });
+        });
     </script>
     <!-- /.sidebar -->
     </aside>
-<style>
-.input-group .select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
-    border-radius: 0 10px 10px 0;
-}
-</style>
+    <style>
+        .input-group .select2-container--default .select2-selection--single,
+        .select2-selection .select2-selection--single {
+            border-radius: 0 10px 10px 0;
+        }
+    </style>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -49,7 +50,7 @@ include_once("sidebar.php");
                 Supplier
                 <small>Payment</small>
             </h1>
-            
+
         </section>
 
         <!-- add item -->
@@ -69,14 +70,14 @@ include_once("sidebar.php");
                                         <div class="input-group-addon">
                                             <label>Supplier</label>
                                         </div>
-                                        <?php  
+                                        <?php
                                         $result = $db->prepare("SELECT * FROM supplier ");
                                         $result->bindParam(':id', $res);
                                         $result->execute(); ?>
-                                        <select class="form-control select2" id="supply" onchange="invo_get()" style="width: 100%;" tabindex="1" >
+                                        <select class="form-control select2" id="supply" onchange="invo_get()" style="width: 100%;" tabindex="1">
                                             <option value="0" selected disabled> Select Supplier </option>
-                                            <?php for($i=0; $row = $result->fetch(); $i++){  ?>
-                                            <option value="<?php echo $row['id'];?>"> <?php echo $row['name']; ?> </option>
+                                            <?php for ($i = 0; $row = $result->fetch(); $i++) {  ?>
+                                                <option value="<?php echo $row['id']; ?>"> <?php echo $row['name']; ?> </option>
                                             <?php  } ?>
                                         </select>
                                     </div>
@@ -86,7 +87,7 @@ include_once("sidebar.php");
 
                         <div class="form-group">
                             <div class="box-body d-block">
-                                <form method="POST" action="grn_payment_save.php">           
+                                <form method="POST" action="grn_payment_save.php">
                                     <div class="row">
 
                                         <div class="col-md-12">
@@ -96,7 +97,7 @@ include_once("sidebar.php");
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Supply Invoice</label>
-                                                <select class="form-control select2" name="invoice" onchange="tbl_get()" id="invo"  style="width: 100%;" tabindex="1" >
+                                                <select class="form-control select2" name="invoice" onchange="tbl_get()" id="invo" style="width: 100%;" tabindex="1">
                                                     <option value="0" selected disabled> select invoice </option>
                                                 </select>
                                             </div>
@@ -117,15 +118,15 @@ include_once("sidebar.php");
 
                                         <div class="col-md-3 slt-bank" style="display:none;">
                                             <div class="form-group">
-                                                <label>Account No</label>                                            
-                                                <input class="form-control" type="text" name="acc_no" autocomplete="off" >
+                                                <label>Account No</label>
+                                                <input class="form-control" type="text" name="acc_no" autocomplete="off">
                                             </div>
                                         </div>
 
                                         <div class="col-md-3 slt-bank" style="display:none;">
                                             <div class="form-group">
-                                                <label>Bank Name</label>                                            
-                                                <input class="form-control" type="text" name="bank_name" autocomplete="off" >
+                                                <label>Bank Name</label>
+                                                <input class="form-control" type="text" name="bank_name" autocomplete="off">
                                             </div>
                                         </div>
 
@@ -141,7 +142,7 @@ include_once("sidebar.php");
                                         <div class="col-md-3 slt-chq" style="display:none;">
                                             <div class="form-group">
                                                 <label>Chq Number</label>
-                                                <input class="form-control" type="text" name="chq_no" autocomplete="off" >
+                                                <input class="form-control" type="text" name="chq_no" autocomplete="off">
                                             </div>
                                         </div>
 
@@ -162,7 +163,7 @@ include_once("sidebar.php");
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Pay Amount</label>
-                                                <input class="form-control"  type="number" name="amount" id="pay_txt"  onkeyup="checking()" autocomplete="off">
+                                                <input class="form-control" type="number" name="amount" id="pay_txt" onkeyup="checking()" autocomplete="off">
                                             </div>
                                         </div>
 
@@ -173,7 +174,7 @@ include_once("sidebar.php");
                                             </div>
                                         </div>
 
-                                        <div class="col-md-1 ps-0"  style="height: 70px; display: flex; align-items: end;">
+                                        <div class="col-md-1 ps-0" style="height: 70px; display: flex; align-items: end;">
                                             <div class="form-group">
                                                 <input type="hidden" name="id" id="invo_no">
                                                 <input type="hidden" name="sup_id" id="sup_id">
@@ -211,10 +212,8 @@ include_once("sidebar.php");
                                         <th>#</th>
                                     </tr>
                                 </thead>
-                                
-                                <tbody id="tbl">
-                                    
-                                </tbody>
+
+                                <tbody id="tbl"> </tbody>
                             </table>
 
                         </div>
@@ -224,7 +223,7 @@ include_once("sidebar.php");
             </div>
 
         </section>
-    <!-- /.content -->
+        <!-- /.content -->
     </div>
 
     <?php include("dounbr.php"); ?>
@@ -232,8 +231,8 @@ include_once("sidebar.php");
     <div class="control-sidebar-bg"></div>
     </div>
 
- <!-- jQuery 2.2.3 -->
- <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <!-- jQuery 2.2.3 -->
+    <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- Select2 -->
@@ -241,19 +240,11 @@ include_once("sidebar.php");
     <!-- DataTables -->
     <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
-    <!-- InputMask -->
-    <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-    <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
     <!-- date-range-picker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
     <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
     <!-- bootstrap datepicker -->
     <script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
-    <!-- bootstrap color picker -->
-    <script src="../../plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
-    <!-- bootstrap time picker -->
-    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
     <!-- SlimScroll 1.3.0 -->
     <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- iCheck 1.0.1 -->
@@ -264,14 +255,15 @@ include_once("sidebar.php");
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
+    <!-- Dark Theme Btn-->
+    <script src="https://dev.colorbiz.org/ashen/cdn/main/dist/js/dark_theme_btn.js"></script>
 
 
     <script type="text/javascript">
-
-        function checking(){
+        function checking() {
 
             let val = $("#credit_note").val();
-            var info = 'type=cred_set&id='+val;
+            var info = 'type=cred_set&id=' + val;
             $.ajax({
                 type: "GET",
                 url: "grn_payment_get.php",
@@ -286,30 +278,30 @@ include_once("sidebar.php");
             let blc = parseInt($("#blc").val());
             let cr_blc = parseInt($("#cr_blc").val());
 
-            if(0 >= am){
-                $('#submit').attr("disabled","");
-            }else
+            if (0 >= am) {
+                $('#submit').attr("disabled", "");
+            } else
 
-            if(pt == 'Credit_Note'){
+            if (pt == 'Credit_Note') {
 
-                if( am <= cr_blc ){
+                if (am <= cr_blc) {
                     $('#submit').removeAttr("disabled");
-                }else{ 
-                    $('#submit').attr("disabled","");
+                } else {
+                    $('#submit').attr("disabled", "");
                 }
 
-            }else
-            
-            if(am <= blc){
+            } else
+
+            if (am <= blc) {
                 $('#submit').removeAttr("disabled");
-            }else{ 
-                $('#submit').attr("disabled","");
+            } else {
+                $('#submit').attr("disabled", "");
             }
         }
 
-        function invo_get(){
+        function invo_get() {
             let val = $("#supply").val();
-            var info = 'type=inv_get&id='+val;
+            var info = 'type=inv_get&id=' + val;
             $.ajax({
                 type: "GET",
                 url: "grn_payment_get.php",
@@ -323,10 +315,10 @@ include_once("sidebar.php");
             $("#sup_id").val(val);
         }
 
-        function tbl_get(){
+        function tbl_get() {
             let val = $("#invo").val();
 
-            var info = 'type=bill_get&id='+val;
+            var info = 'type=bill_get&id=' + val;
             $.ajax({
                 type: "GET",
                 url: "grn_payment_get.php",
@@ -337,7 +329,7 @@ include_once("sidebar.php");
                 }
             });
 
-            info = 'type=tbl_get&id='+val;
+            info = 'type=tbl_get&id=' + val;
             $.ajax({
                 type: "GET",
                 url: "grn_payment_get.php",
@@ -351,25 +343,25 @@ include_once("sidebar.php");
             $("#invo_no").val(val);
         }
 
-        function select_pay(){
+        function select_pay() {
             var val = $('#method').val();
-            if(val=="Bank"){
-                $('.slt-bank').css("display","block");
-            }else{
-                $('.slt-bank').css("display","none");
+            if (val == "Bank") {
+                $('.slt-bank').css("display", "block");
+            } else {
+                $('.slt-bank').css("display", "none");
             }
 
-            if(val=="Chq"){
-                $('.slt-chq').css("display","block");
-            }else{
-                $('.slt-chq').css("display","none");
+            if (val == "Chq") {
+                $('.slt-chq').css("display", "block");
+            } else {
+                $('.slt-chq').css("display", "none");
             }
 
-            if(val=="Credit_Note"){
-                $('#slt-credit').css("display","block");
+            if (val == "Credit_Note") {
+                $('#slt-credit').css("display", "block");
 
                 let val = $("#supply").val();
-                var info = 'type=cred_get&id='+val;
+                var info = 'type=cred_get&id=' + val;
                 $.ajax({
                     type: "GET",
                     url: "grn_payment_get.php",
@@ -380,8 +372,8 @@ include_once("sidebar.php");
                     }
                 });
 
-            }else{
-                $('#slt-credit').css("display","none");
+            } else {
+                $('#slt-credit').css("display", "none");
             }
         }
 
@@ -393,9 +385,12 @@ include_once("sidebar.php");
                     type: "GET",
                     url: "grn_payment_dll.php",
                     data: info,
-                    success: function(res) {tbl_get();invo_get();}
+                    success: function(res) {
+                        tbl_get();
+                        invo_get();
+                    }
                 });
-                
+
             }
             return false;
         }
@@ -416,49 +411,38 @@ include_once("sidebar.php");
 
     <!-- Page script -->
     <script>
-    $(function() {
-        //Initialize Select2 Elements
-        $(".select2").select2();
+        $(function() {
+            //Initialize Select2 Elements
+            $(".select2").select2();
 
-        //Datemask dd/mm/yyyy
-        $("#datemask").inputmask("YYYY/MM/DD", {
-            "placeholder": "YYYY/MM/DD"
+            //Date range picker
+            $('#reservation').daterangepicker();
+            //Date range picker with time picker
+            //$('#datepicker').datepicker({datepicker: true,  format: 'yyyy/mm/dd '});
+            //Date range as a button
+
+
+            //Date picker
+            $('#datepicker').datepicker({
+                autoclose: true,
+                datepicker: true,
+                format: 'yyyy-mm-dd '
+            });
+            $('#datepicker').datepicker({
+                autoclose: true
+            });
+
+
+            $('#datepickerd').datepicker({
+                autoclose: true,
+                datepicker: true,
+                format: 'yyyy-mm-dd '
+            });
+            $('#datepickerd').datepicker({
+                autoclose: true
+            });
+
         });
-        //Datemask2 mm/dd/yyyy
-        $("#datemask2").inputmask("YYYY/MM/DD", {
-            "placeholder": "YYYY/MM/DD"
-        });
-        //Money Euro
-        $("[data-mask]").inputmask();
-
-        //Date range picker
-        $('#reservation').daterangepicker();
-        //Date range picker with time picker
-        //$('#datepicker').datepicker({datepicker: true,  format: 'yyyy/mm/dd '});
-        //Date range as a button
-
-
-        //Date picker
-        $('#datepicker').datepicker({
-            autoclose: true,
-            datepicker: true,
-            format: 'yyyy-mm-dd '
-        });
-        $('#datepicker').datepicker({
-            autoclose: true
-        });
-
-
-        $('#datepickerd').datepicker({
-            autoclose: true,
-            datepicker: true,
-            format: 'yyyy-mm-dd '
-        });
-        $('#datepickerd').datepicker({
-            autoclose: true
-        });
-
-    });
     </script>
 
 

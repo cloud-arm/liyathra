@@ -325,19 +325,11 @@ include("connect.php");
     <!-- DataTables -->
     <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
-    <!-- InputMask -->
-    <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-    <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
     <!-- date-range-picker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
     <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
     <!-- bootstrap datepicker -->
     <script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
-    <!-- bootstrap color picker -->
-    <script src="../../plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
-    <!-- bootstrap time picker -->
-    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
     <!-- SlimScroll 1.3.0 -->
     <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- iCheck 1.0.1 -->
@@ -348,6 +340,8 @@ include("connect.php");
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
+    <!-- Dark Theme Btn-->
+    <script src="https://dev.colorbiz.org/ashen/cdn/main/dist/js/dark_theme_btn.js"></script>
 
     <script type="text/javascript">
         function pro_select() {

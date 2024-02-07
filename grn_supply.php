@@ -286,19 +286,11 @@ date_default_timezone_set("Asia/Colombo");
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- Select2 -->
     <script src="../../plugins/select2/select2.full.min.js"></script>
-    <!-- InputMask -->
-    <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-    <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
     <!-- date-range-picker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
     <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
     <!-- bootstrap datepicker -->
     <script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
-    <!-- bootstrap color picker -->
-    <script src="../../plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
-    <!-- bootstrap time picker -->
-    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
     <!-- SlimScroll 1.3.0 -->
     <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- iCheck 1.0.1 -->
@@ -309,6 +301,8 @@ date_default_timezone_set("Asia/Colombo");
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
+    <!-- Dark Theme Btn-->
+    <script src="https://dev.colorbiz.org/ashen/cdn/main/dist/js/dark_theme_btn.js"></script>
 
     <script type="text/javascript">
         $(function() {
@@ -358,17 +352,6 @@ date_default_timezone_set("Asia/Colombo");
         $(function() {
             //Initialize Select2 Elements
             $(".select2").select2();
-
-            //Datemask dd/mm/yyyy
-            $("#datemask").inputmask("YYYY/MM/DD", {
-                "placeholder": "YYYY/MM/DD"
-            });
-            //Datemask2 mm/dd/yyyy
-            $("#datemask2").inputmask("YYYY/MM/DD", {
-                "placeholder": "YYYY/MM/DD"
-            });
-            //Money Euro
-            $("[data-mask]").inputmask();
 
             //Date range picker
             $('#reservation').daterangepicker();

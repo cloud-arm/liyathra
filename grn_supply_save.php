@@ -11,16 +11,14 @@ $mobile = $_POST['mobile'];
 $email = $_POST['email'];
 
 
-if($id=='0'){
+if ($id == '0') {
     $sql = "INSERT INTO supplier (name,contact,address,contact_person,mobile,email,action) VALUES (?,?,?,?,?,?,?)";
     $ql = $db->prepare($sql);
-    $ql->execute(array($name,$contact,$address,$person,$mobile,$email,1));
-}else {
+    $ql->execute(array($name, $contact, $address, $person, $mobile, $email, 1));
+} else {
     $sql = "UPDATE  supplier SET name =?, contact =?, address =?, contact_person =?, mobile =?, email =? WHERE id =?";
     $ql = $db->prepare($sql);
-    $ql->execute(array($name,$contact,$address,$person,$mobile,$email,$id));
+    $ql->execute(array($name, $contact, $address, $person, $mobile, $email, $id));
 }
 
 header("location: grn_supply.php?id=0");
-
-?>

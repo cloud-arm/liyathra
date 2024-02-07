@@ -11,38 +11,40 @@ include("connect.php");
 
 <body class="hold-transition skin-blue sidebar-mini">
     <?php
-include_once("auth.php");
-$r=$_SESSION['SESS_LAST_NAME'];
-if($r =='Cashier'){
-include_once("sidebar2.php");
-}
-if($r =='admin'){
-include_once("sidebar.php");
-}
-$u = $_SESSION['SESS_MEMBER_ID'];
-$invo = $_GET['id'];
+    include_once("auth.php");
+    $r = $_SESSION['SESS_LAST_NAME'];
+    if ($r == 'Cashier') {
+        include_once("sidebar2.php");
+    }
+    if ($r == 'admin') {
+        include_once("sidebar.php");
+    }
+    $u = $_SESSION['SESS_MEMBER_ID'];
+    $invo = $_GET['id'];
 
-$result = $db->prepare("SELECT * FROM purchases_list WHERE user_id=$u AND action='' AND type='Return' ");
-$result->bindParam(':userid', $res);
-$result->execute();
-for($i=0; $row = $result->fetch(); $i++){$invo = $row['invoice_no'];}
+    $result = $db->prepare("SELECT * FROM purchases_list WHERE user_id=$u AND action='' AND type='Return' ");
+    $result->bindParam(':userid', $res);
+    $result->execute();
+    for ($i = 0; $row = $result->fetch(); $i++) {
+        $invo = $row['invoice_no'];
+    }
 
-?>
+    ?>
 
 
-<link rel="stylesheet" href="datepicker.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="datepicker.css" type="text/css" media="all" />
     <script src="datepicker.js" type="text/javascript"></script>
     <script src="datepicker.ui.min.js" type="text/javascript"></script>
     <script type="text/javascript">
-    $(function() {
-        $("#datepicker1").datepicker({
-            dateFormat: 'yy/mm/dd'
-        });
-        $("#datepicker2").datepicker({
-            dateFormat: 'yy/mm/dd'
-        });
+        $(function() {
+            $("#datepicker1").datepicker({
+                dateFormat: 'yy/mm/dd'
+            });
+            $("#datepicker2").datepicker({
+                dateFormat: 'yy/mm/dd'
+            });
 
-    });
+        });
     </script>
     <!-- /.sidebar -->
     </aside>
@@ -54,7 +56,7 @@ for($i=0; $row = $result->fetch(); $i++){$invo = $row['invoice_no'];}
                 GRN
                 <small>Preview</small>
             </h1>
-            
+
         </section>
         <!-- Main content -->
         <section class="content">
@@ -69,11 +71,11 @@ for($i=0; $row = $result->fetch(); $i++){$invo = $row['invoice_no'];}
 
                         <div class="box-body d-block">
                             <form method="POST" action="grn_list_save.php">
-                                
+
                                 <div class="row">
 
                                     <div class="col-md-12 m-0">
-                                        <div class="form-group"  id="status"></div>
+                                        <div class="form-group" id="status"></div>
                                     </div>
 
                                     <div class="col-md-4">
@@ -83,18 +85,17 @@ for($i=0; $row = $result->fetch(); $i++){$invo = $row['invoice_no'];}
                                                     <label>Product</label>
                                                 </div>
 
-                                                <select class="form-control select2" name="stock" id="p_sel" onchange="pro_select()"
-                                                    style="width: 100%;" tabindex="1" autofocus>
+                                                <select class="form-control select2" name="stock" id="p_sel" onchange="pro_select()" style="width: 100%;" tabindex="1" autofocus>
 
-                                                    <?php 
+                                                    <?php
                                                     $result = $db->prepare("SELECT * FROM stock WHERE qty_balance > 0 ");
                                                     $result->bindParam(':userid', $res);
                                                     $result->execute();
-                                                    for($i=0; $row = $result->fetch(); $i++){ ?>
-                                                        <option value="<?php echo $row['id'];?>" >
+                                                    for ($i = 0; $row = $result->fetch(); $i++) { ?>
+                                                        <option value="<?php echo $row['id']; ?>">
                                                             <?php echo $row['code']; ?> -<?php echo $row['name']; ?>
                                                         </option>
-                                                    <?php	} ?>
+                                                    <?php    } ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -117,8 +118,7 @@ for($i=0; $row = $result->fetch(); $i++){$invo = $row['invoice_no'];}
                                                 <div class="input-group-addon">
                                                     <label>Cost Price</label>
                                                 </div>
-                                                <input type="number" class="form-control" id="cost1" name="cost"
-                                                    tabindex="2">
+                                                <input type="number" class="form-control" id="cost1" name="cost" tabindex="2">
                                             </div>
                                         </div>
                                     </div>
@@ -143,34 +143,39 @@ for($i=0; $row = $result->fetch(); $i++){$invo = $row['invoice_no'];}
                                     <th>Amount (Rs.)</th>
                                     <th>#</th>
                                 </tr>
-                                <?php $total=0; $style="";
-                            $result = $db->prepare("SELECT * FROM purchases_list WHERE invoice_no = '$invo' ");
-                            $result->bindParam(':userid', $res);
-                            $result->execute();
-                            for($i=0; $row = $result->fetch(); $i++){
-                                $pro_id=$row['product_id'];
+                                <?php $total = 0;
+                                $style = "";
+                                $result = $db->prepare("SELECT * FROM purchases_list WHERE invoice_no = '$invo' ");
+                                $result->bindParam(':userid', $res);
+                                $result->execute();
+                                for ($i = 0; $row = $result->fetch(); $i++) {
+                                    $pro_id = $row['product_id'];
 
-                                $re = $db->prepare("SELECT * FROM product WHERE product_id = '$pro_id' ");
-                                $re->bindParam(':userid', $res);
-                                $re->execute();
-                                for($i=0; $rw = $re->fetch(); $i++){$stock=$rw['qty']; }
-                                if ($stock < 0) {$style='style="color:red" '; }
-
-                            ?>
-                                <tr <?php echo $style; ?>  class="record">
-                                    <td><?php echo $row['name']; ?></td>
-                                    <td><?php echo $row['qty']; ?></td>
-                                    <td><?php echo $row['cost']; ?></td>
-                                    <td><?php echo $row['amount']; ?></td>
-                                    <td> <a href="#" id="<?php echo $row['id']; ?>" class="dll_btn btn btn-danger" title="Click to Delete"> X</a></td>                                                       
-                                    <?php  $total+=$row['amount']; ?>
-                                </tr>
-                                <?php
+                                    $re = $db->prepare("SELECT * FROM product WHERE product_id = '$pro_id' ");
+                                    $re->bindParam(':userid', $res);
+                                    $re->execute();
+                                    for ($i = 0; $rw = $re->fetch(); $i++) {
+                                        $stock = $rw['qty'];
                                     }
-                            ?>
+                                    if ($stock < 0) {
+                                        $style = 'style="color:red" ';
+                                    }
+
+                                ?>
+                                    <tr <?php echo $style; ?> class="record">
+                                        <td><?php echo $row['name']; ?></td>
+                                        <td><?php echo $row['qty']; ?></td>
+                                        <td><?php echo $row['cost']; ?></td>
+                                        <td><?php echo $row['amount']; ?></td>
+                                        <td> <a href="#" id="<?php echo $row['id']; ?>" class="dll_btn btn btn-danger" title="Click to Delete"> X</a></td>
+                                        <?php $total += $row['amount']; ?>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
 
                             </table>
-                            <h4>Total Rs <b><?php echo number_format($total,2); ?></h4>
+                            <h4>Total Rs <b><?php echo number_format($total, 2); ?></h4>
 
                         </div>
 
@@ -185,19 +190,19 @@ for($i=0; $row = $result->fetch(); $i++){$invo = $row['invoice_no'];}
                         </div>
                         <div class="form-group">
                             <div class="box-body d-block">
-                                <form method="POST" action="grn_save.php">           
+                                <form method="POST" action="grn_save.php">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Supplier</label>
-                                                <select class="form-control select2" name="supply"style="width: 100%;" tabindex="1" autofocus>
-                                                    <?php 
+                                                <select class="form-control select2" name="supply" style="width: 100%;" tabindex="1" autofocus>
+                                                    <?php
                                                     $result = $db->prepare("SELECT * FROM supplier ");
                                                     $result->bindParam(':id', $invo);
-                                                    $result->execute();                                                        
-                                                    for($i=0; $row = $result->fetch(); $i++){ ?>
-                                                        <option value="<?php echo $row['id'];?>"><?php echo $row['name'];?></option>
-                                                    <?php	} ?>
+                                                    $result->execute();
+                                                    for ($i = 0; $row = $result->fetch(); $i++) { ?>
+                                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                                                    <?php    } ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -205,7 +210,7 @@ for($i=0; $row = $result->fetch(); $i++){$invo = $row['invoice_no'];}
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Pay Amount</label>
-                                                <input class="form-control"  type="number" name="amount" autocomplete="off">
+                                                <input class="form-control" type="number" name="amount" autocomplete="off">
                                             </div>
                                         </div>
 
@@ -223,7 +228,7 @@ for($i=0; $row = $result->fetch(); $i++){$invo = $row['invoice_no'];}
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3"  style="height: 75px;display: flex; align-items: end;">
+                                        <div class="col-md-3" style="height: 75px;display: flex; align-items: end;">
                                             <div class="form-group">
                                                 <input type="hidden" name="id" value="<?php echo $invo; ?>">
                                                 <input type="hidden" name="type" value="Return">
@@ -246,8 +251,8 @@ for($i=0; $row = $result->fetch(); $i++){$invo = $row['invoice_no'];}
     <div class="control-sidebar-bg"></div>
     </div>
 
- <!-- jQuery 2.2.3 -->
- <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <!-- jQuery 2.2.3 -->
+    <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- Select2 -->
@@ -255,19 +260,11 @@ for($i=0; $row = $result->fetch(); $i++){$invo = $row['invoice_no'];}
     <!-- DataTables -->
     <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
-    <!-- InputMask -->
-    <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-    <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
     <!-- date-range-picker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
     <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
     <!-- bootstrap datepicker -->
     <script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
-    <!-- bootstrap color picker -->
-    <script src="../../plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
-    <!-- bootstrap time picker -->
-    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
     <!-- SlimScroll 1.3.0 -->
     <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- iCheck 1.0.1 -->
@@ -278,12 +275,13 @@ for($i=0; $row = $result->fetch(); $i++){$invo = $row['invoice_no'];}
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
+    <!-- Dark Theme Btn-->
+    <script src="https://dev.colorbiz.org/ashen/cdn/main/dist/js/dark_theme_btn.js"></script>
 
     <script type="text/javascript">
-
-        function pro_select(){
+        function pro_select() {
             let val = $('#p_sel').val();
-            var info = 'id='+val+'&type=Return&ac=0';
+            var info = 'id=' + val + '&type=Return&ac=0';
             $.ajax({
                 type: "GET",
                 url: "grn_status.php",
@@ -293,7 +291,7 @@ for($i=0; $row = $result->fetch(); $i++){$invo = $row['invoice_no'];}
                     $("#status").append(res);
                 }
             });
-            info = 'id='+val+'&type=Return&ac=2';
+            info = 'id=' + val + '&type=Return&ac=2';
             $.ajax({
                 type: "GET",
                 url: "grn_status.php",
@@ -306,24 +304,28 @@ for($i=0; $row = $result->fetch(); $i++){$invo = $row['invoice_no'];}
         }
 
         $(".dll_btn").click(function() {
-                var element = $(this);
-                var id = element.attr("id");
-                var info = 'id=' + id;
-                if (confirm("Sure you want to delete this Collection? There is NO undo!")) {
+            var element = $(this);
+            var id = element.attr("id");
+            var info = 'id=' + id;
+            if (confirm("Sure you want to delete this Collection? There is NO undo!")) {
 
-                    $.ajax({
-                        type: "GET",
-                        url: "grn_list_dll.php",
-                        data: info,
-                        success: function() {
+                $.ajax({
+                    type: "GET",
+                    url: "grn_list_dll.php",
+                    data: info,
+                    success: function() {
 
-                        }
-                    });
-                    $(this).parents(".record").animate({backgroundColor: "#fbc7c7"}, "fast")
-                        .animate({opacity: "hide"}, "slow");
-                }
-                return false;
-            });
+                    }
+                });
+                $(this).parents(".record").animate({
+                        backgroundColor: "#fbc7c7"
+                    }, "fast")
+                    .animate({
+                        opacity: "hide"
+                    }, "slow");
+            }
+            return false;
+        });
 
         $(function() {
             $(".select2").select2();
@@ -341,46 +343,36 @@ for($i=0; $row = $result->fetch(); $i++){$invo = $row['invoice_no'];}
 
     <!-- Page script -->
     <script>
-    $(function() {
-        //Initialize Select2 Elements
-        $(".select2").select2();
+        $(function() {
+            //Initialize Select2 Elements
+            $(".select2").select2();
 
-        //Datemask dd/mm/yyyy
-        $("#datemask").inputmask("YYYY/MM/DD", {
-            "placeholder": "YYYY/MM/DD"
+
+            //Date range picker
+            $('#reservation').daterangepicker();
+            //Date range picker with time picker
+            //$('#datepicker').datepicker({datepicker: true,  format: 'yyyy/mm/dd '});
+            //Date range as a button
+
+
+            //Date picker
+            $('#datepicker1').datepicker({
+                autoclose: true,
+                datepicker: true,
+                format: 'yyyy-mm-dd '
+            });
+            $('#datepicker').datepicker({
+                autoclose: true
+            });
+
+
+            $('#datepickerd').datepicker({
+                autoclose: true,
+                datepicker: true,
+                format: 'yyyy-mm-dd '
+            });
+
         });
-        //Datemask2 mm/dd/yyyy
-        $("#datemask2").inputmask("YYYY/MM/DD", {
-            "placeholder": "YYYY/MM/DD"
-        });
-        //Money Euro
-        $("[data-mask]").inputmask();
-
-        //Date range picker
-        $('#reservation').daterangepicker();
-        //Date range picker with time picker
-        //$('#datepicker').datepicker({datepicker: true,  format: 'yyyy/mm/dd '});
-        //Date range as a button
-
-
-        //Date picker
-        $('#datepicker1').datepicker({
-            autoclose: true,
-            datepicker: true,
-            format: 'yyyy-mm-dd '
-        });
-        $('#datepicker').datepicker({
-            autoclose: true
-        });
-
-
-        $('#datepickerd').datepicker({
-            autoclose: true,
-            datepicker: true,
-            format: 'yyyy-mm-dd '
-        });
-        
-    });
     </script>
 
 </body>
