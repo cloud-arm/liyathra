@@ -182,8 +182,8 @@ for ($i = 0; $row = $result->fetch(); $i++) {
         $ql->execute(array('active', $pay_total, $pay_total, $pay_type, $invoice));
     }
 
-    $sql = "UPDATE appointment 
-            SET action='5'
+    $sql = "UPDATE job 
+            SET action='close'
             WHERE invoice_no=?";
     $q = $db->prepare($sql);
     $q->execute(array($invoice));
@@ -291,8 +291,8 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     }
 }
 
-$sql = "UPDATE appointment
-SET action='5'
+$sql = "UPDATE job
+SET action='close'
 WHERE invoice_no=?";
 $q = $db->prepare($sql);
 $q->execute(array($invoice));
