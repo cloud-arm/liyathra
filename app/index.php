@@ -35,6 +35,14 @@
         </nav>
     </header>
 
+    <div class="float-btn">
+        <span class="room-info active" id="float_btn">
+            <div class="room-box first">
+                <span><i class="fa-solid fa-rotate-right"></i></span>
+            </div>
+        </span>
+    </div>
+
     <div class="container-fluid mb-3">
         <div class="box">
             <div class="box-header">
@@ -76,6 +84,23 @@
 
             xmlhttp.open("GET", "appointment_get.php", true);
             xmlhttp.send();
+
+            $('#float_btn').click(function() {
+
+                if (window.XMLHttpRequest) {
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        document.getElementById("room-box").innerHTML = xmlhttp.responseText;
+                    }
+                }
+
+                xmlhttp.open("GET", "appointment_get.php", true);
+                xmlhttp.send();
+            });
 
             $(".click_fun").click(function() {
                 $(".click_fun").removeClass("active");

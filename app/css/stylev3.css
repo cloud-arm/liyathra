@@ -803,3 +803,10 @@ table th {
   display: flex;
   max-width: 110px;
 }
+
+.float-btn{
+  width: max-content;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+}
