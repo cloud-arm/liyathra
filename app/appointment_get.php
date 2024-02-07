@@ -2,8 +2,9 @@
 include("../connect.php");
 date_default_timezone_set("Asia/Colombo");
 
+$date = date('Y-m-d');
 
-$sql = "SELECT * FROM job WHERE action != 'close' ";
+$sql = "SELECT * FROM job WHERE action != 'close' AND app_date = '$date' ";
 
 $result = $db->prepare($sql);
 $result->bindParam(':userid', $date);
@@ -14,8 +15,7 @@ for ($i = 0; $row = $result->fetch(); $i++) {
 
 ?>
     <div class="col-4 col-sm-4 col-md-3 col-lg-2">
-        <a class="nav-link" <?php if ($con == 'active') { ?> href="order.php?id=<?php echo $row['id'] ?>" <?php } ?> 
-            <?php if ($con == 'pending') { ?> href="appointment_action.php?id=<?php echo $row['id'] ?>" <?php } ?>>
+        <a class="nav-link" <?php if ($con == 'active') { ?> href="order.php?id=<?php echo $row['id'] ?>" <?php } ?> <?php if ($con == 'pending') { ?> href="appointment_action.php?id=<?php echo $row['id'] ?>" <?php } ?>>
             <div class="room" <?php if ($con == 'active') { ?> style="background-color: rgb(var(--bg-theme));" <?php } ?>>
                 <span style="font-size: 12px;"><?php echo $row['app_date'] . ' <br> Time: ' . $row['app_time']; ?> </span>
 
