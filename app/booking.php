@@ -27,7 +27,7 @@
                 <div class="collapse navbar-collapse" id="nav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="booking.php">Booking List</a>
+                            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                         </li>
                     </ul>
                 </div>
@@ -52,6 +52,10 @@
         <div class="row" id="room-box"></div>
     </div>
 
+    <div class="container-fluid my-4 flex">
+        <a href="index.php" class="cate-info active" style="width: 90%;justify-content: center;font-size: 25px; color: rgb(var(--bg-white)); font-weight: 600;">Home</a>
+    </div>
+
 
     <!-- Bootstrap 5.3.2-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
@@ -74,7 +78,7 @@
                 }
             }
 
-            xmlhttp.open("GET", "appointment_get.php", true);
+            xmlhttp.open("GET", "appointment_get.php?type=all", true);
             xmlhttp.send();
 
             $(".click_fun").click(function() {

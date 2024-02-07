@@ -4,7 +4,11 @@ date_default_timezone_set("Asia/Colombo");
 
 $date = date('Y-m-d');
 
-$sql = "SELECT * FROM job WHERE action != 'close' AND app_date = '$date' ";
+if (isset($_GET['type'])) {
+    $sql = "SELECT * FROM job WHERE action != 'close'  ";
+} else {
+    $sql = "SELECT * FROM job WHERE action != 'close' AND app_date = '$date' ";
+}
 
 $result = $db->prepare($sql);
 $result->bindParam(':userid', $date);
