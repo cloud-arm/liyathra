@@ -760,3 +760,34 @@ table td,
 table th {
   color: rgb(var(--bg-black));
 }
+
+.ajk_ady .inb_num {
+  display: flex;
+  flex-direction: column;
+}
+
+.ajk_ady .inb_num .num {
+  font-size: 50px;
+  text-align: center;
+  font-weight: 600;
+  color: rgb(var(--bg-theme));
+}
+
+.ajk_ady .inb_num .time {
+  font-size: 13px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.ajk_ady .info-foot .time {
+  font-size: 45px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.ajk_ady .info-foot .bin.btn {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 5px 10px;
+  margin-right: 10px;
+}

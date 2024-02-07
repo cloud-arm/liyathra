@@ -24,11 +24,15 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     $cost = $row['sum(sell_price)'];
 }
 
+if ($cost == '') {
+    $cost = 0;
+}
+
 $result = $db->prepare("SELECT * FROM job WHERE invoice_no =:id ");
 $result->bindParam(':id', $invo);
 $result->execute();
 for ($i = 0; $row = $result->fetch(); $i++) {
-    
+
     $job = $row['id'];
 }
 
