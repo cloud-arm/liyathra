@@ -5,9 +5,9 @@ date_default_timezone_set("Asia/Colombo");
 $date = date('Y-m-d');
 
 if (isset($_GET['type'])) {
-    $sql = "SELECT * FROM job WHERE action != 'close'  ORDER BY invoice_no  ";
+    $sql = "SELECT * FROM job WHERE action != 'close'  ORDER BY order_no  ";
 } else {
-    $sql = "SELECT * FROM job WHERE action != 'close' AND app_date = '$date' ORDER BY invoice_no ";
+    $sql = "SELECT * FROM job WHERE action != 'close' AND app_date = '$date' ORDER BY order_no ";
 }
 
 $result = $db->prepare($sql);

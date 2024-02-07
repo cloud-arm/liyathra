@@ -11,9 +11,11 @@ if ($type == 'edit') {
     $date = $_REQUEST['date'];
     $time = $_REQUEST['time'];
 
-    $sql = "UPDATE job SET app_date =?, app_time = ?  WHERE id = ? ";
+    $order_no = str_replace('-', '', $date) . str_replace(':', '', $time);
+
+    $sql = "UPDATE job SET app_date =?, app_time =?, order_no = ?  WHERE id = ? ";
     $ql = $db->prepare($sql);
-    $ql->execute(array($date, $time, $id));
+    $ql->execute(array($date, $time, $order_no, $id));
 
     header("location: appointment_action.php?id=$id");
 }
