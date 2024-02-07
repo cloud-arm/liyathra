@@ -767,7 +767,7 @@ table th {
 }
 
 .ajk_ady .inb_num .num {
-  font-size: 50px;
+  font-size: 40px;
   text-align: center;
   font-weight: 600;
   color: rgb(var(--bg-theme));
@@ -780,9 +780,15 @@ table th {
 }
 
 .ajk_ady .info-foot .time {
-  font-size: 45px;
+  font-size: 40px;
   text-align: center;
   font-weight: 600;
+}
+
+.ajk_ady .info-foot .app .type {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
 .ajk_ady .info-foot .bin.btn {
@@ -790,4 +796,10 @@ table th {
   font-weight: 600;
   padding: 5px 10px;
   margin-right: 10px;
+}
+
+.ajk_ady .info-foot .app {
+  flex-direction: column;
+  display: flex;
+  max-width: 110px;
 }

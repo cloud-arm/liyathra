@@ -5,9 +5,9 @@ date_default_timezone_set("Asia/Colombo");
 $date = date('Y-m-d');
 
 if (isset($_GET['type'])) {
-    $sql = "SELECT * FROM job WHERE action != 'close'  ";
+    $sql = "SELECT * FROM job WHERE action != 'close'  ORDER BY invoice_no  ";
 } else {
-    $sql = "SELECT * FROM job WHERE action != 'close' AND app_date = '$date' ";
+    $sql = "SELECT * FROM job WHERE action != 'close' AND app_date = '$date' ORDER BY invoice_no ";
 }
 
 $result = $db->prepare($sql);
@@ -26,6 +26,9 @@ for ($i = 0; $row = $result->fetch(); $i++) {
                         <div class="inb_num">
                             <span class="num" <?php if ($con == 'active') { ?> style="color: rgb(var(--bg-black));" <?php } ?>><?php echo $num; ?></span>
                             <span class="time">Time:<?php echo  $row['app_time']; ?> </span>
+                            <?php if (isset($_GET['type'])) { ?>
+                                <span class="time"><?php echo  $row['app_date']; ?> </span>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="col-9 as_jdk">
@@ -36,9 +39,13 @@ for ($i = 0; $row = $result->fetch(); $i++) {
                             <div class="qty-box">
                                 <span class="time"><?php echo  $row['app_time']; ?> </span>
                             </div>
-                            <a class="nav-link" <?php if ($con == 'active') { ?> href="order.php?id=<?php echo $row['id'] ?>" <?php } ?> <?php if ($con == 'pending') { ?> href="appointment_action.php?id=<?php echo $row['id'] ?>" <?php } ?>>
-                                <span <?php if ($con == 'active') { ?> style="color: rgb(var(--bg-black));" <?php } ?> class="bin btn">View</span>
-                            </a>
+                            <div class="app">
+                                <span class="type"><?php echo  $row['type_name']; ?> </span>
+                                <a class="nav-link" style="align-self: end;" <?php if ($con == 'active') { ?> href="order.php?id=<?php echo $row['id'] ?>" <?php } ?> <?php if ($con == 'pending') { ?> href="appointment_action.php?id=<?php echo $row['id'] ?>" <?php } ?>>
+                                    <span <?php if ($con == 'active') { ?> style="color: rgb(var(--bg-black));" <?php } ?> class="bin btn">View</span>
+                                </a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
