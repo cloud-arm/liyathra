@@ -17,6 +17,27 @@ $result->execute();
 for ($i = 0; $row = $result->fetch(); $i++) {
     $con = $row['action'];
     $num = $i + 1;
+
+
+    $time_now=date("H.i");
+
+//-------------------- Date sum --------------------//
+$date1=date_create(date('Y-m-d'));
+$date2=date_create($row['app_date']);
+$date_diff=date_diff($date1,$date2);
+$deff_date=$date_diff->format("%R%a");
+//--------------------Time sum----------------------//
+list($out_h, $out_m) = explode('.',$row['app_time'] );
+list($in_h, $in_m) = explode('.', $time_now);
+
+$deff_h=$out_h-$in_h;
+$deff_m=$out_m-$in_m;
+if ($deff_m < 0) {$deff_m=$deff_m+60; $deff_h=$deff_h-1;}
+
+if($deff_date > 0){$deff_h=$deff_h+($deff_date*24);}
+
+$deff_time=$deff_h.".".sprintf("%02d",$deff_m);
+//----------------------------------------------------//
 ?>
     <div class="col-12 col-sm-6 col-md-6 col-lg-4">
         <div class="ajk_ady ">
@@ -37,7 +58,7 @@ for ($i = 0; $row = $result->fetch(); $i++) {
                         </div>
                         <div class="info-foot">
                             <div class="qty-box">
-                                <span class="time"><?php echo  $row['app_time']; ?> </span>
+                                <span class="time"><?php echo  $deff_time; ?> </span>
                             </div>
                             <div class="app">
                                 <span class="type"><?php echo  $row['type_name']; ?> </span>
