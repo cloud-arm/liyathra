@@ -12,6 +12,7 @@
     date_default_timezone_set("Asia/Colombo");
 
     $id = $_SESSION['SESS_MEMBER_ID'];
+    $date = date("Y-m-d");
     ?>
 </head>
 
@@ -44,12 +45,12 @@
             $result->execute();
 
             for ($i = 0; $row = $result->fetch(); $i++) {
-                $con = '';
+                $con = $row['last_date'];
                 //----------------------------------------------------//
             ?>
                 <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                     <div class="ajk_ady ">
-                        <div class="info-box" style="border: 2px solid rgb(var(--bg-theme));<?php if ($con == 'active') { ?> background: rgba(var(--bg-theme), 0.25);<?php } ?>">
+                        <div class="info-box" style="border: 2px solid rgb(var(--bg-theme));<?php if ($con == $date) { ?> background: rgba(var(--bg-theme), 0.25);<?php } ?>">
                             <div class="w-100">
                                 <div class="as_jdk">
                                     <div class="i_n_b">
@@ -59,7 +60,7 @@
                                         <div class="anl">
                                             <span class="anl_hed"><i class="fa-solid fa-arrow-up-1-9 me-2"></i>Last Meter : <span><?php echo $row['meter'] ?></span></span>
                                             <a class="nav-link" style="align-self: end;" href="cost_analyser_view.php?id=<?php echo $row['id'] ?>">
-                                                <span <?php if ($con == 'active') { ?> style="color: rgb(var(--bg-black));" <?php } ?> class="bin btn">View</span>
+                                                <span <?php if ($con == $date) { ?> style="color: rgb(var(--bg-black));" <?php } ?> class="bin btn">View</span>
                                             </a>
                                         </div>
                                     </div>
