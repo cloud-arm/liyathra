@@ -239,7 +239,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="hr_employee.php"><i class="fa fa-user text-yellow"></i>Employee</a></li>
+              <li><a href="hr_employee.php?id=0"><i class="fa fa-user text-yellow"></i>Employee</a></li>
               <li><a href="hr_attendance.php?emp=all&dates=<?php echo date("Y") . '%2F' . date("m") . '%2F01'; ?>+-+<?php echo date("Y") . '%2F' . date("m") . '%2F' . date("d"); ?>"><i class="fa  fa-500px text-yellow"></i>Attendance</a></li>
               <li><a href="hr_allowances.php"><i class="fa fa-star-o text-yellow"></i>Allowances</a></li>
               <li><a href="hr_salary_advance.php"><i class="fa fa-money text-yellow"></i>Advance</a></li>
