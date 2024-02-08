@@ -143,7 +143,7 @@ include("connect.php");
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6" style="height: 75px;display: flex; align-items: end;">
+                                        <div class="col-md-2 pull-right">
                                             <div class="form-group">
                                                 <input type="hidden" name="id" value="0">
                                                 <input type="submit" value="Save" class="btn btn-success">
@@ -272,7 +272,7 @@ include("connect.php");
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6" style="height: 75px;display: flex; align-items: end;">
+                                        <div class="col-md-2 pull-right">
                                             <div class="form-group">
                                                 <input type="hidden" name="id" value="0">
                                                 <input type="submit" value="Update" class="btn btn-success">
