@@ -260,7 +260,7 @@ include("connect.php");
                                                 <td><?php echo "Rs." . $tot_bill; ?></td>
 
                                                 <td>
-                                                    <a href="profile.php?id=<?php echo $row['cus_id']; ?>"><button class="btn btn-success"><i class="glyphicon glyphicon-user"></i></button></a>
+                                                    <a href="#profile.php?id=<?php echo $row['cus_id']; ?>"><button class="btn btn-success"><i class="glyphicon glyphicon-user"></i></button></a>
                                                 </td>
                                             </tr>
                                         <?php } ?>
