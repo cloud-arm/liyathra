@@ -50,7 +50,7 @@ include("connect.php");
         </section>
         <section class="content">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <?php if ($id == '0') { ?>
 
                         <div class="box box-success">
@@ -63,70 +63,70 @@ include("connect.php");
                                 <form method="POST" action="hr_employee_save.php" class="w-100">
 
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Name</label>
                                                 <input type="text" name="name" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Address</label>
                                                 <input type="text" name="address" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone No</label>
                                                 <input type="text" name="phone_no" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>NIC</label>
                                                 <input type="text" name="nic" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Month Rate</label>
                                                 <input type="text" name="rate" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>OT Rate</label>
                                                 <input type="text" name="ot" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>EPF NO</label>
                                                 <input type="text" name="etf_no" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>EPF Amount</label>
                                                 <input type="text" name="etf_amount" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Welfare Amount</label>
                                                 <input type="text" name="well_amount" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Designation</label>
                                                 <select class="form-control" name="type">
@@ -143,7 +143,7 @@ include("connect.php");
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3" style="height: 75px;display: flex; align-items: end;">
+                                        <div class="col-md-6" style="height: 75px;display: flex; align-items: end;">
                                             <div class="form-group">
                                                 <input type="hidden" name="id" value="0">
                                                 <input type="submit" value="Save" class="btn btn-success">
@@ -190,70 +190,70 @@ include("connect.php");
                                 <form method="POST" action="hr_employee_save.php" class="w-100">
 
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Name</label>
                                                 <input type="text" value="<?php echo $name; ?>" name="name" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Address</label>
                                                 <input type="text" value="<?php echo $address; ?>" name="address" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone No</label>
                                                 <input type="text" value="<?php echo $phone_no; ?>" name="phone_no" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>NIC</label>
                                                 <input type="text" value="<?php echo $nic; ?>" name="nic" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Month Rate</label>
                                                 <input type="text" value="<?php echo $rate; ?>" name="rate" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>OT Rate</label>
                                                 <input type="text" value="<?php echo $ot; ?>" name="ot" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>EPF NO</label>
                                                 <input type="text" value="<?php echo $epf_no; ?>" name="etf_no" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>EPF Amount</label>
                                                 <input type="text" value="<?php echo $epf_amount; ?>" name="etf_amount" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Welfare Amount</label>
                                                 <input type="text" value="<?php echo $well; ?>" name="well_amount" class="form-control" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Designation</label>
                                                 <select class="form-control" name="type">
@@ -272,7 +272,7 @@ include("connect.php");
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3" style="height: 75px;display: flex; align-items: end;">
+                                        <div class="col-md-6" style="height: 75px;display: flex; align-items: end;">
                                             <div class="form-group">
                                                 <input type="hidden" name="id" value="0">
                                                 <input type="submit" value="Update" class="btn btn-success">
@@ -331,7 +331,7 @@ include("connect.php");
                                                 <a href="#" id="<?php echo $row['id']; ?>" class="dll_btn btn btn-danger" title="Click to Delete">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
-                                                <a href="#hr_employee_profile.php?id=<?php echo $id; ?>" class="btn btn-info" title="Click to View Profile">
+                                                <a href="hr_employee_profile.php?id=<?php echo $id; ?>" class="btn btn-info" title="Click to View Profile">
                                                     <i class="fa fa-user"></i>
                                                 </a>
                                                 <a href="hr_employee.php?id=<?php echo $row['id']; ?>" class="up_btn btn btn-warning" title="Click to Delete">
