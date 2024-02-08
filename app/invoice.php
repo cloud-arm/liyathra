@@ -215,7 +215,7 @@
                 if (confirm("Sure you want to delete this Collection? There is NO undo!")) {
                     $.ajax({
                         type: "GET",
-                        url: "item_list_dll.php",
+                        url: "sales_list_dll.php",
                         data: info,
                         success: function() {}
                     });
