@@ -37,15 +37,12 @@ if ($pay_type == 'bank') {
     }
 }
 
-$result = $db->prepare("SELECT * FROM appointment WHERE invoice_no = '$invoice' ");
+$result = $db->prepare("SELECT * FROM job WHERE invoice_no = '$invoice' ");
 $result->bindParam(':userid', $res);
 $result->execute();
 for ($i = 0; $row = $result->fetch(); $i++) {
     $cus_name = $row['cus_name'];
     $cus_id = $row['cus_id'];
-    $in_date = $row['in_date'];
-    $in_time = $row['time'];
-    $room_no = '';
 }
 
 
