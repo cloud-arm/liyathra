@@ -79,7 +79,7 @@
             <div class="box-body">
                 <div class="row w-100">
                     <?php
-                    $sql = "SELECT * FROM sales_list WHERE invoice_no='$invo' AND view = 0 ";
+                    $sql = "SELECT * FROM sales_list WHERE invoice_no='$invo' ";
                     $result = $db->prepare($sql);
                     $result->bindParam(':userid', $date);
                     $result->execute();
