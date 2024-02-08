@@ -103,7 +103,8 @@ include("connect.php");
                                 <th>Date</th>
                                 <th>Invoice no</th>
                                 <th>Customer Name</th>
-                                <th>Labor Cost</th>
+                                <th>Cost</th>
+                                <th>Labor</th>
                                 <th>Amount</th>
                                 <th>View</th>
                             </tr>
@@ -115,7 +116,7 @@ include("connect.php");
                             $d1 = $_GET['d1'];
                             $d2 = $_GET['d2'];
                             $tot = 0;
-                            $credit = 0;
+                            $labor = 0;
                             $result = $db->prepare("SELECT * FROM sales WHERE action='active' and date BETWEEN '$d1' AND '$d2'  ");
                             $result->bindParam(':userid', $date);
                             $result->execute();
@@ -132,23 +133,20 @@ include("connect.php");
                             ?>
 
                                 <td><?php echo $row['date']; ?></td>
-                                <td><?php echo $row['invoice_number']; ?><?php if ($row['balance'] < 0) { ?><small class="label label-danger">Credit</small><?php } ?></td>
+                                <td><?php echo $row['invoice_number']; ?></td>
                                 <td><?php echo $row['customer_name']; ?></td>
-
-                                <td><?php echo $row['labor_cost']; ?></td>
+                                <td><?php echo $row['cost']; ?></td>
+                                <td><?php echo $row['amount'] - $row['cost']; ?></td>
                                 <td><?php echo $row['amount']; ?></td>
-                                <td>
-                                    <a href="bill.php?id=<?php echo $id; ?>" class="btn btn-primary btn-xs"><b>Print</b></a>
+                                <td><a href="bill.php?id=<?php echo $id; ?>" class="btn btn-primary btn-xs"><b>Print</b></a>
                                     <a href="bill_remove.php?id=<?php echo $row['transaction_id']; ?>&d1=<?php echo $d1; ?>&d2=<?php echo $d2; ?>" class="btn btn-danger btn-xs dll" style="display: none; width:60%;"><b>Delete</b></a>
                                 </td>
 
 
                             <?php
-                                $credit += $row['credit_left'];
                                 $tot += $row['amount'];
-                                $labor += $row['amount'] - $row['labor_cost'];
+                                $labor += $row['amount'] - $row['cost'];
                             }
-
 
                             ?>
                             </tr>
@@ -161,12 +159,11 @@ include("connect.php");
                             <tr>
                                 <th></th>
                                 <th></th>
-                                <th></th>
                                 <th>Total </th>
 
-                                <th><?php echo $tot - $labor; ?></th>
-                                <th><?php echo $labor; ?></th>
-                                <th><?php echo $tot; ?></th>
+                                <th><?php echo $tot - $labor; ?>.00</th>
+                                <th><?php echo $labor; ?>.00</th>
+                                <th><?php echo $tot; ?>.00</th>
                                 <th></th>
                             </tr>
 
@@ -179,64 +176,34 @@ include("connect.php");
                                 $ex = $row['sum(amount)'];
                             }
 
-
-
-
-                            $result = $db->prepare("SELECT sum(payment) FROM sales WHERE pay_type='Cash' and action='active' and  date BETWEEN '$d1' AND '$d2'  ");
+                            $result = $db->prepare("SELECT sum(amount) FROM sales WHERE pay_type='Card' and action='active' and date BETWEEN '$d1' AND '$d2'  ");
                             $result->bindParam(':userid', $date);
                             $result->execute();
                             for ($i = 0; $row = $result->fetch(); $i++) {
-                                $cash = $row['sum(payment)'];
-                            }
-
-                            $result = $db->prepare("SELECT sum(payment) FROM sales WHERE pay_type='Card' and action='active' and  date BETWEEN '$d1' AND '$d2'  ");
-                            $result->bindParam(':userid', $date);
-                            $result->execute();
-                            for ($i = 0; $row = $result->fetch(); $i++) {
-                                $card_tot = $row['sum(payment)'];
-                            }
-
-                            $result = $db->prepare("SELECT sum(payment) FROM sales WHERE pay_type='Bank' AND action='active' AND  date BETWEEN '$d1' AND '$d2'  ");
-                            $result->bindParam(':userid', $date);
-                            $result->execute();
-                            for ($i = 0; $row = $result->fetch(); $i++) {
-                                $bank_tot = $row['sum(payment)'];
-                            }
-
-                            $result = $db->prepare("SELECT sum(payment) FROM sales WHERE pay_type='Chq' and action='active' and  date BETWEEN '$d1' AND '$d2'  ");
-                            $result->bindParam(':userid', $date);
-                            $result->execute();
-                            for ($i = 0; $row = $result->fetch(); $i++) {
-                                $chq_tot = $row['sum(payment)'];
+                                $card_tot1 = $row['sum(amount)'];
                             }
 
 
 
+                            $card_tot = $card_tot1;
 
 
-                            $result = $db->prepare("SELECT sum(amount) FROM salary_advance WHERE  date BETWEEN '$d1' AND '$d2'  ");
-                            $result->bindParam(':userid', $date);
-                            $result->execute();
-                            for ($i = 0; $row = $result->fetch(); $i++) {
-                                $salary_adv = $row['sum(amount)'];
-                            }
-
-                            $hold_date = '';
-                            $hold1 = '';
 
 
-                            $total = $hold1 + $advance + $cash - $ex - $salary_adv;
-                            $total = $total - $advance_x;
+
+
+                            $cash = $tot - $card_tot;
+                            $total = $cash - $ex;
+
 
                             ?>
                         </tfoot>
                     </table>
 
-                    <b class="btn btn-danger btn-md" onclick="dllshow()">INVOICE DELETE</b>
+                    <b class="btn btn-danger btn-md">INVOICE DELETE</b>
                     <div class="row">
-
+                        <h3>Total Balance</h3>
                         <div class="col-md-6">
-                            <h3>Total Balance</h3>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -247,63 +214,34 @@ include("connect.php");
 
                                 <tr>
                                     <th>Bill Total</th>
-                                    <th>Rs.<?php echo $tot; ?></th>
-                                </tr>
-                                <tr>
-                                    <th>Advance Total</th>
-                                    <th>Rs.<?php echo $advance; ?></th>
+                                    <th>Rs.<?php echo $tot; ?>.00</th>
                                 </tr>
 
-                                <tr>
-                                    <th>Credit</th>
-                                    <th>Rs.<?php echo $credit; ?></th>
-                                </tr>
 
                                 <tr>
-                                    <th>Card</th>
+                                    <th>Card Amount Total</th>
                                     <th>Rs.<?php echo $card_tot; ?></th>
                                 </tr>
                                 <tr>
-                                    <th>Cash</th>
+                                    <th>Cash Amount Total</th>
                                     <th>Rs.<?php echo $cash; ?></th>
-                                </tr>
-                                <tr>
-                                    <th>Bank</th>
-                                    <th>Rs.<?php echo $bank_tot; ?></th>
-                                </tr>
-                                <tr>
-                                    <th>CHQ</th>
-                                    <th>Rs.<?php echo $chq_tot; ?></th>
                                 </tr>
                                 <tr>
                                     <th>Expenses</th>
                                     <th>Rs.<?php echo $ex; ?></th>
                                 </tr>
-                                <tr>
-                                    <th>Salary Advance</th>
-                                    <th>Rs.<?php echo $salary_adv; ?></th>
-                                </tr>
+
 
                                 <tr>
-                                    <th>Hold Amount (<?php echo $hold_date; ?>)</th>
-                                    <th>Rs.<?php echo $hold1; ?></th>
-                                </tr>
-                                <tr>
                                     <th>Total</th>
-                                    <th>Rs.<?php echo $total; ?></th>
+                                    <th>Rs.<?php echo $total; ?>.00</th>
                                 </tr>
                                 <tr>
                                     <th>-</th>
                                     <th>-</th>
                                 </tr>
-                                <tr>
-                                    <th>Hold Amount</th>
-                                    <th>Rs.<?php echo $hold; ?></th>
-                                </tr>
-                                <tr>
-                                    <th>Cash Balance</th>
-                                    <th>Rs.<?php echo $total - $hold; ?></th>
-                                </tr>
+
+
 
 
 
@@ -314,9 +252,8 @@ include("connect.php");
 
                         </div>
 
-
+                        <h3>Expenses</h3>
                         <div class="col-md-6">
-                            <h3>Expenses</h3>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -349,65 +286,7 @@ include("connect.php");
 
 
 
-                        <div class="col-md-6">
-                            <h3>Credit Payment</h3>
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Customer</th>
-                                        <th>Pay Type</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                </thead>
-                                <?php
-                                $result = $db->prepare("SELECT * FROM credit_payment WHERE  date BETWEEN '$d1' AND '$d2'  ");
-                                $result->bindParam(':userid', $date);
-                                $result->execute();
-                                for ($i = 0; $row = $result->fetch(); $i++) {
-                                ?>
-                                    <tr>
-                                        <th><?php echo $row['cus_name']; ?></th>
-                                        <th><?php echo $row['pay_type']; ?></th>
-                                        <th>Rs.<?php echo $row['amount']; ?></th>
-                                    </tr>
-                                <?php } ?>
 
-
-                                <tfoot>
-                                </tfoot>
-                            </table>
-                        </div>
-
-                        <div class="col-md-6">
-                            <h3>Salory Advance</h3>
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Customer</th>
-                                        <th>Note</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                </thead>
-                                <?php
-                                $result = $db->prepare("SELECT * FROM salary_advance WHERE  date BETWEEN '$d1' AND '$d2'  ");
-                                $result->bindParam(':userid', $date);
-                                $result->execute();
-                                for ($i = 0; $row = $result->fetch(); $i++) {
-                                ?>
-                                    <tr>
-                                        <th><?php echo $row['name']; ?></th>
-                                        <th><?php echo $row['note']; ?></th>
-                                        <th>Rs.<?php echo $row['amount']; ?></th>
-                                    </tr>
-                                <?php } ?>
-
-
-                                <tfoot>
-                                </tfoot>
-                            </table>
-
-
-                        </div>
 
 
                     </div>
@@ -418,17 +297,7 @@ include("connect.php");
                     </button></a>
                 <!-- /.box-body -->
             </div>
-            <form action="hold_save.php" method="post">
-                <div class="input-group-addon">
-                    <label>Hold Amount</label>
-                    <input type="text" name="amount" style="width:223px; padding:4px;">
-                    <input type="hidden" name="d1" value="<?php echo $_GET['d1']; ?>">
-                    <input type="hidden" name="d2" value="<?php echo $_GET['d2']; ?>">
-                    <button class="btn btn-danger" style="width: 123px; height:35px; margin-top:-8px;margin-left:8px;" type="submit">
-                        <i class="icon icon-search icon-large"></i> Save
-                    </button>
-                </div>
-            </form>
+
             <!-- /.box -->
     </div>
     <!-- /.col -->
@@ -469,6 +338,8 @@ include("connect.php");
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
+    <!-- Dark Theme Btn-->
+    <script src="https://dev.colorbiz.org/ashen/cdn/main/dist/js/dark_theme_btn.js"></script>
     <!-- page script -->
     <script>
         function dllshow() {
