@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <div class="container flex mb-3">
+    <div class="container flex">
         <div class="box room-container" style=" min-width: 100%;">
             <div class="box-body room " style="padding: 30px 10px;">
                 <div class="logo flex">
@@ -91,7 +91,7 @@
                     $result->execute();
                     for ($i = 0; $row = $result->fetch(); $i++) { ?>
                         <tr>
-                            <td><?php echo $row['id']; ?></td>
+                            <td><?php echo $i + 1; ?></td>
                             <td><?php echo $row['name']; ?></td>
                             <td><?php echo $row['amount']; ?></td>
                         </tr>
@@ -124,6 +124,74 @@
         </div>
     </div>
 
+    <?php if ($r == 'admin') { ?>
+        <div class="container flex mb-3">
+            <div class="box room-container pt-0" style=" min-width: 100%;">
+                <div class="box-body room mt-0 " style="padding: 30px 10px;">
+                    <div class="logo flex">
+                        <h1>Assign</h1>
+                    </div>
+
+                    <p>Enter an employee for the service </p>
+                    <h2 class="mt-3">Click Service</span></h2>
+                    <table class="w-100 tbl-assign">
+                        <?php
+                        $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' ");
+                        $result->bindParam(':id', $res);
+                        $result->execute();
+                        for ($i = 0; $row = $result->fetch(); $i++) { ?>
+                            <tr class="tbl-row" id="<?php echo $row['id']; ?>" name="<?php echo $row['emp']; ?>" sup-name="<?php echo $row['sup_emp']; ?>">
+                                <td><?php echo $i + 1; ?></td>
+                                <td><?php echo $row['name']; ?></td>
+                                <td><?php echo $row['amount']; ?></td>
+                                <td><?php echo $row['emp_name']; ?></td>
+                            </tr>
+                        <?php } ?>
+                    </table>
+
+                    <form action="appointment_emp_assign.php" method="POST" id="form_assign" class="d-none" style="width: 100%;">
+
+                        <h2 class="mt-3">Select Employee</span></h2>
+                        <div class="form-group ">
+                            <label>Employee*</label>
+                            <select name="emp" class="form-input" id="emp">
+                                <?php
+                                $result = $db->prepare('SELECT * FROM Employees  ');
+                                $result->bindParam(':id', $res);
+                                $result->execute();
+                                for ($i = 0; $row = $result->fetch(); $i++) { ?>
+                                    <option value="<?php echo $row['id']  ?>">
+                                        <?php echo  $row['name'];  ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <h2 class="mt-3">Select Sub Employee</span></h2>
+                        <div class="form-group ">
+                            <label>Sub Employee*</label>
+                            <select name="sup_emp" class="form-input" id="sup_emp">
+                                <?php
+                                $result = $db->prepare('SELECT * FROM Employees  ');
+                                $result->bindParam(':id', $res);
+                                $result->execute();
+                                for ($i = 0; $row = $result->fetch(); $i++) { ?>
+                                    <option value="<?php echo $row['id']  ?>">
+                                        <?php echo  $row['name'];  ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <input type="hidden" name="job" value="<?php echo $job; ?>">
+                        <input type="hidden" name="id" id="sales_id" value="">
+
+                        <div class="form-group " style="margin-top: 50px; width: 90%">
+                            <input type="submit" id="btn" class="form-input" value="Assign">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
 
     <!-- Bootstrap 5.3.2-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
@@ -147,6 +215,21 @@
         });
         $('#btn').click(function() {
             $('#edit_form').submit();
+        });
+
+        $(".tbl-row").click(function() {
+            $(".tbl-row").removeClass("active");
+            $(this).addClass("active");
+
+            let id = $(this).attr("id");
+            let emp = $(this).attr("name");
+            let sup = $(this).attr("sup-name");
+
+            $("#emp").val(emp).change();
+            $("#sup_emp").val(sup).change();
+            $("#sales_id").val(id);
+
+            $("#form_assign").removeClass("d-none");
         });
     </script>
 
