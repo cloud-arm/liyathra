@@ -127,7 +127,7 @@ include("connect.php");
                             <li><a href="#activity" data-toggle="tab">Payroll</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane" id="activity">
+                            <div class="tab-pane" id="">
                                 <!-- Post -->
                                 <ul class="timeline timeline-inverse">
                                     <?php
