@@ -11,15 +11,16 @@
     include("../connect.php");
     date_default_timezone_set("Asia/Colombo");
 
-    $id = 1;
+    $id = $_SESSION['SESS_MEMBER_ID'];
     ?>
 </head>
 
 <body class="bg-light">
 
     <header>
-        <nav class="navbar navbar-expand-lg bg-none">
+        <nav class="navbar navbar-expand-lg bg-none mt-3">
             <div class="container-fluid">
+                <div class="navbar-brand ms-2" style="--bs-navbar-brand-font-size: 1.5rem">Hi <span class="ms-1" style="font-weight: 600;"><?php echo $_SESSION['SESS_FIRST_NAME']; ?></span></div>
                 <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -27,7 +28,7 @@
                 <div class="collapse navbar-collapse" id="nav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="booking.php">Booking List</a>
+                            <a class="nav-link active" aria-current="page" href="booking.php"><i class="fa-regular fa-bookmark me-2"></i>Booking List</a>
                         </li>
                     </ul>
                 </div>
