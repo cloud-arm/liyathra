@@ -53,7 +53,6 @@ include("connect.php");
                 <small>Preview</small>
             </h1>
 
-
         </section>
         <!-- Main content -->
         <section class="content">
@@ -62,47 +61,19 @@ include("connect.php");
             date_default_timezone_set("Asia/Colombo");
             $cash = $_SESSION['SESS_FIRST_NAME'];
 
-
-
             $date =  date("Y-m-d");
-
-
-
             $result = $db->prepare("SELECT sum(profit) FROM sales WHERE action='active' AND  date='$date' ");
-
-
-
             $result->bindParam(':userid', $date);
-
             $result->execute();
-
             for ($i = 0; $row = $result->fetch(); $i++) {
-
-
-
                 $profit = $row['sum(profit)'];
             }
 
 
-
-
-
-
-
-
-
             $result = $db->prepare("SELECT sum(amount) FROM sales WHERE  action='active' AND  date='$date'  ");
-
-
-
             $result->bindParam(':userid', $date);
-
             $result->execute();
-
             for ($i = 0; $row = $result->fetch(); $i++) {
-
-
-
                 $amount = $row['sum(amount)'];
             }
 
@@ -118,13 +89,9 @@ include("connect.php");
             $month1 = date("Y-m-01");
             $month2 = date("Y-m-31");
 
-
-
-
             date_default_timezone_set("Asia/Colombo");
             $date = date("Y-m-d");
             $job_count = 0;
-
 
             $date = date("Y-m-d");
             $d1 = date("Y-m-") . '01';
@@ -134,26 +101,9 @@ include("connect.php");
             <div class="row">
 
                 <?php $r = $_SESSION['SESS_LAST_NAME'];
+                if ($r == 'Cashier') { ?>
 
-
-
-                if ($r == 'Cashier') {
-
-                ?>
-
-
-
-                <?php } else {
-
-                ?>
-
-
-
-
-
-
-
-
+                <?php } else {  ?>
 
                     <div class="col-lg-3 col-xs-6">
 
@@ -247,175 +197,159 @@ include("connect.php");
                         </div>
                     </div>
                     <!-- ./col -->
-
+                <?php  } ?>
             </div>
 
-        <?php
+            <?php if ($_SESSION['SESS_FIRST_NAME'] == "Kushan") {
+                include('index_cancel_appr.php');
+            } ?>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Latest Booking Orders </h3>
 
-                }
-
-        ?>
-
-        <?php if ($_SESSION['SESS_FIRST_NAME'] == "Kushan") {
-            include('index_cancel_appr.php');
-        } ?>
-
-
-        <div class="row">
-
-
-            <div class="col-md-12">
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Latest Booking Orders </h3>
-
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <div class="table-responsive">
-                            <table class="table no-margin">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>app. Date</th>
-                                        <th>app Time</th>
-                                        <th>Customer</th>
-                                        <th>Phone no</th>
-                                        <th>Bill</th>
-                                        <th>#</th>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="table-responsive">
+                                <table class="table no-margin">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>app. Date</th>
+                                            <th>app Time</th>
+                                            <th>Customer</th>
+                                            <th>Phone no</th>
+                                            <th>Bill</th>
+                                            <th>#</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    date_default_timezone_set("Asia/Colombo");
-                                    include("connect.php");
-                                    $ramp = "";
-                                    $tot_bill = 0;
-                                    $job_no = 0;
-                                    $mechanic_id = 0;
-                                    $result = $db->prepare("SELECT * FROM job JOIN customer ON customer.id=job.cus_id WHERE job.type='active'  ORDER by job.id DESC  ");
-                                    $result->bindParam(':userid', $date);
-                                    $result->execute();
-                                    for ($i = 0; $row = $result->fetch(); $i++) {
-                                        $invoice_number = $row['invoice_no'];
-
-                                        $resultm = $db->prepare("SELECT sum(amount) FROM sales_list WHERE invoice_no='$invoice_number' ");
-                                        $resultm->bindParam(':userid', $res);
-                                        $resultm->execute();
-                                        for ($i = 0; $row12 = $resultm->fetch(); $i++) {
-                                            $tot_bill = $row12['sum(amount)'];
-                                        }
-
-
-                                    ?>
-                                        <tr class="alert alert-general record">
-                                            <td><?php echo $row['id']; ?></td>
-                                            <td><?php echo $row['app_date']; ?></td>
-                                            <td><?php echo $row['app_time']; ?></td>
-                                            <td><?php echo $row['cus_name']; ?></td>
-                                            <td><?php echo $row['contact']  ?></td>
-                                            <td><?php echo "Rs." . $tot_bill; ?></td>
-
-                                            <td>
-                                                <a href="profile.php?id=<?php echo $row['cus_id']; ?>"><button class="btn btn-success"><i class="glyphicon glyphicon-user"></i></button></a>
-                                            </td>
                                         </tr>
-                                    <?php } ?>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        date_default_timezone_set("Asia/Colombo");
+                                        include("connect.php");
+                                        $ramp = "";
+                                        $tot_bill = 0;
+                                        $job_no = 0;
+                                        $mechanic_id = 0;
+                                        $result = $db->prepare("SELECT * FROM job JOIN customer ON customer.id=job.cus_id WHERE job.type='active'  ORDER by job.id DESC  ");
+                                        $result->bindParam(':userid', $date);
+                                        $result->execute();
+                                        for ($i = 0; $row = $result->fetch(); $i++) {
+                                            $invoice_number = $row['invoice_no'];
 
-                                </tbody>
+                                            $resultm = $db->prepare("SELECT sum(amount) FROM sales_list WHERE invoice_no='$invoice_number' ");
+                                            $resultm->bindParam(':userid', $res);
+                                            $resultm->execute();
+                                            for ($i = 0; $row12 = $resultm->fetch(); $i++) {
+                                                $tot_bill = $row12['sum(amount)'];
+                                            }
 
-                            </table>
+
+                                        ?>
+                                            <tr class="alert alert-general record">
+                                                <td><?php echo $row['id']; ?></td>
+                                                <td><?php echo $row['app_date']; ?></td>
+                                                <td><?php echo $row['app_time']; ?></td>
+                                                <td><?php echo $row['cus_name']; ?></td>
+                                                <td><?php echo $row['contact']  ?></td>
+                                                <td><?php echo "Rs." . $tot_bill; ?></td>
+
+                                                <td>
+                                                    <a href="profile.php?id=<?php echo $row['cus_id']; ?>"><button class="btn btn-success"><i class="glyphicon glyphicon-user"></i></button></a>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+
                         </div>
-                        <!-- /.table-responsive -->
 
+
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <!-- LINE CHART -->
+                    <div class="box box-solid bg-teal-gradient">
+                        <div class="box-header">
+                            <i class="fa fa-th"></i>
+
+                            <h3 class="box-title">Net Profit Graph</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body border-radius-none">
+                            <div class="chart" id="line-chart" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">GROSS PROFIT and EXPENSES</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="chart">
+                                <canvas id="barChart" style="height:230px"></canvas>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
                     </div>
 
 
+
                 </div>
+
+                <div class="col-md-12">
+                    <div class="box box-info">
+
+                        <div class="box-header with-border">
+
+                            <h3 class="box-title"><?php echo date("Y") - 1 ?> to <?php echo date("Y") ?> Sales Chart</h3>
+                            <div class="chart">
+
+                                <canvas id="lineChart" style="height:250px"></canvas>
+
+                            </div>
+
+                            <!-- Main content -->
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
-
-
-
-            <div class="col-md-6">
-                <!-- LINE CHART -->
-                <div class="box box-solid bg-teal-gradient">
-                    <div class="box-header">
-                        <i class="fa fa-th"></i>
-
-                        <h3 class="box-title">Net Profit Graph</h3>
-
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="box-body border-radius-none">
-                        <div class="chart" id="line-chart" style="height: 300px;"></div>
-                    </div>
-                </div>
-
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">GROSS PROFIT and EXPENSES</h3>
-
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                        </div>
-                    </div>
-                    <div class="box-body">
-                        <div class="chart">
-                            <canvas id="barChart" style="height:230px"></canvas>
-                        </div>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-
-
-
-            </div>
-
-
-        </div>
-
-
-        <!-- SELECT2 EXAMPLE -->
-
-        <div class="box box-info">
-
-            <div class="box-header with-border">
-
-                <h3 class="box-title"><?php echo date("Y") - 1 ?> to <?php echo date("Y") ?> Sales Chart</h3>
-                <div class="chart">
-
-                    <canvas id="lineChart" style="height:250px"></canvas>
-
-                </div>
-
-                <!-- Main content -->
-            </div>
-
-        </div>
-
+        </section>
     </div>
 
     <!-- /.content-wrapper -->
 
-    <?php
-
-    include("dounbr.php");
-
-    ?>
+    <?php include("dounbr.php"); ?>
 
     <!-- /.control-sidebar -->
 
@@ -424,7 +358,7 @@ include("connect.php");
        immediately after the control sidebar -->
 
     <div class="control-sidebar-bg"></div>
-
+    </div>
 
 
     <!-- ./wrapper -->
@@ -451,17 +385,7 @@ include("connect.php");
     <script src="../../plugins/chartjs/Chart.min.js"></script>
 
 
-
-
-
-    <?php
-
-    include("chart.php");
-
-    ?>
-
-
-
+    <?php  include("chart.php");  ?>
 
 
     <!-- page script -->
