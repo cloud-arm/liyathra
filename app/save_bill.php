@@ -168,14 +168,14 @@ for ($i = 0; $row = $result->fetch(); $i++) {
 
 if ($sales_id == 0) {
     // query
-    $sql = "INSERT INTO sales (invoice_number,amount,balance,profit,pay_type,pay_amount,date,customer_id,customer_name,action,discount) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO sales (invoice_number,amount,balance,profit,pay_type,pay_amount,date,customer_id,customer_name,action,discount,user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
     $ql = $db->prepare($sql);
-    $ql->execute(array($invoice, $amount, $balance, $profit, $pay_type, $pay_total, $date, $cus_id, $cus_name, 'active', $discount));
+    $ql->execute(array($invoice, $amount, $balance, $profit, $pay_type, $pay_total, $date, $cus_id, $cus_name, 'active', $discount, $ui));
 } else {
 
-    $sql = 'UPDATE  sales SET action=?, pay_amount=?, balance=amount-?, pay_type=?  WHERE  invoice_number=? ';
+    $sql = 'UPDATE  sales SET action=?, pay_amount=?, balance=amount-?, pay_type=?, user_id=?  WHERE  invoice_number=? ';
     $ql = $db->prepare($sql);
-    $ql->execute(array('active', $pay_total, $pay_total, $pay_type, $invoice));
+    $ql->execute(array('active', $pay_total, $pay_total, $pay_type, $ui, $invoice));
 }
 
 $sql = "UPDATE job 

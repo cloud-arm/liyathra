@@ -18,5 +18,5 @@
 <!-- Font awesome 6.4.2-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <!-- Style -->
-<link rel="stylesheet" href="css/stylev4.css">
+<link rel="stylesheet" href="css/stylev5.css">
 <?php include('auth.php'); ?>

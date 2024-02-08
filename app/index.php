@@ -30,6 +30,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="booking.php"><i class="fa-regular fa-bookmark me-2"></i>Booking List</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="cost_analyser.php"><i class="fa-solid fa-gauge-high me-2"></i>Meter Reading</a>
+                        </li>
                     </ul>
                 </div>
             </div>
