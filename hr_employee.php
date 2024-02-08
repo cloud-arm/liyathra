@@ -477,7 +477,7 @@ include("connect.php");
                                             <td><?php echo $row['epf_no']; ?></td>
                                             <td><?php echo $row['des']; ?></td>
                                             <td>Rs.<?php echo $row['hour_rate']; ?></td>
-                                            <td><a href="hr_employee_profile.php?id=<?php echo $id; ?>"><button class="btn btn-info"><i class="fa fa-user"></i></button></a></td>
+                                            <td><a href="#hr_employee_profile.php?id=<?php echo $id; ?>"><button class="btn btn-info"><i class="fa fa-user"></i></button></a></td>
 
                                         </tr>
                                     <?php  }  ?>
