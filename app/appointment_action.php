@@ -12,6 +12,8 @@
     include("../connect.php");
     date_default_timezone_set("Asia/Colombo");
 
+    $r = $_SESSION['SESS_LAST_NAME'];
+
     $job = $_GET['id'];
 
     $result = $db->prepare("SELECT * FROM job WHERE id = '$job' ");
@@ -60,9 +62,9 @@
 
 
                 <h2><i class="fa-solid fa-user mx-3"></i><?php echo $customer; ?></h2>
-
-                <h2><i class="fa-solid fa-phone mx-3"></i><?php echo $contact; ?></h2>
-
+                <?php if ($r == 'admin') { ?>
+                    <h2><i class="fa-solid fa-phone mx-3"></i><?php echo $contact; ?></h2>
+                <?php } ?>
                 <form action="appointment_edit.php" id="edit_form" method="POST" style="width: 100%;">
 
                     <h2 style="margin-bottom: 1rem;"><i class="fa-solid fa-calendar-days mx-3"></i><span class="editor old"><?php echo $date; ?></span><span class="editor new d-none">Enter new date</span></h2>
