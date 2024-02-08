@@ -305,7 +305,7 @@ include("connect.php");
                                                 <tr class="<?php if ($type == 'close') { ?> alert alert-general <? } ?> record">
                                                     <td><?php echo $row['id']; ?></td>
                                                     <td><?php echo $row['app_date']; ?></td>
-                                                    <td></td>
+                                                    <td><?php echo $type_tag; ?></td>
                                                     <td><?php echo $row['app_time']; ?></td>
                                                     <td><?php echo $row['cus_name']; ?></td>
                                                     <td><?php echo $row['contact']  ?></td>
