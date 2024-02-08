@@ -18,15 +18,11 @@ if ($unit == 1) {
     $result->execute();
 
     for ($i = 0; $row = $result->fetch(); $i++) {
-        $brand_id=$row['brand_id'];
-        $ssr = $db->prepare('SELECT * FROM brand WHERE  id=:id ');
-        $ssr->bindParam(':id', $brand_id);
-        $ssr->execute();
-        for($i=0; $row1 = $ssr->fetch(); $i++){ $brand_path=$row1['img']; }
+
 
         $img = $row['img'];
         if ($img == '') {
-            $path = 'product_img/'.$brand_path;
+            $path = 'product_img/';
         } else {
             $path = 'product_img/' . $img;
         }
@@ -65,10 +61,25 @@ if ($unit == 2) {
     $pro_id = $_GET['id'];
     $invo = $_GET['invo'];
 
-    $result = $db->prepare("SELECT * FROM use_product WHERE main_product = '$pro_id' ");
+    $result = $db->prepare("SELECT * FROM use_product JOIN product ON use_product.product_id=product.product_id WHERE main_product = '$pro_id' ");
     $result->bindParam(':id', $res);
     $result->execute();
     for ($i = 0; $row = $result->fetch(); $i++) {
+
+
+        $brand_id=$row['brand_id'];
+        $ssr = $db->prepare('SELECT * FROM brand WHERE  id=:id ');
+        $ssr->bindParam(':id', $brand_id);
+        $ssr->execute();
+        for($i=0; $row1 = $ssr->fetch(); $i++){ $brand_path=$row1['img']; }
+
+        $img = $row['img'];
+        if ($img == '') {
+            $path = 'product_img/'.$brand_path;
+        } else {
+            $path = 'product_img/' . $img;
+        }
+
         $ch = 0;
         $id = $row['product_id'];
         $result2 = $db->prepare("SELECT * FROM sales_list WHERE invoice_no=:id AND  product_id='$id' ");
@@ -84,7 +95,7 @@ if ($unit == 2) {
                     <div class="row w-100">
                         <div class="col-3">
                             <div class="inb_img-box">
-                                <img src="" alt="">
+                                <img src="<?php echo $path ?>" alt="">
                             </div>
                         </div>
                         <div class="col-9 as_jdk">
