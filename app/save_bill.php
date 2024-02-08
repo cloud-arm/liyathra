@@ -1,6 +1,6 @@
 <?php
 session_start();
-date_default_timezone_set("Asia/Tehran");
+date_default_timezone_set("Asia/Colombo");
 include("../connect.php");
 
 $ui = $_SESSION['SESS_MEMBER_ID'];
@@ -138,160 +138,153 @@ for ($i = 0; $row = $result->fetch(); $i++) {
         $ql = $db->prepare($sql);
         $ql->execute(array($qty, $cod));
     }
-
-
-    $result = $db->prepare("SELECT sum(amount),sum(profit) FROM sales_list WHERE invoice_no = '$invoice' ");
-    $result->bindParam(':userid', $res);
-    $result->execute();
-    for ($i = 0; $row = $result->fetch(); $i++) {
-        $amount = $row['sum(amount)'];
-        $profit = $row['sum(profit)'];
-    }
-
-
-    $discount = 0;
-    $amount = $amount - $discount;
-
-    $balance = $amount - $pay_total;
-
-    $pay_amount = $pay_total;
-    //$discount=$_POST['dis'];
-
-    // query
-    $sales_id = 0;
-    $result = $db->prepare('SELECT * FROM sales WHERE  invoice_number = :id');
-    $result->bindParam(':id', $invoice);
-    $result->execute();
-    for ($i = 0; $row = $result->fetch(); $i++) {
-        $sales_id = $row['transaction_id'];
-    }
-
-
-    if ($sales_id == 0) {
-        // query
-        $sql = "INSERT INTO sales (invoice_number,amount,balance,profit,pay_type,pay_amount,date,customer_id,customer_name,action,discount) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-        $ql = $db->prepare($sql);
-        $ql->execute(array($invoice, $amount, $balance, $profit, $pay_type, $pay_total, $date, $cus_id, $cus_name, 'active', $discount));
-    } else {
-
-        $sql = 'UPDATE  sales SET action=?, pay_amount=?, balance=amount-?, pay_type=?  WHERE  invoice_number=? ';
-        $ql = $db->prepare($sql);
-        $ql->execute(array('active', $pay_total, $pay_total, $pay_type, $invoice));
-    }
-
-    $sql = "UPDATE job 
-            SET action='close'
-            WHERE invoice_no=?";
-    $q = $db->prepare($sql);
-    $q->execute(array($invoice));
-
-    if ($amount > $pay_amount) {
-
-        $sql = 'INSERT INTO payment (amount,pay_amount,pay_type,date,time,invoice_no,type,credit_balance) VALUES (?,?,?,?,?,?,?,?)';
-        $q = $db->prepare($sql);
-        $q->execute(array($amount, 0, 'Credit', $date, $time, $invoice, 0, $amount));
-    }
-
-
-    if ($pay_amount > 0) {
-
-        if ($pay_type == 'card') {
-
-            $sql = 'INSERT INTO payment (amount,pay_amount,pay_type,date,time,invoice_no,type,action) VALUES (?,?,?,?,?,?,?,?)';
-            $q = $db->prepare($sql);
-            $q->execute(array($pay_amount, $pay_amount, $pay_type, $date, $time, $invoice, '1', 1));
-
-            $re = $db->prepare("SELECT * FROM payment WHERE invoice_no = :id ");
-            $re->bindParam(':id', $invoice);
-            $re->execute();
-            for ($k = 0; $r = $re->fetch(); $k++) {
-                $p = $r['id'];
-            }
-
-            $sql = "INSERT INTO bank_record (transaction_type,type,record_no,amount,action,credit_acc_no,credit_acc_type,credit_acc_name,credit_acc_balance,debit_acc_type,debit_acc_name,debit_acc_id,debit_acc_balance,date,time,user_id,user_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            $ql = $db->prepare($sql);
-            $ql->execute(array('invoice_payment', 'Credit', $invoice, $pay_amount, 1, 0, 'Card Payment', 'Bank', 0, 'Bank Invoice', 'Bank Deposit', $p, 0, $date, $time, $ui, $un));
-        } else {
-
-            $sql = 'INSERT INTO payment (amount,pay_amount,pay_type,date,time,invoice_no,type,chq_no,chq_bank,chq_date,bank_id,bank_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
-            $q = $db->prepare($sql);
-            $q->execute(array($pay_amount, $pay_amount, $pay_type, $date, $time, $invoice, '1', $chq_no, $chq_bank, $chq_date, $bank, $bank_name));
-        }
-
-
-        $cr_blc = $amount - $pay_amount;
-
-        $sql = "UPDATE  payment SET credit_balance = ? WHERE invoice_no=? AND pay_type = 'Credit' ";
-        $ql = $db->prepare($sql);
-        $ql->execute(array($cr_blc, $invoice));
-
-
-        if ($pay_type == 'cash') {
-
-            $cr_id = 2;
-
-            $cr_blc = 0;
-            $blc = 0;
-            $re = $db->prepare("SELECT * FROM cash WHERE id = '$cr_id' ");
-            $re->bindParam(':userid', $res);
-            $re->execute();
-            for ($k = 0; $r = $re->fetch(); $k++) {
-                $blc = $r['amount'];
-                $cr_name = $r['name'];
-            }
-
-            $cr_blc = $blc + $pay_amount;
-
-            $re = $db->prepare("SELECT * FROM payment WHERE invoice_no = :id ");
-            $re->bindParam(':id', $invoice);
-            $re->execute();
-            for ($k = 0; $r = $re->fetch(); $k++) {
-                $p = $r['id'];
-            }
-
-            $sql = "INSERT INTO transaction_record (transaction_type,type,record_no,amount,action,credit_acc_no,credit_acc_type,credit_acc_name,credit_acc_balance,debit_acc_type,debit_acc_name,debit_acc_id,debit_acc_balance,date,time,user_id,user_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            $ql = $db->prepare($sql);
-            $ql->execute(array('invoice', 'Credit', $invoice, $pay_amount, 0, $cr_id, 'Cash', $cr_name, $cr_blc, 'cash_invoice', 'Cash Payment', $p, 0, $date, $time, $ui, $un));
-
-            $sql = "UPDATE  cash SET amount=? WHERE id=?";
-            $ql = $db->prepare($sql);
-            $ql->execute(array($cr_blc, $cr_id));
-        }
-
-        if ($pay_type == 'bank') {
-            $cr_blc = 0;
-            $blc = 0;
-            $re = $db->prepare("SELECT * FROM bank WHERE id = :id ");
-            $re->bindParam(':id', $bank);
-            $re->execute();
-            for ($k = 0; $r = $re->fetch(); $k++) {
-                $blc = $r['amount'];
-            }
-
-            $cr_blc = $blc + $pay_amount;
-
-            $re = $db->prepare("SELECT * FROM payment WHERE invoice_no = :id ");
-            $re->bindParam(':id', $invoice);
-            $re->execute();
-            for ($k = 0; $r = $re->fetch(); $k++) {
-                $p = $r['id'];
-            }
-
-            $sql = "UPDATE  bank SET amount=? WHERE id=?";
-            $ql = $db->prepare($sql);
-            $ql->execute(array($cr_blc, $bank));
-
-            $sql = "INSERT INTO bank_record (transaction_type,type,record_no,amount,action,credit_acc_no,credit_acc_type,credit_acc_name,credit_acc_balance,debit_acc_type,debit_acc_name,debit_acc_id,debit_acc_balance,date,time,user_id,user_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            $ql = $db->prepare($sql);
-            $ql->execute(array('invoice_payment', 'Credit', $invoice, $pay_amount, 0, $bank, 'Bank Transfer', $bank_name, $cr_blc, 'Bank Invoice', 'Bank Transfer', $p, 0, $date, $time, $ui, $un));
-        }
-    }
 }
 
-$sql = "UPDATE job
-SET action='close'
-WHERE invoice_no=?";
+$result = $db->prepare("SELECT sum(amount),sum(profit) FROM sales_list WHERE invoice_no = '$invoice' ");
+$result->bindParam(':userid', $res);
+$result->execute();
+for ($i = 0; $row = $result->fetch(); $i++) {
+    $amount = $row['sum(amount)'];
+    $profit = $row['sum(profit)'];
+}
+
+
+$discount = 0;
+$amount = $amount - $discount;
+
+$balance = $amount - $pay_total;
+
+$pay_amount = $pay_total;
+
+// query
+$sales_id = 0;
+$result = $db->prepare('SELECT * FROM sales WHERE  invoice_number = :id');
+$result->bindParam(':id', $invoice);
+$result->execute();
+for ($i = 0; $row = $result->fetch(); $i++) {
+    $sales_id = $row['transaction_id'];
+}
+
+
+if ($sales_id == 0) {
+    // query
+    $sql = "INSERT INTO sales (invoice_number,amount,balance,profit,pay_type,pay_amount,date,customer_id,customer_name,action,discount) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    $ql = $db->prepare($sql);
+    $ql->execute(array($invoice, $amount, $balance, $profit, $pay_type, $pay_total, $date, $cus_id, $cus_name, 'active', $discount));
+} else {
+
+    $sql = 'UPDATE  sales SET action=?, pay_amount=?, balance=amount-?, pay_type=?  WHERE  invoice_number=? ';
+    $ql = $db->prepare($sql);
+    $ql->execute(array('active', $pay_total, $pay_total, $pay_type, $invoice));
+}
+
+$sql = "UPDATE job 
+            SET action='close'
+            WHERE invoice_no=?";
 $q = $db->prepare($sql);
 $q->execute(array($invoice));
 
-// header("location: bill.php?id=$invoice");
+if ($amount > $pay_amount) {
+
+    $sql = 'INSERT INTO payment (amount,pay_amount,pay_type,date,time,invoice_no,type,credit_balance) VALUES (?,?,?,?,?,?,?,?)';
+    $q = $db->prepare($sql);
+    $q->execute(array($amount, 0, 'Credit', $date, $time, $invoice, 0, $amount));
+}
+
+
+if ($pay_amount > 0) {
+
+    if ($pay_type == 'card') {
+
+        $sql = 'INSERT INTO payment (amount,pay_amount,pay_type,date,time,invoice_no,type,action) VALUES (?,?,?,?,?,?,?,?)';
+        $q = $db->prepare($sql);
+        $q->execute(array($pay_amount, $pay_amount, $pay_type, $date, $time, $invoice, '1', 1));
+
+        $re = $db->prepare("SELECT * FROM payment WHERE invoice_no = :id ");
+        $re->bindParam(':id', $invoice);
+        $re->execute();
+        for ($k = 0; $r = $re->fetch(); $k++) {
+            $p = $r['id'];
+        }
+
+        $sql = "INSERT INTO bank_record (transaction_type,type,record_no,amount,action,credit_acc_no,credit_acc_type,credit_acc_name,credit_acc_balance,debit_acc_type,debit_acc_name,debit_acc_id,debit_acc_balance,date,time,user_id,user_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $ql = $db->prepare($sql);
+        $ql->execute(array('invoice_payment', 'Credit', $invoice, $pay_amount, 1, 0, 'Card Payment', 'Bank', 0, 'Bank Invoice', 'Bank Deposit', $p, 0, $date, $time, $ui, $un));
+    } else {
+
+        $sql = 'INSERT INTO payment (amount,pay_amount,pay_type,date,time,invoice_no,type,chq_no,chq_bank,chq_date,bank_id,bank_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
+        $q = $db->prepare($sql);
+        $q->execute(array($pay_amount, $pay_amount, $pay_type, $date, $time, $invoice, '1', $chq_no, $chq_bank, $chq_date, $bank, $bank_name));
+    }
+
+
+    $cr_blc = $amount - $pay_amount;
+
+    $sql = "UPDATE  payment SET credit_balance = ? WHERE invoice_no=? AND pay_type = 'Credit' ";
+    $ql = $db->prepare($sql);
+    $ql->execute(array($cr_blc, $invoice));
+
+
+    if ($pay_type == 'cash') {
+
+        $cr_id = 2;
+
+        $cr_blc = 0;
+        $blc = 0;
+        $re = $db->prepare("SELECT * FROM cash WHERE id = '$cr_id' ");
+        $re->bindParam(':userid', $res);
+        $re->execute();
+        for ($k = 0; $r = $re->fetch(); $k++) {
+            $blc = $r['amount'];
+            $cr_name = $r['name'];
+        }
+
+        $cr_blc = $blc + $pay_amount;
+
+        $re = $db->prepare("SELECT * FROM payment WHERE invoice_no = :id ");
+        $re->bindParam(':id', $invoice);
+        $re->execute();
+        for ($k = 0; $r = $re->fetch(); $k++) {
+            $p = $r['id'];
+        }
+
+        $sql = "INSERT INTO transaction_record (transaction_type,type,record_no,amount,action,credit_acc_no,credit_acc_type,credit_acc_name,credit_acc_balance,debit_acc_type,debit_acc_name,debit_acc_id,debit_acc_balance,date,time,user_id,user_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $ql = $db->prepare($sql);
+        $ql->execute(array('invoice', 'Credit', $invoice, $pay_amount, 0, $cr_id, 'Cash', $cr_name, $cr_blc, 'cash_invoice', 'Cash Payment', $p, 0, $date, $time, $ui, $un));
+
+        $sql = "UPDATE  cash SET amount=? WHERE id=?";
+        $ql = $db->prepare($sql);
+        $ql->execute(array($cr_blc, $cr_id));
+    }
+
+    if ($pay_type == 'bank') {
+        $cr_blc = 0;
+        $blc = 0;
+        $re = $db->prepare("SELECT * FROM bank WHERE id = :id ");
+        $re->bindParam(':id', $bank);
+        $re->execute();
+        for ($k = 0; $r = $re->fetch(); $k++) {
+            $blc = $r['amount'];
+        }
+
+        $cr_blc = $blc + $pay_amount;
+
+        $re = $db->prepare("SELECT * FROM payment WHERE invoice_no = :id ");
+        $re->bindParam(':id', $invoice);
+        $re->execute();
+        for ($k = 0; $r = $re->fetch(); $k++) {
+            $p = $r['id'];
+        }
+
+        $sql = "UPDATE  bank SET amount=? WHERE id=?";
+        $ql = $db->prepare($sql);
+        $ql->execute(array($cr_blc, $bank));
+
+        $sql = "INSERT INTO bank_record (transaction_type,type,record_no,amount,action,credit_acc_no,credit_acc_type,credit_acc_name,credit_acc_balance,debit_acc_type,debit_acc_name,debit_acc_id,debit_acc_balance,date,time,user_id,user_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $ql = $db->prepare($sql);
+        $ql->execute(array('invoice_payment', 'Credit', $invoice, $pay_amount, 0, $bank, 'Bank Transfer', $bank_name, $cr_blc, 'Bank Invoice', 'Bank Transfer', $p, 0, $date, $time, $ui, $un));
+    }
+}
+
+
+header("location: bill.php?id=$invoice");
