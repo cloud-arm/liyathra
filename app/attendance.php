@@ -27,7 +27,7 @@
                     <h1>Attendance</h1>
                 </div>
 
-                <p>Employee attendance sheet</p>
+                <p>Employee attendance checking</p>
 
                 <h2></h2>
 
