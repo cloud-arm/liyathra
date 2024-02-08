@@ -12,6 +12,26 @@
     date_default_timezone_set("Asia/Colombo");
 
     $id = $_SESSION['SESS_MEMBER_ID'];
+    $date = date("Y-m-d");
+
+    $result = $db->prepare("SELECT * FROM user WHERE id = '$id' ");
+    $result->bindParam(':id', $res);
+    $result->execute();
+    for ($i = 0; $row = $result->fetch(); $i++) {
+        $id = $row['emp_id'];
+    }
+
+    $emp = 0;
+    $result = $db->prepare("SELECT * FROM attendance WHERE emp_id =:id AND date = '$date' ");
+    $result->bindParam(':id', $id);
+    $result->execute();
+    for ($i = 0; $row = $result->fetch(); $i++) {
+        $emp = $row['emp_id'];
+    }
+
+    if ($emp == 0) {
+        header("location: attendance.php?id=$id");
+    }
     ?>
 </head>
 
