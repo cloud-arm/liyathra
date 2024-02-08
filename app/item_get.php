@@ -18,9 +18,15 @@ if ($unit == 1) {
     $result->execute();
 
     for ($i = 0; $row = $result->fetch(); $i++) {
+        $brand_id=$row['brand_id'];
+        $ssr = $db->prepare('SELECT * FROM brand WHERE  id=:id ');
+        $ssr->bindParam(':id', $brand_id);
+        $ssr->execute();
+        for($i=0; $row1 = $ssr->fetch(); $i++){ $brand_path=$row1['img']; }
+
         $img = $row['img'];
         if ($img == '') {
-            $path = 'img/rice.png';
+            $path = 'product_img/'.$brand_path;
         } else {
             $path = 'product_img/' . $img;
         }

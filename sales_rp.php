@@ -289,16 +289,7 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
  </button></a>
             <!-- /.box-body -->
           </div>
-	    <form action="hold_save.php" method="post">
-			<div class="input-group-addon">
-			<label>Hold Amount</label>
-   <input type="text" name="amount" style="width:223px; padding:4px;">
-				<input type="hidden" name="d1" value="<?php echo $_GET['d1']; ?>">
-				<input type="hidden" name="d2" value="<?php echo $_GET['d2']; ?>">
-	   <button class="btn btn-danger" style="width: 123px; height:35px; margin-top:-8px;margin-left:8px;" type="submit">
- <i class="icon icon-search icon-large"></i> Save
- </button></div>
-   </form>
+
           <!-- /.box -->
         </div>
         <!-- /.col -->
