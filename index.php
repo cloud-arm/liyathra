@@ -38,7 +38,7 @@ include("connect.php");
 
     <!-- Content Wrapper. Contains page content -->
 
-    <div class="content-wrapper">
+    <div class="content-wrapper" <?php if ($r != 'admin') { ?> style="margin-left: 30px;" <?php } ?>>
 
         <!-- Content Header (Page header) -->
 
