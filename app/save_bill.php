@@ -1,10 +1,10 @@
 <?php
-//session_start();
+session_start();
 date_default_timezone_set("Asia/Tehran");
 include("../connect.php");
 
-$ui = 1; //$_SESSION['SESS_MEMBER_ID'];
-$un = ""; //$_SESSION['SESS_FIRST_NAME'];
+$ui = $_SESSION['SESS_MEMBER_ID'];
+$un = $_SESSION['SESS_FIRST_NAME'];
 $date = date("Y-m-d");
 $time = date('H:i:s');
 
@@ -294,4 +294,4 @@ WHERE invoice_no=?";
 $q = $db->prepare($sql);
 $q->execute(array($invoice));
 
-header("location: bill.php?id=$invoice");
+// header("location: bill.php?id=$invoice");
