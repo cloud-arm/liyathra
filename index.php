@@ -25,11 +25,7 @@ include("connect.php");
     }
     if ($r == 'admin') {
         include_once("sidebar.php");
-    }
-    //header("location: 404.php");
-
-    ?>
-
+    }else{ ?> <div class="wrapper"> <?php } ?>
 
 
 
