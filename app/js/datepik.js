@@ -44,12 +44,10 @@ function calender(e) {
   
   
   function setCalender(month, year, e) {
-      console.log(e);
     selectedDate = "";
     clearCalender();
     days = [];
     var weekCount = 0;
-    console.log(month, year);
     var d = new Date(year, month, 1);
     $(".main .month").html(monthArray[d.getMonth()]);
     $(".main .year").html(d.getFullYear());
@@ -82,7 +80,6 @@ function calender(e) {
     if ($(".w1").children().length != 7) {
       tot = 7 - $(".w1").children().length;
       for (j = 0; j < tot; j++) {
-        console.log("test");
         $(".w1").prepend("<td>&nbsp</td>");
       }
     }
@@ -100,7 +97,6 @@ function calender(e) {
           (String($(this).attr("value")).length > 1
             ? $(this).attr("value")
             : "0" + $(this).attr("value"));
-        console.log(selectedDate);
         document.getElementById(e).value= selectedDate.toString();
         $(".main").slideUp();
         $("#calenderMain").remove();
