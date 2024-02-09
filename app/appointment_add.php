@@ -26,7 +26,7 @@
         <div class="box px-2 mb-0 mt-3 ">
             <div class="box-header px-0 mb-0">
                 <a class="nav-link border-0 btn fs-1 d-md-none" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i></a>
-                <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-block" aria-current="page" href="index.php"><i  class="fa-solid fa-house me-2"></i>Home</a>
+                <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-block" aria-current="page" href="index.php"><i class="fa-solid fa-house me-2"></i>Home</a>
             </div>
         </div>
     </div>
@@ -297,6 +297,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     <!-- Jquery 3.7.1 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Date Picker -->
+    <script src="js/datepik.js"></script>
 
     <script>
         function click_type(type) {
@@ -338,6 +340,5 @@
         });
     </script>
 </body>
-<script src="js/datepik.js"></script>
 
 </html>
