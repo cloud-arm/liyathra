@@ -1,6 +1,7 @@
 <?php
 //session_start();
 include("../connect.php");
+date_default_timezone_set("Asia/Colombo");
 
 
 $id = $_REQUEST['id'];
@@ -23,9 +24,11 @@ if ($type == 'edit') {
 
 if ($type == 'active') {
 
-    $sql = "UPDATE job SET action = ?  WHERE id = ? ";
+    $time = date("H.i");
+
+    $sql = "UPDATE job SET action = ?, start_time = ?  WHERE id = ? ";
     $ql = $db->prepare($sql);
-    $ql->execute(array('active', $id));
+    $ql->execute(array('active',$time, $id));
 
     header("location: order.php?id=$id");
 }

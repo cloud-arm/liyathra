@@ -13,7 +13,6 @@ $cus_id = 0;
 
 $invoice = $_POST['id'];
 $pay_type = $_POST['p_type'];
-$now = date("Y-m-d");
 $pay_total = $_POST['amount'];
 
 $chq_no = '';
@@ -178,11 +177,12 @@ if ($sales_id == 0) {
     $ql->execute(array('active', $pay_total, $pay_total, $pay_type, $ui, $invoice));
 }
 
+$now = date("H.i");
 $sql = "UPDATE job 
-            SET action='close'
+            SET action=?, end_time=?
             WHERE invoice_no=?";
 $q = $db->prepare($sql);
-$q->execute(array($invoice));
+$q->execute(array('close',$now,$invoice));
 
 if ($amount > $pay_amount) {
 
