@@ -14,14 +14,15 @@
     $id = $_SESSION['SESS_MEMBER_ID'];
     $date = date("Y-m-d");
 
+    $emp = 0;
     $result = $db->prepare("SELECT * FROM user WHERE id = '$id' ");
     $result->bindParam(':id', $res);
     $result->execute();
     for ($i = 0; $row = $result->fetch(); $i++) {
         $id = $row['emp_id'];
+        $pos = $row['position'];
     }
 
-    $emp = 0;
     $result = $db->prepare("SELECT * FROM attendance WHERE emp_id =:id AND date = '$date' ");
     $result->bindParam(':id', $id);
     $result->execute();
@@ -29,7 +30,7 @@
         $emp = $row['emp_id'];
     }
 
-    if ($emp == 0) {
+    if ($emp == 0 && $pos != 'admin') {
         header("location: attendance.php?id=$id");
     }
     ?>
@@ -48,10 +49,13 @@
                 <div class="collapse navbar-collapse" id="nav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="booking.php"><i class="fa-regular fa-bookmark me-2"></i>Booking List</a>
+                            <a class="nav-link active" aria-current="page" href="booking.php">Booking List</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="cost_analyser.php"><i class="fa-solid fa-gauge-high me-2"></i>Meter Reading</a>
+                            <a class="nav-link active" aria-current="page" href="cost_analyser.php">Meter Reading</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="expenses.php">Expenses</a>
                         </li>
                     </ul>
                 </div>
