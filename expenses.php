@@ -37,15 +37,15 @@ date_default_timezone_set("Asia/Colombo");
     <!-- Main content -->
     <section class="content">
 
-      <div class="row util_add" style="display: none;">
-        <div class="col-md-6">
-          <div class="box box-primary util_add">
+      <div class="row">
+        <div class="col-md-6 model_add_1" style="display: none;">
+          <div class="box box-primary model_add_1">
             <div class="box-header with-border">
-              <h3 class="box-title" style="width: 100%;">New Utility Type</h3>
+              <h3 class="box-title">New Utility Type</h3>
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
-                <button type="button" class="btn btn-box-tool" onclick="util_cl()" data-widget="remove"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-box-tool" onclick="model_cl(1)" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
 
@@ -74,13 +74,51 @@ date_default_timezone_set("Asia/Colombo");
             </div>
           </div>
         </div>
+
+        <div class="col-md-6 model_add_2" style="display: none;">
+          <div class="box box-primary model_add_2">
+            <div class="box-header with-border">
+              <h3 class="box-title">New Expenses Type</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" onclick="model_cl(2)" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+
+            <div class="box-body">
+
+              <form method="POST" action="expenses_save.php">
+
+                <div class="row" style="display: flex; align-items: end;">
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <label>Expenses Type</label>
+                      <input type="text" name="type" value="" class="form-control" autocomplete="off">
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <input type="hidden" name="unit" value="3">
+                      <input type="submit" value="Save" class="btn btn-info">
+                    </div>
+                  </div>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- SELECT2 EXAMPLE -->
       <div class="box box-info">
         <div class="box-header with-border">
           <h3 class="box-title">Expenses
-            <span class="btn btn-success" id="util_btn" onclick="util_btn()" style="margin: 10px 20px;">Add Utility Bill</span>
+            <span class="btn btn-success" id="model_btn_1" onclick="model_btn(1)" style="margin: 10px 20px;">Add Utility Bill</span>
+            <span class="btn btn-success" id="model_btn_2" onclick="model_btn(2)" style="margin: 10px 20px;">Add Expenses Type</span>
           </h3>
         </div>
 
@@ -388,14 +426,14 @@ date_default_timezone_set("Asia/Colombo");
   <?php include("script.php"); ?>
 
   <script type="text/javascript">
-    function util_btn() {
-      $('#util_btn').css('display', 'none');
-      $('.util_add').css('display', 'block');
-      $('.util_add').css('display', 'block');
+    function model_btn(i) {
+      $('#model_btn_' + i).css('display', 'none');
+      $('.model_add_' + i).css('display', 'block');
     }
 
-    function util_cl() {
-      $('#util_btn').css('display', 'inline-block');
+    function model_cl(i) {
+      $('#model_add_' + i).css('display', 'none');
+      $('#model_btn_' + i).css('display', 'inline-block');
     }
 
     function select_pay() {

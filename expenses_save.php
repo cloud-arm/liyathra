@@ -144,6 +144,21 @@ if($unit == 2){
         $ql->execute(array($name));
     }
 }
+
+
+if ($unit == 3) {
+    $type = $_POST['type'];
+    $id = 0;
+
+    $name = strtoupper($type);
+
+    if ($id == 0) {
+        $sql = "INSERT INTO expenses_types (type_name) VALUES (?) ";
+        $ql = $db->prepare($sql);
+        $ql->execute(array($name));
+    }
+}
+
 $Y=date("Y");
 $m=date("m");
 header("location: expenses.php?id=$invo&year=$Y&month=$m");
