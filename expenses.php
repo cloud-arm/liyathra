@@ -157,9 +157,8 @@ date_default_timezone_set("Asia/Colombo");
                   <label>Pay Type</label>
                   <select class="form-control " id="pay_type" name="pay_type" onchange="select_pay()" style="width: 100%;" tabindex="2">
                     <option value="cash"> Cash </option>
-                    <option value="chq"> Chq </option>
+                    <option value="bank" disabled> Bank </option>
                   </select>
-
                 </div>
               </div>
 
@@ -167,7 +166,6 @@ date_default_timezone_set("Asia/Colombo");
                 <div class="form-group">
                   <label>Account</label>
                   <select class="form-control " name="acc" style="width: 100%;" tabindex="3">
-
                     <?php
                     $result = $db->prepare("SELECT * FROM cash ");
                     $result->bindParam(':userid', $ttr);
@@ -179,7 +177,6 @@ date_default_timezone_set("Asia/Colombo");
                     }
                     ?>
                   </select>
-
                 </div>
               </div>
 
