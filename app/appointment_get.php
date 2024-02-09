@@ -2,6 +2,15 @@
 include("../connect.php");
 date_default_timezone_set("Asia/Colombo");
 
+$id = $_SESSION['SESS_MEMBER_ID'];
+
+$result = $db->prepare("SELECT * FROM user WHERE id = '$id' ");
+$result->bindParam(':id', $res);
+$result->execute();
+for ($i = 0; $row = $result->fetch(); $i++) {
+    $id = $row['emp_id'];
+    $pos = $row['position'];
+}
 $date = date('Y-m-d');
 
 if (isset($_GET['type'])) {
@@ -46,8 +55,8 @@ for ($i = 0; $row = $result->fetch(); $i++) {
         //----------------------------------------------------//
     } else if ($con == 'active') {
 
-        $time_now = date("H.i");
-        $time_start = $row['start_time'];
+        $time_now = $row['start_time'];
+        $time_start = date("H.i");
         //-------------------- Date sum --------------------//
         $date1 = date_create(date('Y-m-d'));
         $date2 = date_create($row['app_date']);
@@ -172,7 +181,7 @@ if (isset($_GET['type'])) {
                                 </div>
                                 <div class="app">
                                     <span class="type"><?php echo  $row['type_name']; ?> </span>
-                                    <a class="nav-link" style="align-self: end;" <?php if ($con == 'close') { ?> href="bill.php?id=<?php echo $row['invoice_no'] ?>" <?php } ?> >
+                                    <a class="nav-link" style="align-self: end;" <?php if ($con == 'close') { ?> href="bill.php?id=<?php echo $row['invoice_no'] ?>" <?php } ?>>
                                         <span <?php if ($con == 'active') { ?> style="color: rgb(var(--bg-black));" <?php } ?> class="bin btn">View</span>
                                     </a>
                                 </div>
