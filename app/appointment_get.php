@@ -183,7 +183,7 @@ for ($i = 0; $row = $result->fetch(); $i++) {
                             </div>
                             <div class="app">
                                 <span class="type"><?php echo  $row['type_name']; ?> </span>
-                                <a class="nav-link <?php if ($pos == 'admin') {
+                                <a class="nav-link <?php if ($pos != 'admin') {
                                                         echo 'disabled';
                                                     } ?>" style="align-self: end;" <?php if ($pos == 'admin') { ?> href="bill.php?id=<?php echo $row['invoice_no'] ?>" <?php } ?>>
                                     <span <?php if ($pos != 'admin') { ?> style="background: rgb(131 131 131);" <?php } ?> class="bin btn">View</span>
