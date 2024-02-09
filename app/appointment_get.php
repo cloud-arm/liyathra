@@ -123,8 +123,8 @@ if (isset($_GET['type'])) {
 
         if ($con == 'close') {
 
-            $time_now = $row['end_time'];
-            $time_start = $row['start_time'];
+            $time_now = $row['start_time'];
+            $time_start = $row['end_time'];
             //-------------------- Date sum --------------------//
             $date1 = date_create(date('Y-m-d'));
             $date2 = date_create($row['app_date']);
