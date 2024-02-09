@@ -4,7 +4,7 @@ date_default_timezone_set("Asia/Colombo");
 include("../connect.php");
 
 $date = date("Y-m-d");
-$time = date('H:i:s');
+$time = date('H.i.s');
 
 $id = $_POST['id'];
 
