@@ -167,9 +167,9 @@ for ($i = 0; $row = $result->fetch(); $i++) {
                     <div class="col-3 p-0">
                         <div class="inb_num">
                             <span class="num" <?php if ($con == 'active') { ?> style="color: rgb(var(--bg-black));" <?php } ?>><?php echo $num; ?></span>
-                            <span class="time">Time:<?php echo  $row['app_time']; ?> </span>
+                            <span class="time">Time:<?php if (isset($_GET['type'])) { echo  $row['cancel_time'];}else{ echo  $row['end_time'];} ?> </span>
                             <?php if (isset($_GET['type'])) { ?>
-                                <span class="time"><?php echo  $row['app_date']; ?> </span>
+                                <span class="time"><?php echo  $row['cancel_date']; ?> </span>
                             <?php } ?>
                         </div>
                     </div>

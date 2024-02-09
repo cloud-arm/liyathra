@@ -36,7 +36,7 @@ if ($type == 'active') {
 if ($type == 'cancel') {
 
     $date = date("Y-m-d");
-    $time = date('H:i:s');
+    $time = date('H.i');
 
     $sql = "UPDATE job SET action = ?, cancel_date = ?, cancel_time = ?  WHERE id = ? ";
     $ql = $db->prepare($sql);
