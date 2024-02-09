@@ -35,9 +35,9 @@ if ($type == 'active') {
 
 if ($type == 'cancel') {
 
-    $result = $db->prepare("DELETE FROM job WHERE  id= :id");
-    $result->bindParam(':id', $id);
-    $result->execute();
+    $sql = "UPDATE job SET action = ?  WHERE id = ? ";
+    $ql = $db->prepare($sql);
+    $ql->execute(array('cancel', $id));
 
     header("location: index.php");
 }

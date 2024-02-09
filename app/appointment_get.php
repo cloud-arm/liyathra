@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../connect.php");
 date_default_timezone_set("Asia/Colombo");
 
@@ -181,11 +182,11 @@ if (isset($_GET['type'])) {
                                 </div>
                                 <div class="app">
                                     <span class="type"><?php echo  $row['type_name']; ?> </span>
-                                    <?php if ($pos == 'admin') { ?>
-                                        <a class="nav-link" style="align-self: end;" <?php if ($con == 'close') { ?> href="bill.php?id=<?php echo $row['invoice_no'] ?>" <?php } ?>>
-                                            <span <?php if ($con == 'active') { ?> style="color: rgb(var(--bg-black));" <?php } ?> class="bin btn">View</span>
-                                        </a>
-                                    <?php } ?>
+                                    <a class="nav-link <?php if ($pos == 'admin') {
+                                                            echo 'disabled';
+                                                        } ?>" style="align-self: end;" <?php if ($pos == 'admin') { ?> href="bill.php?id=<?php echo $row['invoice_no'] ?>" <?php } ?>>
+                                        <span <?php if ($pos != 'admin') { ?> style="background: rgb(131 131 131);" <?php } ?> class="bin btn">View</span>
+                                    </a>
                                 </div>
 
                             </div>
