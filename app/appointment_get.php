@@ -8,9 +8,9 @@ $result = $db->prepare("SELECT * FROM user WHERE id = '$id' ");
 $result->bindParam(':id', $res);
 $result->execute();
 for ($i = 0; $row = $result->fetch(); $i++) {
-    $id = $row['emp_id'];
     $pos = $row['position'];
 }
+
 $date = date('Y-m-d');
 
 if (isset($_GET['type'])) {
@@ -30,14 +30,14 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     if ($con == 'pending') {
 
         $time_now = date("H.i");
-        $time_start = $row['app_time'];
+        $time_end = $row['app_time'];
         //-------------------- Date sum --------------------//
         $date1 = date_create(date('Y-m-d'));
         $date2 = date_create($row['app_date']);
         $date_diff = date_diff($date1, $date2);
         $deff_date = $date_diff->format("%R%a");
         //--------------------Time sum----------------------//
-        list($out_h, $out_m) = explode('.', $time_start);
+        list($out_h, $out_m) = explode('.', $time_end);
         list($in_h, $in_m) = explode('.', $time_now);
 
         $deff_h = $out_h - $in_h;
@@ -56,14 +56,14 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     } else if ($con == 'active') {
 
         $time_now = $row['start_time'];
-        $time_start = date("H.i");
+        $time_end = date("H.i");
         //-------------------- Date sum --------------------//
         $date1 = date_create(date('Y-m-d'));
         $date2 = date_create($row['app_date']);
         $date_diff = date_diff($date1, $date2);
         $deff_date = $date_diff->format("%R%a");
         //--------------------Time sum----------------------//
-        list($out_h, $out_m) = explode('.', $time_start);
+        list($out_h, $out_m) = explode('.', $time_end);
         list($in_h, $in_m) = explode('.', $time_now);
 
         $deff_h = $out_h - $in_h;
@@ -133,14 +133,14 @@ if (isset($_GET['type'])) {
         if ($con == 'close') {
 
             $time_now = $row['start_time'];
-            $time_start = $row['end_time'];
+            $time_end = $row['end_time'];
             //-------------------- Date sum --------------------//
             $date1 = date_create(date('Y-m-d'));
             $date2 = date_create($row['app_date']);
             $date_diff = date_diff($date1, $date2);
             $deff_date = $date_diff->format("%R%a");
             //--------------------Time sum----------------------//
-            list($out_h, $out_m) = explode('.', $time_start);
+            list($out_h, $out_m) = explode('.', $time_end);
             list($in_h, $in_m) = explode('.', $time_now);
 
             $deff_h = $out_h - $in_h;
@@ -181,9 +181,11 @@ if (isset($_GET['type'])) {
                                 </div>
                                 <div class="app">
                                     <span class="type"><?php echo  $row['type_name']; ?> </span>
-                                    <a class="nav-link" style="align-self: end;" <?php if ($con == 'close') { ?> href="bill.php?id=<?php echo $row['invoice_no'] ?>" <?php } ?>>
-                                        <span <?php if ($con == 'active') { ?> style="color: rgb(var(--bg-black));" <?php } ?> class="bin btn">View</span>
-                                    </a>
+                                    <?php if ($pos == 'admin') { ?>
+                                        <a class="nav-link" style="align-self: end;" <?php if ($con == 'close') { ?> href="bill.php?id=<?php echo $row['invoice_no'] ?>" <?php } ?>>
+                                            <span <?php if ($con == 'active') { ?> style="color: rgb(var(--bg-black));" <?php } ?> class="bin btn">View</span>
+                                        </a>
+                                    <?php } ?>
                                 </div>
 
                             </div>
