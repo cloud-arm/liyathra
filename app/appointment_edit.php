@@ -28,16 +28,19 @@ if ($type == 'active') {
 
     $sql = "UPDATE job SET action = ?, start_time = ?  WHERE id = ? ";
     $ql = $db->prepare($sql);
-    $ql->execute(array('active',$time, $id));
+    $ql->execute(array('active', $time, $id));
 
     header("location: order.php?id=$id");
 }
 
 if ($type == 'cancel') {
 
-    $sql = "UPDATE job SET action = ?  WHERE id = ? ";
+    $date = date("Y-m-d");
+    $time = date('H:i:s');
+
+    $sql = "UPDATE job SET action = ?, cancel_date = ?, cancel_time = ?  WHERE id = ? ";
     $ql = $db->prepare($sql);
-    $ql->execute(array('cancel', $id));
+    $ql->execute(array('cancel', $date, $time, $id));
 
     header("location: index.php");
 }
