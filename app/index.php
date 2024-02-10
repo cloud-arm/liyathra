@@ -57,6 +57,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="expenses.php">Expenses</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="assign_job.php">Assign List</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -83,6 +86,8 @@
             </div>
         </div>
     </div>
+
+
 
     <div class="container room-container">
         <div class="row" id="room-box"></div>
