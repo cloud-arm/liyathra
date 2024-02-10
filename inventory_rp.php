@@ -113,10 +113,11 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
 				<?php
    $d1=$_GET['d1'];
    $d2=$_GET['d2'];
+   $tot_amount=0;
    $tot=0;
   
 	   
-	$result = $db->prepare("SELECT sum(cost),sum(amount),sum(qty), code, name, product_id  FROM sales_list WHERE  action='0' and  date BETWEEN '$d1' AND '$d2' GROUP BY product_id ");
+	$result = $db->prepare("SELECT sum(sales_list.amount),sum(sales_list.cost),sum(sales_list.qty),sales_list.product_id,sales_list.name  FROM  sales JOIN sales_list ON sales.invoice_number=sales_list.invoice_no WHERE  sales.action='active' AND  sales.date BETWEEN '$d1' AND '$d2' GROUP BY sales_list.product_id ");
 	$result->bindParam(':userid', $res);
 	$result->execute();
 	for($i=0; $row = $result->fetch(); $i++){
@@ -128,12 +129,12 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
 				  <td><?php echo $row['product_id'];?></td>
 				  <td><?php echo $row['name'];?></td>
                   
-                  <td><?php echo $row['sum(qty)'];?></td>
-                  <td><?php echo $row['sum(cost)']  ?></td>
-                  <td><?php echo $row['sum(amount)']  ?></td>
-                  <td><?php echo $row['sum(amount)']-$row['sum(cost)']  ?></td>
+                  <td><?php echo $row['sum(sales_list.qty)'];?></td>
+                  <td><?php echo $row['sum(sales_list.cost)']  ?></td>
+                  <td><?php echo $row['sum(sales_list.amount)']  ?></td>
+                  <td><?php echo $row['sum(sales_list.amount)']-$row['sum(sales_list.cost)']  ?></td>
                 </tr>
-           <?php $tot_amount+=$row['sum(amount)']; $tot+=$row['sum(amount)']-$row['sum(cost)']; } ?>    
+           <?php $tot_amount+=$row['sum(sales_list.amount)']; $tot+=$row['sum(sales_list.amount)']-$row['sum(sales_list.cost)']; } ?>    
                 
                 </tbody>
                 <tfoot>
