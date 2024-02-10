@@ -30,7 +30,7 @@
     <div class="container-fluid mb-3">
         <div class="box">
             <div class="box-header">
-                <h4 class="fs-4 m-0">Cost Analyses</h4>
+                <h4 class="fs-4 m-0">Assign Job List</h4>
             </div>
         </div>
     </div>
