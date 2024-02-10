@@ -100,9 +100,8 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
                 <thead>
                 <tr>
                   <th>Code</th>
-				          <th>Name</th>
+				  <th>Name</th>
                   <th>Sell QTY</th>
-					        <th>Stock QTY</th>
                   <th>Cost</th>
                   <th>Sales</th>
                   <th>Margin</th>
@@ -117,7 +116,7 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
    $tot=0;
   
 	   
-	$result = $db->prepare("SELECT sum(cost),sum(amount),sum(qty), code, name, product_id  FROM sales_list WHERE  action='1' and  date BETWEEN '$d1' AND '$d2' GROUP BY product_id ");
+	$result = $db->prepare("SELECT sum(cost),sum(amount),sum(qty), code, name, product_id  FROM sales_list WHERE  action='0' and  date BETWEEN '$d1' AND '$d2' GROUP BY product_id ");
 	$result->bindParam(':userid', $res);
 	$result->execute();
 	for($i=0; $row = $result->fetch(); $i++){
@@ -126,27 +125,23 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
 				
 			?>
                 <tr>
-				  <td><?php echo $row['code'];?></td>
+				  <td><?php echo $row['product_id'];?></td>
 				  <td><?php echo $row['name'];?></td>
                   
                   <td><?php echo $row['sum(qty)'];?></td>
-                  <?php 
-    $result1 = $db->prepare("SELECT qty  FROM product WHERE  product_id='$co_id' ");
-	$result1->bindParam(':userid', $res);
-	$result1->execute();
-	for($i=0; $row1 = $result1->fetch(); $i++){ ?>
-                  <td><?php echo $row1['qty'];?></td>
-                  <?php } ?>
-
                   <td><?php echo $row['sum(cost)']  ?></td>
                   <td><?php echo $row['sum(amount)']  ?></td>
                   <td><?php echo $row['sum(amount)']-$row['sum(cost)']  ?></td>
                 </tr>
-           <?php $tot+=$row['sum(amount)']-$row['sum(cost)']; } ?>    
+           <?php $tot_amount+=$row['sum(amount)']; $tot+=$row['sum(amount)']-$row['sum(cost)']; } ?>    
                 
                 </tbody>
                 <tfoot>
-                
+                <tr>
+                <th colspan="4">Total</th>
+                <th>Rs.<?php echo $tot_amount ?></th>
+                <th>Rs.<?php echo $tot; ?></th>
+                </tr>
 				
 				
 				
@@ -158,7 +153,7 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
 				<center>
 				<h3>Margin Total Rs.<?php echo $tot; ?>.00</h3>
 					</center>
-			<a href="inventory_rp_print.php?d1=<?php echo $_GET['d1']; ?>&d2=<?php echo $_GET['d2']; ?>"><button class="btn btn-info" style="width: 123px; height:35px; margin-top:-8px;margin-left:8px;" >
+			<a href="#=<?php echo $_GET['d1']; ?>&d2=<?php echo $_GET['d2']; ?>"><button class="btn btn-info" style="width: 123px; height:35px; margin-top:-8px;margin-left:8px;" >
  <i class="icon icon-search icon-large"></i> print
  </button></a>
             </div>

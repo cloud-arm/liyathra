@@ -260,7 +260,7 @@
 
               <li><a href="purchases_rp.php?d1=<?php echo date("Y-m-d"); ?>&d2=<?php echo date("Y-m-d"); ?>"><i class="fa fa-circle-o text-yellow"></i> Purchases Report</a></li>
               <li><a href="pnl_rp.php?d1=<?php echo date("Y-m"); ?>-01&d2=<?php echo date("Y-m"); ?>-31"><i class="fa fa-circle-o text-yellow"></i> PNL Report</a></li>
-              <li><a href="inventory_rp.php?d1=<?php echo date("Y-m-d"); ?>&d2=<?php echo date("Y-m-d"); ?>"><i class="fa fa-circle-o text-yellow"></i> Inventory Report</a></li>
+              <li><a href="inventory_rp.php?d1=<?php echo date("Y-m-d"); ?>&d2=<?php echo date("Y-m-d"); ?>"><i class="fa fa-circle-o text-yellow"></i> Item Sales Report</a></li>
               <li><a href="sms_rp.php?d1=<?php echo date("Y-m-d"); ?>&d2=<?php echo date("Y-m-d"); ?>"><i class="fa fa-circle-o text-yellow"></i> SMS Report</a></li>
               <li><a href="stock_up_rp.php?d1=<?php echo date("Y-m-d"); ?>&d2=<?php echo date("Y-m-d"); ?>"><i class="fa fa-circle-o text-yellow"></i> Stock up Report</a></li>
 
