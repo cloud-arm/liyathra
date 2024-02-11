@@ -80,7 +80,7 @@
             <div class="row" id="room-box">
                 <?php $expenses = 0;
                 $collection = 0;
-                $result = $db->prepare("SELECT *,sum(amount) FROM payment JOIN user ON user.id = payment.user_id WHERE payment.pay_type = 'cash' AND  payment.date = '$date' ");
+                $result = $db->prepare("SELECT * FROM payment JOIN user ON user.id = payment.user_id WHERE payment.pay_type = 'cash' AND  payment.date = '$date' ");
                 $result->bindParam(':id', $user_id);
                 $result->execute();
                 for ($i = 0; $row = $result->fetch(); $i++) {
