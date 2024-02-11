@@ -37,37 +37,6 @@
         </div>
     </div>
 
-
-    <div class="container-fluid d-none">
-        <div class="box room-container mt-0">
-            <div class="box-body room mt-0">
-                <form action="order_save.php" class="w-100" method="POST">
-                    <h2>Add Supporter here</h2>
-                    <div class="flex w-100">
-                        <div class="form-group w-100 me-0">
-                            <label>Supporter</label>
-                            <select name="sub_emp" class="form-input">
-                                <?php
-                                $result = $db->prepare('SELECT * FROM Employees ');
-                                $result->bindParam(':id', $res);
-                                $result->execute();
-                                for ($i = 0; $row = $result->fetch(); $i++) { ?>
-                                    <option value="<?php echo $row['id']  ?>">
-                                        <?php echo $row['name']  ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                        <div class="form-group me-0">
-                            <input class="cate-info active" type="submit" value="Save" style="margin-bottom: -15px;padding: 5px 10px;color: rgb(var(--bg-white));font-weight: 600;font-size: 18px;">
-                            <input type="hidden" name="type" value="sub_emp">
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
     <div class="container-fluid bg-none">
         <div class="container-fluid my-4">
             <h1 class="fs-2 fw-semibold m_had"><span><?php echo $type_name ?> </span> </h1>

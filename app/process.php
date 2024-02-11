@@ -63,9 +63,9 @@ if ($sev > 0) {
 
 
     // query
-    $sql = "INSERT INTO sales_list (invoice_no,product_id,qty,name,profit,code,dic,date,emp,sup_emp,type,cost) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO sales_list (invoice_no,product_id,qty,name,profit,code,dic,date,emp,sup_emp,type,cost,job_no) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
     $q = $db->prepare($sql);
-    $q->execute(array($invo, $pro_id, $qty, $name, $profit, $code, $discount, $date, $emp, $sup_emp, 'Service', $cost));
+    $q->execute(array($invo, $pro_id, $qty, $name, $profit, $code, $discount, $date, $emp, $sup_emp, 'Service', $cost, $job));
 }
 
 header("location: order.php?id=$job");

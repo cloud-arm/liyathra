@@ -3,7 +3,7 @@ session_start();
 date_default_timezone_set("Asia/Colombo");
 include("../connect.php");
 
-
+$user_id = $_SESSION['SESS_MEMBER_ID'];
 $app_date = $_POST['date'];
 $app_time = $_POST['time'];
 
@@ -35,9 +35,9 @@ for ($i = 0; $row = $result->fetch(); $i++) {
 
 $order_no = str_replace('-','', $app_date).str_replace(':','', $app_time);
 
-$sql = "INSERT INTO job (note,date,time,cus_id,cus_name,emp_id,emp_name,app_date,app_time,action,invoice_no,order_no) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+$sql = "INSERT INTO job (note,date,time,cus_id,cus_name,emp_id,emp_name,app_date,app_time,action,invoice_no,order_no,booking_user) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 $ql = $db->prepare($sql);
-$ql->execute(array($note, $date, $time, $cus, $cus_name, $emp, $emp_name, $app_date, $app_time, 'pending',$invo,$order_no));
+$ql->execute(array($note, $date, $time, $cus, $cus_name, $emp, $emp_name, $app_date, $app_time, 'pending',$invo,$order_no,$user_id));
 
 
 header("location: appointment_service.php?invo=$invo");

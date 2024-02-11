@@ -157,41 +157,6 @@
             }
         }
 
-        function qtySet(type, id) {
-            let qty = parseInt(document.getElementById('qty-' + id).value);
-            if (type == 'up') {
-                qty += 1;
-            }
-            if (type == 'down') {
-                if (qty > 1) {
-                    qty -= 1;
-                }
-            }
-            if (qty < 10) {
-                document.getElementById('qty-' + id).value = ("0" + qty);
-            } else {
-                document.getElementById('qty-' + id).value = (qty);
-            }
-            let price = parseFloat(document.getElementById('int-' + id).value);
-            document.getElementById('prc-' + id).innerHTML = (price * qty) + ".00";
-
-            var xmlhttp;
-            if (window.XMLHttpRequest) {
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    // document.getElementById("room-box").innerHTML = xmlhttp.responseText;
-                    console.log(xmlhttp.responseText);
-                }
-            }
-
-            xmlhttp.open("GET", "qty_change.php?id=" + id + "&qty=" + qty, true);
-            xmlhttp.send();
-        }
-
         function binClick(id) {
             let info_box = document.getElementById('info-' + id);
             let dlt_box = document.getElementById('dlt-' + id);

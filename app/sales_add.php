@@ -35,7 +35,7 @@ $profit = ($sell - $cost) * $qty;
 // query
 $sql = "INSERT INTO sales_list (invoice_no,product_id,qty,amount,name,price,profit,code,dic,date,view,service_id,met_id,type,action) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 $q = $db->prepare($sql);
-$q->execute(array($invo, $pro_id, $qty, $amount, $name, $sell, $profit, $code, $discount, $date, 1, $sev_id, $met_id, 'Materials',1));
+$q->execute(array($invo, $pro_id, $qty, $amount, $name, $sell, $profit, $code, $discount, $date, 1, $sev_id, $met_id, 'Materials', 1));
 
 
 header("location: item_get.php?unit=2&invo=$invo&id=$main_id");
