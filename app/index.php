@@ -19,19 +19,19 @@
     $result->bindParam(':id', $res);
     $result->execute();
     for ($i = 0; $row = $result->fetch(); $i++) {
-        $user_id = $row['emp_id'];
+        $user = $row['emp_id'];
         $pos = $row['position'];
     }
 
     $result = $db->prepare("SELECT * FROM attendance WHERE emp_id =:id AND date = '$date' ");
-    $result->bindParam(':id', $user_id);
+    $result->bindParam(':id', $user);
     $result->execute();
     for ($i = 0; $row = $result->fetch(); $i++) {
         $emp = $row['emp_id'];
     }
 
     if ($emp == 0 && $pos != 'admin') {
-        header("location: attendance.php?id=$user_id");
+        header("location: attendance.php?id=$user");
     }
 
     if ($pos == 'admin') {
@@ -94,7 +94,7 @@
         <div class="box">
             <div class="box-header">
                 <h4 class="fs-4 m-0">Collection Rs.<?php echo number_format($collection, 2) ?></h4>
-                <a class="room-info active" href="customer_checking.php?id=<?php echo $user_id; ?>">
+                <a class="room-info active" href="customer_checking.php?id=<?php echo $user; ?>">
                     <div class="room-box first">
                         <span><i class="fa-solid fa-plus"></i></span>
                     </div>
