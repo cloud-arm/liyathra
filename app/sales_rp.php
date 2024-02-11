@@ -67,8 +67,9 @@
 
                 <p>Today all collections</p>
 
-                <h2>Expenses: <small>Rs.</small> <?php echo $expenses; ?> </h2>
+
                 <h2>Collection: <small>Rs.</small> <?php echo $collection; ?> </h2>
+                <h2>Expenses: <small>Rs.</small> <?php echo $expenses; ?> </h2>
                 <h2 style="font-size: 40px;">Rs.<?php echo number_format($collection - $expenses, 2); ?></h2>
 
             </div>
@@ -109,8 +110,8 @@
                                         <div class="sl_nad"><i class="fa-solid fa-user mx-3"></i><?php echo $user_name; ?></div>
                                     </div>
                                     <div class="col-12">
-                                        <div class="sjk_sk">Expenses: <small>Rs.</small> <?php echo $expenses; ?> </div>
                                         <div class="sjk_sk">Collection: <small>Rs.</small> <?php echo $collection; ?> </div>
+                                        <div class="sjk_sk">Expenses: <small>Rs.</small> <?php echo $expenses; ?> </div>
                                         <div class="sjk_sk sm">Balance: <small>Rs.</small> <?php echo number_format($collection - $expenses, 2); ?> </div>
                                     </div>
                                 </div>
