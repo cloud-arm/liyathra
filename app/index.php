@@ -11,27 +11,27 @@
     include("../connect.php");
     date_default_timezone_set("Asia/Colombo");
 
-    $id = $_SESSION['SESS_MEMBER_ID'];
+    $user_id = $_SESSION['SESS_MEMBER_ID'];
     $date = date("Y-m-d");
 
     $emp = 0;
-    $result = $db->prepare("SELECT * FROM user WHERE id = '$id' ");
+    $result = $db->prepare("SELECT * FROM user WHERE id = '$user_id' ");
     $result->bindParam(':id', $res);
     $result->execute();
     for ($i = 0; $row = $result->fetch(); $i++) {
-        $id = $row['emp_id'];
+        $user_id = $row['emp_id'];
         $pos = $row['position'];
     }
 
     $result = $db->prepare("SELECT * FROM attendance WHERE emp_id =:id AND date = '$date' ");
-    $result->bindParam(':id', $id);
+    $result->bindParam(':id', $user_id);
     $result->execute();
     for ($i = 0; $row = $result->fetch(); $i++) {
         $emp = $row['emp_id'];
     }
 
     if ($emp == 0 && $pos != 'admin') {
-        header("location: attendance.php?id=$id");
+        header("location: attendance.php?id=$user_id");
     }
     ?>
 </head>
@@ -90,7 +90,7 @@
         <div class="box">
             <div class="box-header">
                 <h4 class="fs-4 m-0">Collection Rs.<?php echo number_format($cash_total, 2) ?></h4>
-                <a class="room-info active" href="customer_checking.php?id=<?php echo $id; ?>">
+                <a class="room-info active" href="customer_checking.php?id=<?php echo $user_id; ?>">
                     <div class="room-box first">
                         <span><i class="fa-solid fa-plus"></i></span>
                     </div>
