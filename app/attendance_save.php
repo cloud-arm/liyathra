@@ -13,7 +13,6 @@ $result->bindParam(':id', $res);
 $result->execute();
 for ($i = 0; $row = $result->fetch(); $i++) {
     $id = $row['emp_id'];
-    $pos = $row['position'];
 }
 
 $result = $db->prepare("SELECT * FROM Employees WHERE id=:id ");
