@@ -3,4 +3,4 @@
 connect.php
 debug.log
 error_log
-*.sql
+#*.sql
