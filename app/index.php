@@ -60,11 +60,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="assign_job.php">Assign List</a>
                         </li>
-                        <?php if ($pos == 'admin') { ?>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="report.php">Reports</a>
-                            </li>
-                        <?php } ?>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="report.php">Reports</a>
+                        </li>
                     </ul>
                 </div>
             </div>
