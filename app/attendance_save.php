@@ -8,13 +8,6 @@ $time = date('H.i.s');
 
 $id = $_POST['id'];
 
-$result = $db->prepare("SELECT * FROM user WHERE id = '$id' ");
-$result->bindParam(':id', $res);
-$result->execute();
-for ($i = 0; $row = $result->fetch(); $i++) {
-    $id = $row['emp_id'];
-}
-
 $result = $db->prepare("SELECT * FROM Employees WHERE id=:id ");
 $result->bindParam(':id', $id);
 $result->execute();
