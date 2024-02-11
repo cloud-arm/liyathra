@@ -81,7 +81,7 @@
             <div class="row" id="room-box">
                 <?php $expenses = 0;
                 $collection = 0;
-                $result = $db->prepare("SELECT * FROM Employees JOIN attendance ON Employees.id = attendance.emp_id WHERE  attendance.date = '$date' ");
+                $result = $db->prepare("SELECT * FROM user JOIN attendance ON user.emp_id = attendance.emp_id WHERE  attendance.date = '$date' ");
                 $result->bindParam(':id', $user_id);
                 $result->execute();
                 for ($i = 0; $row = $result->fetch(); $i++) {
