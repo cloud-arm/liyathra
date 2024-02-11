@@ -29,4 +29,5 @@ ALTER TABLE `job`
  ADD `booking_user` INT NOT NULL AFTER `order_no`,
  ADD `active_user` INT NOT NULL AFTER `booking_user`,
  ADD `close_user` INT NOT NULL AFTER `active_user`,
- ADD `cancel_user` INT NOT NULL AFTER `close_user`;
+ ADD `cancel_user` INT NOT NULL AFTER `close_user`,
+ ADD `edit_user` INT NOT NULL AFTER `cancel_user`;
