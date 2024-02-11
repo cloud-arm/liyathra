@@ -98,7 +98,7 @@
                     $re->bindParam(':id', $user_id);
                     $re->execute();
                     for ($i = 0; $r = $re->fetch(); $i++) {
-                        $collection = $row['sum(amount)'];
+                        $collection = $r['sum(amount)'];
                     }
                 ?>
                     <div class="col-12 col-sm-6 col-md-6 col-lg-4">
