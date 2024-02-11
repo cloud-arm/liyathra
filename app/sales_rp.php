@@ -68,8 +68,8 @@
                 <p>Today all collections</p>
 
 
-                <h2>Collection: <small>Rs.</small> <?php echo number_format($collection, 2);; ?> </h2>
-                <h2>Expenses: <small>Rs.</small> <?php echo number_format($expenses, 2);; ?> </h2>
+                <h2>Collection: <small>Rs.</small> <?php echo number_format($collection, 2); ?> </h2>
+                <h2>Expenses: <small>Rs.</small> <?php echo number_format($expenses, 2); ?> </h2>
                 <h2 style="font-size: 40px;">Rs.<?php echo number_format($collection - $expenses, 2); ?></h2>
 
             </div>
@@ -81,7 +81,7 @@
             <div class="row" id="room-box">
                 <?php $expenses = 0;
                 $collection = 0;
-                $result = $db->prepare("SELECT * FROM Employees JOIN attendance ON Employees.id = attendance.emp_id WHERE Employees.user != 'admin' AND attendance.date = '$date' ");
+                $result = $db->prepare("SELECT * FROM Employees JOIN attendance ON Employees.id = attendance.emp_id WHERE  attendance.date = '$date' ");
                 $result->bindParam(':id', $user_id);
                 $result->execute();
                 for ($i = 0; $row = $result->fetch(); $i++) {
@@ -110,8 +110,8 @@
                                         <div class="sl_nad"><i class="fa-solid fa-user mx-3"></i><?php echo $user_name; ?></div>
                                     </div>
                                     <div class="col-12">
-                                        <div class="sjk_sk">Collection: <small>Rs.</small> <?php number_format($collection, 2);; ?> </div>
-                                        <div class="sjk_sk">Expenses: <small>Rs.</small> <?php number_format($expenses, 2);; ?> </div>
+                                        <div class="sjk_sk">Collection: <small>Rs.</small> <?php number_format($collection, 2); ?> </div>
+                                        <div class="sjk_sk">Expenses: <small>Rs.</small> <?php number_format($expenses, 2); ?> </div>
                                         <div class="sjk_sk sm">Balance: <small>Rs.</small> <?php echo number_format($collection - $expenses, 2); ?> </div>
                                     </div>
                                 </div>
