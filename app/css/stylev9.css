@@ -809,6 +809,7 @@ table th {
   position: fixed;
   right: 30px;
   bottom: 30px;
+  z-index: 1;
 }
 
 .tbl-assign tr {
@@ -883,6 +884,40 @@ table th {
   opacity: 0.8;
   font-size: 80%;
   margin-left: 10px;
+}
+
+.small-box {
+  border: 2px solid #5f5f5f;
+  border-radius: 15px;
+  width: 250px;
+  padding: 10px;
+}
+
+.small-box .content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.small-box .content.asn i {
+  font-size: 45px;
+  align-self: center;
+  color: #5f5f5f;
+}
+
+.small-box .content.aud h4 {
+  font-size: 25px;
+  font-weight: 600;
+  color: #5f5f5f;
+  text-align: start;
+}
+
+.small-box .content.aud p {
+  padding-bottom: 5px;
+  font-size: 25px;
+  font-weight: 500;
+  color: #5f5f5f;
 }
 
 .app.badge {

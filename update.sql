@@ -35,3 +35,10 @@ ALTER TABLE `job`
 --
 -- Update attendance --
  ALTER TABLE `attendance` ADD `user_id` INT NOT NULL AFTER `work_time`;
+
+--
+-- Update bank --
+ALTER TABLE `bank`
+ ADD `ac_name` INT NOT NULL AFTER `action`,
+ ADD `dep_id` INT NOT NULL AFTER `ac_name`,
+ ADD `dep_name` INT NOT NULL AFTER `dep_id`;
