@@ -94,7 +94,7 @@
                         $expenses = $r['sum(amount)'];
                     }
 
-                    $re = $db->prepare("SELECT sum(amount) FROM payment WHERE user = '$user' AND pay_type = 'cash' AND date = '$date' ");
+                    $re = $db->prepare("SELECT sum(amount) FROM payment WHERE user_id = '$user' AND pay_type = 'cash' AND date = '$date' ");
                     $re->bindParam(':id', $user_id);
                     $re->execute();
                     for ($i = 0; $r = $re->fetch(); $i++) {
