@@ -109,8 +109,8 @@
                                         <div class="sl_nad"><i class="fa-solid fa-user mx-3"></i><?php echo $user_name; ?></div>
                                     </div>
                                     <div class="col-12">
-                                        <div class="sjk_sk">Collection: <small>Rs.</small> <?php number_format($collection, 2); ?> </div>
-                                        <div class="sjk_sk">Expenses: <small>Rs.</small> <?php number_format($expenses, 2); ?> </div>
+                                        <div class="sjk_sk">Collection: <small>Rs.</small> <?php echo number_format($collection, 2); ?> </div>
+                                        <div class="sjk_sk">Expenses: <small>Rs.</small> <?php echo number_format($expenses, 2); ?> </div>
                                         <div class="sjk_sk sm">Balance: <small>Rs.</small> <?php echo number_format($collection - $expenses, 2); ?> </div>
                                     </div>
                                 </div>
