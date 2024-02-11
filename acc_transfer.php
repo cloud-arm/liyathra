@@ -74,10 +74,10 @@ include("connect.php");
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-md-2 d-flex" style="font-size: 21px;margin-top: 25px;">
-                                                            <i class="fa-solid fa-angles-right " style="opacity: 0.25;"></i>
-                                                            <i class="fa-solid fa-angles-right px-1" style="opacity: 0.5;"></i>
-                                                            <i class="fa-solid fa-angles-right " style="opacity: 0.75;"></i>
+                                                        <div class="col-md-2 d-flex" style="font-size: 35px;margin-top: 25px;display: flex;justify-content: space-around;">
+                                                            <i class="fa fa-angle-double-right " style="opacity: 0.25;"></i>
+                                                            <i class="fa fa-angle-double-right px-1" style="opacity: 0.5;"></i>
+                                                            <i class="fa fa-angle-double-right " style="opacity: 0.75;"></i>
                                                         </div>
 
                                                         <div class="col-md-5">
