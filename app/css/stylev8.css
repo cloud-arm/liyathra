@@ -863,6 +863,28 @@ table th {
   color: rgb(var(--bg-theme));
 }
 
+.ajk_ady .sl_nad {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.ajk_ady .sjk_sk {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.ajk_ady .sjk_sk.sm {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.ajk_ady .sjk_sk small {
+  opacity: 0.8;
+  font-size: 80%;
+  margin-left: 10px;
+}
+
 .app.badge {
   position: absolute;
   top: 2px;

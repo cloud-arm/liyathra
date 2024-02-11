@@ -13,6 +13,7 @@
 
     $user_id = $_SESSION['SESS_MEMBER_ID'];
     $date = date('Y-m-d');
+    
     $result = $db->prepare("SELECT * FROM user WHERE id = '$user_id' ");
     $result->bindParam(':id', $res);
     $result->execute();
@@ -52,7 +53,7 @@
         <div class="row" id="room-box">
             <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                 <div class="ajk_ady ">
-                    <a href="sales_rp.php" style="text-decoration: none;">
+                    <a href="sales_rp.php" style="text-decoration: none; color: rgb(var(--bg-theme))">
                         <div class="info-box" style="border: 2px solid rgb(var(--bg-theme));">
                             <div class="row w-100">
                                 <div class="col-4 p-0 inb_nu">

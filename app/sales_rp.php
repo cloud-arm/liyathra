@@ -23,16 +23,25 @@
     }
 
     if ($pos == 'admin') {
-        $sql = "SELECT sum(amount) FROM payment WHERE  pay_type = 'cash' AND date ='$date' ";
+        $sql1 = "SELECT sum(amount) FROM payment WHERE  pay_type = 'cash' AND date ='$date' ";
+        $sql2 = "SELECT sum(amount) FROM expenses_records WHERE  pay_type = 'cash' AND date ='$date' ";
     } else {
-        $sql = "SELECT sum(amount) FROM payment WHERE user_id = '$user_id' AND pay_type = 'cash' AND date = '$date' ";
+        $sql1 = "SELECT sum(amount) FROM payment WHERE user_id = '$user_id' AND pay_type = 'cash' AND date = '$date' ";
+        $sql2 = "SELECT sum(amount) FROM expenses_records WHERE user = '$user_id' AND pay_type = 'cash' AND date = '$date' ";
     }
 
-    $result = $db->prepare($sql);
+    $result = $db->prepare($sql1);
     $result->bindParam(':id', $user_id);
     $result->execute();
     for ($i = 0; $row = $result->fetch(); $i++) {
-        $cash_total = $row['sum(amount)'];
+        $collection = $row['sum(amount)'];
+    }
+
+    $result = $db->prepare($sql2);
+    $result->bindParam(':id', $user_id);
+    $result->execute();
+    for ($i = 0; $row = $result->fetch(); $i++) {
+        $expenses = $row['sum(amount)'];
     }
 
     ?>
@@ -58,12 +67,60 @@
 
                 <p>Today all collections</p>
 
-                <h2 style="font-size: 40px;">Rs. <?php echo $cash_total; ?></h2>
+                <h2>Expenses: <small>Rs.</small> <?php echo $expenses; ?> </h2>
+                <h2>Collection: <small>Rs.</small> <?php echo $collection; ?> </h2>
+                <h2 style="font-size: 40px;">Rs.<?php echo number_format($collection - $expenses, 2); ?></h2>
 
             </div>
         </div>
     </div>
 
+    <?php if ($pos == 'admin') { ?>
+        <div class="container room-container">
+            <div class="row" id="room-box">
+                <?php $expenses = 0;
+                $collection = 0;
+                $result = $db->prepare("SELECT * FROM Employees JOIN attendance ON Employees.id = attendance.emp_id WHERE Employees.user != 'admin' AND attendance.date = '$date' ");
+                $result->bindParam(':id', $user_id);
+                $result->execute();
+                for ($i = 0; $row = $result->fetch(); $i++) {
+                    $user = $row['emp_id'];
+                    $user_name = $row['name'];
+
+                    $re = $db->prepare("SELECT sum(amount) FROM expenses_records WHERE user = '$user' AND pay_type = 'cash' AND date = '$date' ");
+                    $re->bindParam(':id', $user_id);
+                    $re->execute();
+                    for ($i = 0; $r = $re->fetch(); $i++) {
+                        $expenses = $r['sum(amount)'];
+                    }
+
+                    $re = $db->prepare("SELECT sum(amount) FROM payment WHERE user_id = '$user' AND pay_type = 'cash' AND date = '$date' ");
+                    $re->bindParam(':id', $user_id);
+                    $re->execute();
+                    for ($i = 0; $r = $re->fetch(); $i++) {
+                        $collection = $r['sum(amount)'];
+                    }
+                ?>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                        <div class="ajk_ady ">
+                            <div class="info-box" style="border: 2px solid rgb(var(--bg-theme));">
+                                <div class="row w-100">
+                                    <div class="col-12 mb-3">
+                                        <div class="sl_nad"><i class="fa-solid fa-user mx-3"></i><?php echo $user_name; ?></div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="sjk_sk">Expenses: <small>Rs.</small> <?php echo $expenses; ?> </div>
+                                        <div class="sjk_sk">Collection: <small>Rs.</small> <?php echo $collection; ?> </div>
+                                        <div class="sjk_sk sm">Balance: <small>Rs.</small> <?php echo number_format($collection - $expenses, 2); ?> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    <?php } ?>
 
     <!-- Bootstrap 5.3.2-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
