@@ -17,23 +17,14 @@
 
 <body class="bg-light">
 
-    <header>
-        <nav class="navbar navbar-expand-lg bg-none">
-            <div class="container-fluid">
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <a href="order.php" class="d-none"><span class="navbar-toggler border-0"><i id="icon" class="fa-solid fa-bell"></i></span></a>
-                <div class="collapse navbar-collapse" id="nav">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-                        </li>
-                    </ul>
-                </div>
+    <div class="container-fluid container-md mt-4">
+        <div class="box px-2 mb-0 mt-3 ">
+            <div class="box-header px-0 mb-0">
+                <a class="nav-link border-0 btn fs-1 d-md-none" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i></a>
+                <a class="nav-link btn border-0 bg-theme px-3 fs-4 py-2 d-none d-md-block" aria-current="page" href="index.php"><i class="fa-solid fa-house me-2"></i>Home</a>
             </div>
-        </nav>
-    </header>
+        </div>
+    </div>
 
     <div class="container-fluid mb-3">
         <div class="box">
