@@ -28,6 +28,21 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     $con = $row['action'];
     $num = $i + 1;
 
+    // -------------- Badge ---------//
+    if ($con == 'pending') {
+        $badge = '<div class="app badge bg-yellow">Pending</div>';
+    }
+    if ($con == 'active') {
+        $badge = '<div class="app badge bg-green">Active</div>';
+    }
+    if ($con == 'close') {
+        $badge = '<div class="app badge bg-aqua">Close</div>';
+    }
+    if ($con == 'cancel') {
+        $badge = '<div class="app badge bg-red">Cancel</div>';
+    }
+    // -------------- Badge ---------//
+
     if ($con == 'pending') {
 
         $time_now = date("H.i");
@@ -114,6 +129,7 @@ for ($i = 0; $row = $result->fetch(); $i++) {
                     </div>
                 </div>
             </div>
+            <?php echo $badge; ?>
         </div>
     </div>
 
@@ -131,7 +147,20 @@ $result->execute();
 for ($i = 0; $row = $result->fetch(); $i++) {
     $con = $row['action'];
     $num = $i + 1;
-
+    // -------------- Badge ---------//
+    if ($con == 'pending') {
+        $badge = '<div class="app badge bg-yellow">Pending</div>';
+    }
+    if ($con == 'active') {
+        $badge = '<div class="app badge bg-green">Active</div>';
+    }
+    if ($con == 'close') {
+        $badge = '<div class="app badge bg-aqua">Close</div>';
+    }
+    if ($con == 'cancel') {
+        $badge = '<div class="app badge bg-red">Cancel</div>';
+    }
+    // -------------- Badge ---------//
     if ($con == 'close') {
 
         $time_now = $row['start_time'];
@@ -167,7 +196,11 @@ for ($i = 0; $row = $result->fetch(); $i++) {
                     <div class="col-3 p-0">
                         <div class="inb_num">
                             <span class="num" <?php if ($con == 'active') { ?> style="color: rgb(var(--bg-black));" <?php } ?>><?php echo $num; ?></span>
-                            <span class="time">Time:<?php if (isset($_GET['type'])) { echo  $row['cancel_time'];}else{ echo  $row['end_time'];} ?> </span>
+                            <span class="time">Time:<?php if (isset($_GET['type'])) {
+                                                        echo  $row['cancel_time'];
+                                                    } else {
+                                                        echo  $row['end_time'];
+                                                    } ?> </span>
                             <?php if (isset($_GET['type'])) { ?>
                                 <span class="time"><?php echo  $row['cancel_date']; ?> </span>
                             <?php } ?>
@@ -194,6 +227,7 @@ for ($i = 0; $row = $result->fetch(); $i++) {
                     </div>
                 </div>
             </div>
+            <?php echo $badge; ?>
         </div>
     </div>
 

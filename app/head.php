@@ -18,5 +18,5 @@
 <!-- Date Picker -->
 <link rel="stylesheet" href="css/datepik.css">
 <!-- Style -->
-<link rel="stylesheet" href="css/stylev5.css">
+<link rel="stylesheet" href="css/stylev6.css">
 <?php include('auth.php'); ?>

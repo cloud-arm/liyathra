@@ -846,3 +846,60 @@ table th {
 .as_jdk .info-foot .anl .anl_hed span {
   font-weight: 500;
 }
+
+.ajk_ady {
+  position: relative;
+}
+
+.app.badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 75px;
+  font-size: 13px;
+  border-radius: 0 7px 0 10px;
+}
+
+.badge {
+  color: rgba(var(--bg-white), 1) !important;
+}
+
+.badge.bg-green {
+  background-color: rgba(2, 151, 2, 1) !important;
+  border: 1px solid rgba(2, 151, 2, 1) !important;
+}
+
+.badge.bg-red {
+  background-color: rgba(225, 50, 50, 1) !important;
+  border: 1px solid rgba(225, 50, 50, 1) !important;
+}
+
+.badge.bg-blue {
+  background-color: rgba(0, 115, 183, 1) !important;
+  border: 1px solid rgba(0, 115, 183, 1) !important;
+}
+
+.badge.bg-yellow {
+  background-color: rgba(225, 141, 9, 1) !important;
+  border: 1px solid rgba(225, 141, 9, 1) !important;
+}
+
+.badge.bg-aqua {
+  background-color: rgba(0, 192, 239, 1) !important;
+  border: 1px solid rgba(0, 192, 239, 1) !important;
+}
+
+.badge.bg-maroon {
+  background-color: rgba(216, 27, 96, 1) !important;
+  border: 1px solid rgba(216, 27, 96, 1) !important;
+}
+
+.badge.bg-purple {
+  background-color: rgba(196, 57, 211, 1) !important;
+  border: 1px solid rgba(196, 57, 211, 1) !important;
+}
+
+.badge.bg-default {
+  background-color: rgba(var(--bg-light), 1) !important;
+  border: 1px solid rgba(var(--bg-light), 1) !important;
+}
