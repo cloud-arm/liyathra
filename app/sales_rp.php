@@ -13,6 +13,7 @@
 
     $user_id = $_SESSION['SESS_MEMBER_ID'];
     $date = date('Y-m-d');
+
     $result = $db->prepare("SELECT * FROM user WHERE id = '$user_id' ");
     $result->bindParam(':id', $res);
     $result->execute();
@@ -48,32 +49,17 @@
         </div>
     </div>
 
-    <div class="container room-container">
-        <div class="row" id="room-box">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                <div class="ajk_ady ">
-                    <a href="sales_rp.php" style="text-decoration: none;">
-                        <div class="info-box" style="border: 2px solid rgb(var(--bg-theme));">
-                            <div class="row w-100">
-                                <div class="col-4 p-0 inb_nu">
-                                    <span class="num_inp">Rs.<?php echo $cash_total; ?></span>
-                                </div>
-                                <div class="col-8">
-                                    <div style="margin: 10px;" class="sparkline" data-type="bar" data-width="60%" data-height="40px" data-bar-Width="5" data-bar-Spacing="9" data-bar-Color="#B5B5B8">
-                                        <?php
-                                        $result1 = $db->prepare("SELECT  sum(amount) FROM sales GROUP BY date ORDER BY date DESC LIMIT 20 ");
-                                        $result1->bindParam(':userid', $date);
-                                        $result1->execute();
-                                        for ($i = 0; $row1 = $result1->fetch(); $i++) {
-                                            echo $row1['sum(amount)'] . ",";
-                                        } ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="app badge bg-maroon" style="width: 110px;">Sales Report</div>
-                    </a>
+    <div class="container my-3">
+        <div class="box room-container">
+            <div class="box-body room " style="padding: 30px 10px;">
+                <div class="logo flex">
+                    <h1>Collection</h1>
                 </div>
+
+                <p>Today all collections</p>
+
+                <h2 style="font-size: 40px;">Rs. <?php echo $cash_total; ?></h2>
+
             </div>
         </div>
     </div>
@@ -94,18 +80,7 @@
     <script src="../../../plugins/sparkline/jquery.sparkline.min.js"></script>
 
     <script>
-        $(function() {
 
-            // Line charts taking their values from the tag
-            $('.sparkline-1').sparkline();
-
-            //INITIALIZE SPARKLINE CHARTS
-            $(".sparkline").each(function() {
-                var $this = $(this);
-                $this.sparkline('html', $this.data());
-            });
-
-        });
     </script>
 </body>
 
