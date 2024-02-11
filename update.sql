@@ -31,3 +31,7 @@ ALTER TABLE `job`
  ADD `close_user` INT NOT NULL AFTER `active_user`,
  ADD `cancel_user` INT NOT NULL AFTER `close_user`,
  ADD `edit_user` INT NOT NULL AFTER `cancel_user`;
+
+--
+-- Update attendance --
+ ALTER TABLE `attendance` ADD `user_id` INT NOT NULL AFTER `work_time`;

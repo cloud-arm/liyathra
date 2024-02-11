@@ -81,25 +81,19 @@
             <div class="row" id="room-box">
                 <?php $expenses = 0;
                 $collection = 0;
-                $result = $db->prepare("SELECT * FROM user JOIN attendance ON user.emp_id = attendance.user_id WHERE  attendance.date = '$date' ");
+                $result = $db->prepare("SELECT *,sum(amount) FROM payment JOIN user ON user.id = payment.user_id WHERE  payment.date = '$date' ");
                 $result->bindParam(':id', $user_id);
                 $result->execute();
                 for ($i = 0; $row = $result->fetch(); $i++) {
                     $user = $row['emp_id'];
                     $user_name = $row['name'];
+                    $collection = $row['sum(amount)'];
 
                     $re = $db->prepare("SELECT sum(amount) FROM expenses_records WHERE user = '$user' AND pay_type = 'cash' AND date = '$date' ");
                     $re->bindParam(':id', $user_id);
                     $re->execute();
                     for ($i = 0; $r = $re->fetch(); $i++) {
                         $expenses = $r['sum(amount)'];
-                    }
-
-                    $re = $db->prepare("SELECT sum(amount) FROM payment WHERE user_id = '$user' AND pay_type = 'cash' AND date = '$date' ");
-                    $re->bindParam(':id', $user_id);
-                    $re->execute();
-                    for ($i = 0; $r = $re->fetch(); $i++) {
-                        $collection = $r['sum(amount)'];
                     }
                 ?>
                     <div class="col-12 col-sm-6 col-md-6 col-lg-4">
