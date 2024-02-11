@@ -167,9 +167,9 @@ for ($i = 0; $row = $result->fetch(); $i++) {
 
 if ($sales_id == 0) {
     // query
-    $sql = "INSERT INTO sales (invoice_number,amount,balance,profit,pay_type,pay_amount,date,customer_id,customer_name,action,discount,user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO sales (invoice_number,amount,balance,profit,pay_type,pay_amount,date,customer_id,customer_name,action,discount,user_id,cashier) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
     $ql = $db->prepare($sql);
-    $ql->execute(array($invoice, $amount, $balance, $profit, $pay_type, $pay_total, $date, $cus_id, $cus_name, 'active', $discount, $ui));
+    $ql->execute(array($invoice, $amount, $balance, $profit, $pay_type, $pay_total, $date, $cus_id, $cus_name, 'active', $discount, $ui,$un));
 } else {
 
     $sql = 'UPDATE  sales SET action=?, pay_amount=?, balance=amount-?, pay_type=?, user_id=?  WHERE  invoice_number=? ';
@@ -186,9 +186,9 @@ $q->execute(array('close',$now,$invoice));
 
 if ($amount > $pay_amount) {
 
-    $sql = 'INSERT INTO payment (amount,pay_amount,pay_type,date,time,invoice_no,type,credit_balance) VALUES (?,?,?,?,?,?,?,?)';
+    $sql = 'INSERT INTO payment (amount,pay_amount,pay_type,date,time,invoice_no,type,credit_balance,user_id,cashier) VALUES (?,?,?,?,?,?,?,?,?,?)';
     $q = $db->prepare($sql);
-    $q->execute(array($amount, 0, 'Credit', $date, $time, $invoice, 0, $amount));
+    $q->execute(array($amount, 0, 'Credit', $date, $time, $invoice, 0, $amount,$ui,$un));
 }
 
 
@@ -196,9 +196,9 @@ if ($pay_amount > 0) {
 
     if ($pay_type == 'card') {
 
-        $sql = 'INSERT INTO payment (amount,pay_amount,pay_type,date,time,invoice_no,type,action) VALUES (?,?,?,?,?,?,?,?)';
+        $sql = 'INSERT INTO payment (amount,pay_amount,pay_type,date,time,invoice_no,type,action,user_id,cashier) VALUES (?,?,?,?,?,?,?,?,?,?)';
         $q = $db->prepare($sql);
-        $q->execute(array($pay_amount, $pay_amount, $pay_type, $date, $time, $invoice, '1', 1));
+        $q->execute(array($pay_amount, $pay_amount, $pay_type, $date, $time, $invoice, '1', 1,$ui,$un));
 
         $re = $db->prepare("SELECT * FROM payment WHERE invoice_no = :id ");
         $re->bindParam(':id', $invoice);
@@ -212,9 +212,9 @@ if ($pay_amount > 0) {
         $ql->execute(array('invoice_payment', 'Credit', $invoice, $pay_amount, 1, 0, 'Card Payment', 'Bank', 0, 'Bank Invoice', 'Bank Deposit', $p, 0, $date, $time, $ui, $un));
     } else {
 
-        $sql = 'INSERT INTO payment (amount,pay_amount,pay_type,date,time,invoice_no,type,chq_no,chq_bank,chq_date,bank_id,bank_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
+        $sql = 'INSERT INTO payment (amount,pay_amount,pay_type,date,time,invoice_no,type,chq_no,chq_bank,chq_date,bank_id,bank_name,user_id,cashier) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
         $q = $db->prepare($sql);
-        $q->execute(array($pay_amount, $pay_amount, $pay_type, $date, $time, $invoice, '1', $chq_no, $chq_bank, $chq_date, $bank, $bank_name));
+        $q->execute(array($pay_amount, $pay_amount, $pay_type, $date, $time, $invoice, '1', $chq_no, $chq_bank, $chq_date, $bank, $bank_name,$ui,$un));
     }
 
 
