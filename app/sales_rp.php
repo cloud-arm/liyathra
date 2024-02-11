@@ -67,7 +67,6 @@
 
                 <p>Today all collections</p>
 
-
                 <h2>Collection: <small>Rs.</small> <?php echo number_format($collection, 2); ?> </h2>
                 <h2>Expenses: <small>Rs.</small> <?php echo number_format($expenses, 2); ?> </h2>
                 <h2 style="font-size: 40px;">Rs.<?php echo number_format($collection - $expenses, 2); ?></h2>
