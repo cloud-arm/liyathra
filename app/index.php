@@ -33,6 +33,19 @@
     if ($emp == 0 && $pos != 'admin') {
         header("location: attendance.php?id=$user_id");
     }
+
+    if ($pos == 'admin') {
+        $sql1 = "SELECT sum(amount) FROM payment WHERE  pay_type = 'cash' AND date ='$date' ";
+    } else {
+        $sql1 = "SELECT sum(amount) FROM payment WHERE user_id = '$user_id' AND pay_type = 'cash' AND date = '$date' ";
+    }
+
+    $result = $db->prepare($sql1);
+    $result->bindParam(':id', $user_id);
+    $result->execute();
+    for ($i = 0; $row = $result->fetch(); $i++) {
+        $collection = $row['sum(amount)'];
+    }
     ?>
 </head>
 
@@ -77,19 +90,10 @@
         </span>
     </div>
 
-    <?php
-    $user_id = $_SESSION['SESS_MEMBER_ID'];
-    $date = date('Y-m-d');
-    $result = $db->prepare("SELECT sum(amount) FROM payment WHERE user_id=:id AND pay_type='cash' AND date ='$date' ");
-    $result->bindParam(':id', $user_id);
-    $result->execute();
-    for ($i = 0; $row = $result->fetch(); $i++) {
-        $cash_total = $row['sum(amount)'];
-    } ?>
     <div class="container-fluid mb-3">
         <div class="box">
             <div class="box-header">
-                <h4 class="fs-4 m-0">Collection Rs.<?php echo number_format($cash_total, 2) ?></h4>
+                <h4 class="fs-4 m-0">Collection Rs.<?php echo number_format($collection, 2) ?></h4>
                 <a class="room-info active" href="customer_checking.php?id=<?php echo $user_id; ?>">
                     <div class="room-box first">
                         <span><i class="fa-solid fa-plus"></i></span>
