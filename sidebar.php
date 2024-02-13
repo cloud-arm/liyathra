@@ -207,7 +207,7 @@
 
 
           <li>
-            <a href="expenses.php?id=exp<?php echo date("ymdhis"); ?>&year=<?php echo date("Y"); ?>&month=<?php echo date("m"); ?>">
+            <a href="expenses.php?year=<?php echo date("Y"); ?>&month=<?php echo date("m"); ?>">
               <i class="fa fa-dollar"></i> <span>Expenses</span>
               <span class="pull-right-container">
 

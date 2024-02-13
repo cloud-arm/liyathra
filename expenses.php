@@ -293,7 +293,6 @@ date_default_timezone_set("Asia/Colombo");
                 <div class="form-group">
                   <input class="btn btn-info" type="submit" value="Submit">
                   <input name="unit" type="hidden" value="1">
-                  <input name="invo" type="hidden" value="<?php echo $_GET['id']; ?>">
                 </div>
               </div>
             </div>
@@ -327,8 +326,9 @@ date_default_timezone_set("Asia/Colombo");
             <div class="col-md-2">
               <div class="form-group">
                 <select class="form-control " name="month" style="width: 100%;" tabindex="1">
-                  <?php for ($x = 1; $x <= 12; $x++) { ?>
-                    <option> <?php echo sprintf("%02d", $x); ?> </option>
+                <?php for ($x = 1; $x <= 12; $x++) { 
+                    $mo = sprintf("%02d", $x);?>
+                    <option <?php if($mo == $_GET['month']){ echo 'selected'; } ?> > <?php echo $mo; ?> </option>
                   <?php  } ?>
                 </select>
               </div>
