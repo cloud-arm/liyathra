@@ -38,7 +38,7 @@ if ($type == 'cus_check') {
             $cus_id = $row['id'];
         }
 
-        header("location: customer_add.php?emp=$user&cus=$cus_id");
+        header("location: appointment_customer_add.php?emp=$user&cus=$cus_id");
     }
 } else
 

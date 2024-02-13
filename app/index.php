@@ -62,6 +62,9 @@
                 <div class="collapse navbar-collapse" id="nav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#inquiries.php">Inquiries</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="booking.php">Booking List</a>
                         </li>
                         <li class="nav-item">
@@ -180,7 +183,7 @@
         <div class="box">
             <div class="box-header">
                 <h4 class="fs-4 m-0">Collection Rs.<?php echo number_format($collection, 2) ?></h4>
-                <a class="room-info active" href="customer_checking.php?id=<?php echo $user; ?>">
+                <a class="room-info active" href="appointment_customer_checking.php?id=<?php echo $user; ?>">
                     <div class="room-box first">
                         <span><i class="fa-solid fa-plus"></i></span>
                     </div>
