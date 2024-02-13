@@ -57,9 +57,9 @@ if($_SERVER['SERVER_NAME']=='liyathra.colorbiz.org'){
     CURLOPT_POSTFIELDS =>'{
   "number": "94779252594",
   "type": "media",
-  "message": "Hi beautiful,
+  "message": "Hi *beautiful*,
    Your appointment was booked .Liyathra salon will be delighted serve you on 11/02/2024 at 9.00 am. 
-   See you soon!",
+   *_See you soon!_*",
   "media_url": "https://liyathra.colorbiz.org/main/pages/get/app/img/LIYATHRA BOOKING.png",
   "instance_id": "65C8624CF2E87",
   "access_token": "65b8742c1285f"
