@@ -11,6 +11,15 @@
     include("../connect.php");
     date_default_timezone_set("Asia/Colombo");
 
+    $user_id = $_SESSION['SESS_MEMBER_ID'];
+
+    $result = $db->prepare("SELECT * FROM user WHERE id = '$user_id' ");
+    $result->bindParam(':id', $res);
+    $result->execute();
+    for ($i = 0; $row = $result->fetch(); $i++) {
+        $user = $row['emp_id'];
+        $pos = $row['position'];
+    }
     ?>
 </head>
 
@@ -75,7 +84,7 @@
                             $result->execute();
                             for ($i = 0; $row = $result->fetch(); $i++) {
                             ?>
-                                <option value="<?php echo $id = $row['id']; ?>" <?php if ($id == 1) { ?> selected <?php } ?>> <?php echo $row['name']; ?> </option>
+                                <option value="<?php echo $id = $row['id']; ?>" <?php if ($id == 1) { ?> selected <?php } ?> <?php if ($pos == 'user') { if ($id == 2) { ?> selected <?php } if ($id != 2) { ?> disabled <?php } } ?> > <?php echo $row['name']; ?> </option>
                             <?php
                             }
                             ?>
@@ -113,7 +122,6 @@
 
                     <div class="form-group" style="margin-top: 50px;">
                         <input type="submit" id="btn" disabled class="form-input" value="Save">
-                        <input type="hidden" name="invo" value="exp<?php echo date("ymdhis"); ?>">
                         <input name="unit" type="hidden" value="1">
                         <input name="chq_no" type="hidden" value="">
                         <input name="chq_date" type="hidden" value="">

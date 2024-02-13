@@ -13,7 +13,7 @@ $unit = $_POST['unit'];
 
 if($unit == 1){
         
-    $invo = $_POST['invo'];
+    $invo = 'exp' . date("ymdhis");
     $type = $_POST['type'];
     $comment = $_POST['comment'];
     $amount = $_POST['pay_amount'];
