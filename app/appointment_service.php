@@ -40,8 +40,8 @@
             <span class="closer"></span>
             <div class="content">
                 <div class="cont-box ">
-                    <h5 class="top" id="top">Test1</h5>
-                    <h6 class="sub-top" id="sub-top">Test</h6>
+                    <h5 class="top" id="top"></h5>
+                    <h6 class="sub-top" id="sub-top"></h6>
                     <input type="hidden" id="p_id" value="">
                 </div>
                 <div class="cont-box">
