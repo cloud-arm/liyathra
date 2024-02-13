@@ -11,8 +11,6 @@
     include("../connect.php");
     date_default_timezone_set("Asia/Colombo");
 
-    $user = $_GET['id'];
-
     ?>
 </head>
 
@@ -46,7 +44,6 @@
 
                     <div class="form-group" style="margin-top: 50px;">
                         <input type="submit" id="btn" class="form-input" disabled value="Continue">
-                        <input type="hidden" name="emp" value="<?php echo $user; ?>">
                         <input type="hidden" name="type" value="cus_check">
                     </div>
                 </form>

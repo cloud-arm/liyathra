@@ -7,7 +7,6 @@ $date = date("Y-m-d");
 $time = date('H:i:s');
 
 $type = $_POST['type'];
-$user = $_POST['emp'];
 
 $invo = date("ymdhis");
 
@@ -25,7 +24,7 @@ if ($type == 'cus_check') {
 
     if ($cus_id > 0) {
 
-        header("location: appointment_add.php?emp=$user&cus=$cus_id&invo=$invo");
+        header("location: appointment_add.php?cus=$cus_id&invo=$invo");
     } else {
         $sql = "INSERT INTO customer (contact) VALUES (?)";
         $ql = $db->prepare($sql);
@@ -38,7 +37,7 @@ if ($type == 'cus_check') {
             $cus_id = $row['id'];
         }
 
-        header("location: appointment_customer_add.php?emp=$user&cus=$cus_id");
+        header("location: appointment_customer_add.php?cus=$cus_id");
     }
 } else
 
@@ -53,5 +52,5 @@ if ($type == 'cus_add') {
     $ql = $db->prepare($sql);
     $ql->execute(array($name, $email, $mobile, $id));
 
-    header("location: appointment_add.php?emp=$user&cus=$id&invo=$invo");
+    header("location: appointment_add.php?cus=$id&invo=$invo");
 }

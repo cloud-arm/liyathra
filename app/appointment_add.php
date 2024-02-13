@@ -11,7 +11,6 @@
     include("../connect.php");
     date_default_timezone_set("Asia/Colombo");
 
-    $user = $_GET['emp'];
     $cus_id = $_GET['cus'];
     $invo = $_GET['invo'];
 
@@ -282,7 +281,6 @@
 
                     <div class="form-group" style="margin-top: 50px;">
                         <input type="submit" id="btn" class="form-input" value="Continue">
-                        <input type="hidden" name="emp" value="<?php echo $user; ?>">
                         <input type="hidden" name="cus" value="<?php echo $cus_id; ?>">
                         <input type="hidden" name="invo" value="<?php echo $invo; ?>">
                     </div>
