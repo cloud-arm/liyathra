@@ -81,91 +81,92 @@
             </div>
         </nav>
     </header>
-
-    <div class="container-fluid mt-3" style="overflow-x: scroll;">
-        <div class="container" style="width: max-content;">
-            <table>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="small-box">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="content asn">
-                                            <i class="fa-solid fa-cart-shopping"></i>
+    <?php if ($pos == 'admin') { ?>
+        <div class="container-fluid mt-3" style="overflow-x: scroll;">
+            <div class="container" style="width: max-content;">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="small-box">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="content asn">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="content aud">
+                                                <h4>Sales</h4>
+                                                <p>
+                                                    Rs.<?php $date = date("Y-m-d");
+                                                        $result = $db->prepare("SELECT sum(amount)  FROM sales  WHERE action='active' AND date = '$date' ORDER BY transaction_id DESC");
+                                                        $result->bindParam(':userid', $date);
+                                                        $result->execute();
+                                                        for ($i = 0; $row = $result->fetch(); $i++) {
+                                                            echo number_format($row['sum(amount)'], 2);
+                                                        } ?>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-8">
-                                        <div class="content aud">
-                                            <h4>Sales</h4>
-                                            <p>
-                                                Rs.<?php $date = date("Y-m-d");
-                                                    $result = $db->prepare("SELECT sum(amount)  FROM sales  WHERE action='active' AND date = '$date' ORDER BY transaction_id DESC");
+                                </div>
+                            </td>
+                            <td>
+                                <div class="small-box">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="content asn">
+                                                <i class="fa-solid fa-chart-simple"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="content aud">
+                                                <h4>Expenses</h4>
+                                                <p>
+                                                    Rs.<?php
+                                                        $result = $db->prepare("SELECT sum(amount)  FROM expenses_records  WHERE date = '$date' ");
+                                                        $result->bindParam(':userid', $date);
+                                                        $result->execute();
+                                                        for ($i = 0; $row = $result->fetch(); $i++) {
+                                                            echo number_format($row['sum(amount)'], 2);
+                                                        } ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="small-box">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="content asn">
+                                                <i class="fa-solid fa-user-group"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="content aud">
+                                                <h4>Visitors</h4>
+                                                <p class="text-center">
+                                                    <?php $result = $db->prepare("SELECT count(id)  FROM job  WHERE date = '$date' ");
                                                     $result->bindParam(':userid', $date);
                                                     $result->execute();
                                                     for ($i = 0; $row = $result->fetch(); $i++) {
-                                                        echo number_format($row['sum(amount)'], 2);
+                                                        echo $row['count(id)'];
                                                     } ?>
-                                            </p>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="small-box">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="content asn">
-                                            <i class="fa-solid fa-chart-simple"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-8">
-                                        <div class="content aud">
-                                            <h4>Expenses</h4>
-                                            <p>
-                                                Rs.<?php
-                                                    $result = $db->prepare("SELECT sum(amount)  FROM expenses_records  WHERE date = '$date' ");
-                                                    $result->bindParam(':userid', $date);
-                                                    $result->execute();
-                                                    for ($i = 0; $row = $result->fetch(); $i++) {
-                                                        echo number_format($row['sum(amount)'], 2);
-                                                    } ?>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="small-box">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="content asn">
-                                            <i class="fa-solid fa-user-group"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-8">
-                                        <div class="content aud">
-                                            <h4>Visitors</h4>
-                                            <p class="text-center">
-                                                <?php $result = $db->prepare("SELECT count(id)  FROM job  WHERE date = '$date' ");
-                                                $result->bindParam(':userid', $date);
-                                                $result->execute();
-                                                for ($i = 0; $row = $result->fetch(); $i++) {
-                                                    echo $row['count(id)'];
-                                                } ?>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+    <?php } ?>
 
     <div class="float-btn">
         <span class="room-info active" id="float_btn">
