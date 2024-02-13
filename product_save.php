@@ -14,7 +14,7 @@ $type = $_POST['type'];
 $amount = $_POST['price'];
 
 $cost = 0;
-$brand = "";
+$brand = 0;
 $brand_name = '';
 $serve_type = 0;
 if ($type == 'Service') {
@@ -68,9 +68,9 @@ if ($id == 0) {
 } else {
 
 
-    // $sql = "UPDATE  product SET name = ?, job_type = ?, type_name = ?, sell = ?, type = ? WHERE product_id = ?";
-    // $ql = $db->prepare($sql);
-    // $ql->execute(array($name, $serve_type, $type_name, $amount, $type, $id));
+    $sql = "UPDATE  product SET name = ?, job_type = ?, type_name = ?, sell = ?, cost = ?, type = ?, brand = ?, brand_id =? WHERE product_id = ?";
+    $ql = $db->prepare($sql);
+    $ql->execute(array($name, $serve_type, $type_name, $amount, $cost, $type, $brand, $brand_name, $id));
 }
 
 
