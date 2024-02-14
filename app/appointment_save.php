@@ -33,7 +33,7 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     $user_name = $row['name'];
 }
 
-$order_no = str_replace('-', '', $app_date) . str_replace(':', '', $app_time);
+$order_no = str_replace('-', '', $app_date) . str_replace('.', '', $app_time);
 
 $sql = "INSERT INTO job (note,date,time,cus_id,cus_name,emp_id,emp_name,app_date,app_time,action,invoice_no,order_no,booking_user) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 $ql = $db->prepare($sql);
