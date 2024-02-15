@@ -54,21 +54,23 @@
 
                 <div class="w-100">
                     <table class="w-100 mb-2">
-                        <?php $total = 0;
-                        $result = $db->prepare($sql1);
-                        $result->bindParam(':id', $res);
-                        $result->execute();
-                        for ($i = 0; $row = $result->fetch(); $i++) { ?>
-                            <tr>
-                                <td><?php echo $row['product_id']; ?></td>
-                                <td><?php echo $row['name']; ?></td>
-                                <td><?php echo $row['sum(sales_list.qty)']; ?></td>
-                                <td><?php echo $row['sum(sales_list.cost)']; ?></td>
-                                <td><?php echo $row['sum(sales_list.amount)']  ?></td>
-                                <td><?php echo $row['sum(sales_list.amount)'] - $row['sum(sales_list.cost)']  ?></td>
-                                <?php $total += $row['sum(sales_list.amount)'] - $row['sum(sales_list.cost)']; ?>
-                            </tr>
-                        <?php } ?>
+                        <tbody>
+                            <?php $total = 0;
+                            $result = $db->prepare($sql1);
+                            $result->bindParam(':id', $res);
+                            $result->execute();
+                            for ($i = 0; $row = $result->fetch(); $i++) { ?>
+                                <tr>
+                                    <td><?php echo $row['product_id']; ?></td>
+                                    <td><?php echo $row['name']; ?></td>
+                                    <td><?php echo $row['sum(sales_list.qty)']; ?></td>
+                                    <td><?php echo $row['sum(sales_list.cost)']; ?></td>
+                                    <td><?php echo $row['sum(sales_list.amount)']  ?></td>
+                                    <td><?php echo $row['sum(sales_list.amount)'] - $row['sum(sales_list.cost)']  ?></td>
+                                    <?php $total += $row['sum(sales_list.amount)'] - $row['sum(sales_list.cost)']; ?>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
                     </table>
                 </div>
                 <h2 style="font-size: 40px;">Rs.<?php echo number_format($total, 2); ?></h2>
