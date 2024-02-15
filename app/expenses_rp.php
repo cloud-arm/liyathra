@@ -18,7 +18,6 @@
     $result->bindParam(':id', $res);
     $result->execute();
     for ($i = 0; $row = $result->fetch(); $i++) {
-        $user_id = $row['emp_id'];
         $pos = $row['position'];
     }
 

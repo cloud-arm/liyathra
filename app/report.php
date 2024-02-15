@@ -76,7 +76,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 d-none">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                 <div class="ajk_ady ">
                     <a href="sales_rp.php" style="text-decoration: none; color: rgb(var(--bg-theme))">
                         <div class="info-box" style="border: 2px solid rgb(var(--bg-theme));">
