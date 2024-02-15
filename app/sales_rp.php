@@ -54,6 +54,14 @@
 
                 <div class="w-100">
                     <table class="w-100 mb-2">
+                        <thead>
+                            <tr>
+                                <th>Qty</th>
+                                <th>Cost</th>
+                                <th>Sales</th>
+                                <th>Margin</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <?php $total = 0;
                             $result = $db->prepare($sql1);
@@ -61,8 +69,10 @@
                             $result->execute();
                             for ($i = 0; $row = $result->fetch(); $i++) { ?>
                                 <tr>
-                                    <td><?php echo $row['product_id']; ?></td>
-                                    <td><?php echo $row['name']; ?></td>
+                                    <th><?php echo $row['product_id']; ?></th>
+                                    <th colspan="3"><?php echo $row['name']; ?></th>
+                                </tr>
+                                <tr>
                                     <td><?php echo $row['sum(sales_list.qty)']; ?></td>
                                     <td><?php echo $row['sum(sales_list.cost)']; ?></td>
                                     <td><?php echo $row['sum(sales_list.amount)']  ?></td>
