@@ -26,11 +26,10 @@ if ($type == 'edit') {
 if ($type == 'active') {
 
     $time = date("H.i");
-    $date = date("Y-m-d");
 
-    $sql = "UPDATE job SET action = ?, start_time = ?, active_user = ?, active_date = ?  WHERE id = ? ";
+    $sql = "UPDATE job SET action = ?, start_time = ?, active_user = ?  WHERE id = ? ";
     $ql = $db->prepare($sql);
-    $ql->execute(array('active', $time, $user_id, $date, $id));
+    $ql->execute(array('active', $time, $user_id, $id));
 
     header("location: order.php?id=$id");
 }
