@@ -23,16 +23,35 @@
     }
 
     if ($pos == 'admin') {
-        $sql = "SELECT sum(amount) FROM payment WHERE  pay_type = 'cash' AND date ='$date' ";
+        $sql1 = "SELECT sum(amount) FROM payment WHERE  pay_type = 'cash' AND date ='$date' ";
+        $sql2 = "SELECT sum(sales_list.amount),sum(sales_list.cost) FROM  sales JOIN sales_list ON sales.invoice_number=sales_list.invoice_no WHERE  sales.action='active' AND  sales.date  = '$date' GROUP BY sales_list.product_id ";
+        $sql3 = "SELECT sum(amount) FROM expenses_records WHERE  date ='$date' ";
     } else {
-        $sql = "SELECT sum(amount) FROM payment WHERE user_id = '$user_id' AND pay_type = 'cash' AND date = '$date' ";
+        $sql1 = "SELECT sum(amount) FROM payment WHERE user_id = '$user_id' AND pay_type = 'cash' AND date = '$date' ";
+        $sql2 = "SELECT sum(sales_list.amount),sum(sales_list.cost) FROM  sales JOIN sales_list ON sales.invoice_number=sales_list.invoice_no WHERE  sales.action='active' AND  sales.date  = '$date' AND  sales.user_id  = '$user_id' GROUP BY sales_list.product_id ";
+        $sql3 = "SELECT sum(amount) FROM expenses_records WHERE user = '$user_id' AND  date = '$date' ";
     }
 
-    $result = $db->prepare($sql);
+    $result = $db->prepare($sql1);
     $result->bindParam(':id', $user_id);
     $result->execute();
     for ($i = 0; $row = $result->fetch(); $i++) {
-        $cash_total = $row['sum(amount)'];
+        $collection = $row['sum(amount)'];
+    }
+
+    $sales = 0;
+    $result = $db->prepare($sql2);
+    $result->bindParam(':id', $user_id);
+    $result->execute();
+    for ($i = 0; $row = $result->fetch(); $i++) {
+        $sales += $row['sum(sales_list.amount)'] - $row['sum(sales_list.cost)'];
+    }
+
+    $result = $db->prepare($sql3);
+    $result->bindParam(':id', $user_id);
+    $result->execute();
+    for ($i = 0; $row = $result->fetch(); $i++) {
+        $expenses = $row['sum(amount)'];
     }
 
     ?>
@@ -57,7 +76,7 @@
                         <div class="info-box" style="border: 2px solid rgb(var(--bg-theme));">
                             <div class="row w-100">
                                 <div class="col-4 p-0 inb_nu">
-                                    <span class="num_inp">Rs.<?php echo $cash_total; ?></span>
+                                    <span class="num_inp">Rs.<?php echo $collection; ?></span>
                                 </div>
                                 <div class="col-8">
                                     <div style="margin: 10px;" class="sparkline" data-type="bar" data-width="60%" data-height="40px" data-bar-Width="5" data-bar-Spacing="9" data-bar-Color="#B5B5B8">
@@ -82,16 +101,16 @@
                         <div class="info-box" style="border: 2px solid rgb(var(--bg-theme));">
                             <div class="row w-100">
                                 <div class="col-4 p-0 inb_nu">
-                                    <span class="num_inp">Rs.<?php echo $cash_total; ?></span>
+                                    <span class="num_inp">Rs.<?php echo $sales . '.00'; ?></span>
                                 </div>
                                 <div class="col-8">
                                     <div style="margin: 10px;" class="sparkline" data-type="bar" data-width="60%" data-height="40px" data-bar-Width="5" data-bar-Spacing="9" data-bar-Color="#B5B5B8">
                                         <?php
-                                        $result1 = $db->prepare("SELECT  sum(amount) FROM sales GROUP BY date ORDER BY date DESC LIMIT 20 ");
+                                        $result1 = $db->prepare("SELECT sum(sales_list.amount) FROM  sales JOIN sales_list ON sales.invoice_number=sales_list.invoice_no WHERE  sales.action='active'  GROUP BY sales.date ORDER BY sales.date DESC LIMIT 20 ");
                                         $result1->bindParam(':userid', $date);
                                         $result1->execute();
                                         for ($i = 0; $row1 = $result1->fetch(); $i++) {
-                                            echo $row1['sum(amount)'] . ",";
+                                            echo $row1['sum(sales_list.amount)'] . ",";
                                         } ?>
                                     </div>
                                 </div>
@@ -107,7 +126,7 @@
                         <div class="info-box" style="border: 2px solid rgb(var(--bg-theme));">
                             <div class="row w-100">
                                 <div class="col-4 p-0 inb_nu">
-                                    <span class="num_inp">Rs.<?php echo $cash_total; ?></span>
+                                    <span class="num_inp">Rs.<?php echo $expenses; ?></span>
                                 </div>
                                 <div class="col-8">
                                     <div style="margin: 10px;" class="sparkline" data-type="bar" data-width="60%" data-height="40px" data-bar-Width="5" data-bar-Spacing="9" data-bar-Color="#B5B5B8">
