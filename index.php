@@ -235,7 +235,7 @@ include("connect.php");
                                             include("connect.php");
 
                                             $tot_bill = 0;
-                                            $result = $db->prepare("SELECT * FROM job JOIN customer ON customer.id=job.cus_id WHERE job.action!='close'  ORDER by job.id DESC  ");
+                                            $result = $db->prepare("SELECT *,job.id AS sn FROM job JOIN customer ON customer.id=job.cus_id WHERE job.action!='close' AND job.action!='cancel' ORDER by job.id DESC  ");
                                             $result->bindParam(':userid', $date);
                                             $result->execute();
                                             for ($i = 0; $row = $result->fetch(); $i++) {
@@ -262,7 +262,7 @@ include("connect.php");
                                                 }
                                             ?>
                                                 <tr class="<?php if ($type == 'close') { ?> alert alert-general <? } ?> record">
-                                                    <td><?php echo $row['id']; ?></td>
+                                                    <td><?php echo $row['sn']; ?></td>
                                                     <td><?php echo $row['app_date']; ?></td>
                                                     <td><?php echo $type_tag; ?></td>
                                                     <td><?php echo $row['app_time']; ?></td>
@@ -284,7 +284,7 @@ include("connect.php");
                                             include("connect.php");
                                             $date = date("Y-m-d");
                                             $tot_bill = 0;
-                                            $result = $db->prepare("SELECT * FROM job JOIN customer ON customer.id=job.cus_id WHERE job.action='close' AND app_date = '$date' ORDER by job.id DESC  ");
+                                            $result = $db->prepare("SELECT *,job.id AS sn FROM job JOIN customer ON customer.id=job.cus_id WHERE job.action='close' AND app_date = '$date' ORDER by job.id DESC  ");
                                             $result->bindParam(':userid', $date);
                                             $result->execute();
                                             for ($i = 0; $row = $result->fetch(); $i++) {
@@ -303,7 +303,7 @@ include("connect.php");
                                                 }
                                             ?>
                                                 <tr class="<?php if ($type == 'close') { ?> alert alert-general <? } ?> record">
-                                                    <td><?php echo $row['id']; ?></td>
+                                                    <td><?php echo $row['sn']; ?></td>
                                                     <td><?php echo $row['app_date']; ?></td>
                                                     <td><?php echo $type_tag; ?></td>
                                                     <td><?php echo $row['app_time']; ?></td>
