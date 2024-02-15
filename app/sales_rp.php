@@ -62,13 +62,13 @@
                                 <th>Margin</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="border-top">
                             <?php $total = 0;
                             $result = $db->prepare($sql1);
                             $result->bindParam(':id', $res);
                             $result->execute();
                             for ($i = 0; $row = $result->fetch(); $i++) { ?>
-                                <tr>
+                                <tr class="border-top">
                                     <th><?php echo $row['product_id']; ?></th>
                                     <th colspan="3"><?php echo $row['name']; ?></th>
                                 </tr>
