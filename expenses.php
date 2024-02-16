@@ -236,16 +236,16 @@ date_default_timezone_set("Asia/Colombo");
 
               <div class="col-md-3 util_sec" style="display: block;">
                 <div class="form-group">
-                  <label>Utility Bill</label>
-                  <select class="form-control select2" name="util_id" style="width: 100%;" tabindex="8">
-                    <option value="0"></option>
+                  <label>Utility Bill</label> <span id="blc" class="badge bg-red"></span>
+                  <select class="form-control select2" name="util_id" style="width: 100%;" tabindex="8" onchange="select_bill(this.options[this.selectedIndex].getAttribute('balance'))">
+                    <option value="0" balance=""></option>
                     <?php
                     $result = $db->prepare("SELECT * FROM utility_bill  ");
                     $result->bindParam(':userid', $ttr);
                     $result->execute();
                     for ($i = 0; $row = $result->fetch(); $i++) {
                     ?>
-                      <option value="<?php echo $row['id']; ?>"> <?php echo $row['name']; ?> </option>
+                      <option value="<?php echo $row['id']; ?>" balance="<?php echo $row['credit']; ?>"> <?php echo $row['name']; ?> </option>
                     <?php
                     }
                     ?>
@@ -326,9 +326,11 @@ date_default_timezone_set("Asia/Colombo");
             <div class="col-md-2">
               <div class="form-group">
                 <select class="form-control " name="month" style="width: 100%;" tabindex="1">
-                <?php for ($x = 1; $x <= 12; $x++) { 
-                    $mo = sprintf("%02d", $x);?>
-                    <option <?php if($mo == $_GET['month']){ echo 'selected'; } ?> > <?php echo $mo; ?> </option>
+                  <?php for ($x = 1; $x <= 12; $x++) {
+                    $mo = sprintf("%02d", $x); ?>
+                    <option <?php if ($mo == $_GET['month']) {
+                              echo 'selected';
+                            } ?>> <?php echo $mo; ?> </option>
                   <?php  } ?>
                 </select>
               </div>
@@ -423,6 +425,15 @@ date_default_timezone_set("Asia/Colombo");
   <?php include("script.php"); ?>
 
   <script type="text/javascript">
+    function select_bill(val) {
+      $('#blc').text(val);
+      if (val == '') {
+        $('#btn').attr('disabled', '');
+      } else {
+        $('#btn').removeAttr('disabled');
+      }
+    }
+
     function model_btn(i) {
       $('#model_btn_' + i).css('display', 'none');
       $('.model_add_' + i).css('display', 'block');
