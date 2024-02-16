@@ -175,7 +175,7 @@ include("connect.php");
                             <!-- small box -->
                             <div class="small-box bg-red">
                                 <div class="inner">
-                                    <h3><?php $result = $db->prepare("SELECT count(id) FROM job WHERE  date='$date' ORDER by id DESC ");
+                                    <h3><?php $result = $db->prepare("SELECT count(id)  FROM job  WHERE app_date = '$date' AND (action = 'active' OR action = 'close')  ");
                                         $result->bindParam(':userid', $date);
                                         $result->execute();
                                         for ($i = 0; $row = $result->fetch(); $i++) {
