@@ -298,32 +298,32 @@
           </li>
 
           <li class="treeview">
-                <a href="#"><i class="fa fa-pie-chart"></i><span>Accounting</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li><a href="acc_transfer.php"><i class="fa fa-circle-o text-yellow"></i> Account Transfer</a></li>
-                    <li><a href="acc_bank_transfer.php"><i class="fa fa-circle-o text-yellow"></i> Bank Transfer</a>
-                    </li>
-                    <!-- <li><a href="bank_loan.php"><i class="fa fa-circle-o text-yellow"></i> Bank Loan</a>
+            <a href="#"><i class="fa fa-pie-chart"></i><span>Accounting</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="acc_transfer.php"><i class="fa fa-circle-o text-yellow"></i> Account Transfer</a></li>
+              <li><a href="acc_bank_transfer.php"><i class="fa fa-circle-o text-yellow"></i> Bank Transfer</a>
+              </li>
+              <!-- <li><a href="bank_loan.php"><i class="fa fa-circle-o text-yellow"></i> Bank Loan</a>
                     </li> -->
-                    <li><a href="acc_chq_realizing.php"><i class="fa fa-circle-o text-yellow"></i> Chq Realizing</a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-line-chart"></i>
-                            <span>Report</span>
-                            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="acc_regeneration.php?dates=<?php echo date("Y") . '/' . date("m") . '/' . date("d"); ?>-<?php echo date("Y") . '/' . date("m") . '/' . date("d"); ?>&account=1"><i class="fa fa-circle-o text-aqua"></i> Transfer Recode</a></li>
-                            <li><a href="acc_bank_regeneration.php?dates=<?php echo date("Y") . '/' . date("m") . '/' . date("d"); ?>-<?php echo date("Y") . '/' . date("m") . '/' . date("d"); ?>&bank=1"><i class="fa fa-circle-o text-aqua"></i> Bank Reconciliation</a></li>
-                        </ul>
-                    </li>
+              <li><a href="acc_chq_realizing.php"><i class="fa fa-circle-o text-yellow"></i> Chq Realizing</a>
+              </li>
+              <li class="treeview">
+                <a href="#">
+                  <i class="fa fa-line-chart"></i>
+                  <span>Report</span>
+                  <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a href="acc_regeneration.php?dates=<?php echo date("Y") . '/' . date("m") . '/' . date("d"); ?>-<?php echo date("Y") . '/' . date("m") . '/' . date("d"); ?>&account=1"><i class="fa fa-circle-o text-aqua"></i> Transfer Recode</a></li>
+                  <li><a href="acc_bank_regeneration.php?dates=<?php echo date("Y") . '/' . date("m") . '/' . date("d"); ?>-<?php echo date("Y") . '/' . date("m") . '/' . date("d"); ?>&bank=1"><i class="fa fa-circle-o text-aqua"></i> Bank Reconciliation</a></li>
                 </ul>
-            </li>
+              </li>
+            </ul>
+          </li>
 
           <li class="header">CLOUD ARM SERVICE</li>
 
