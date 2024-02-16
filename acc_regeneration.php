@@ -130,7 +130,7 @@ include("connect.php");
 
                         ?>
 
-                        <div class="box-body d-block" style="overflow-x: auto;">
+                        <div class="box-body d-block">
                             <table id="example2" class="table table-bordered table-hover" style="border-radius: 0;">
                                 <thead>
                                     <tr>
