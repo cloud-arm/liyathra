@@ -36,7 +36,6 @@
                                                                                                                                                                                                     } else { ?>order.php?id=<?php echo $job;
                                                                                                                                                                                                                         } ?>"><i class="fa-solid fa-chevron-left me-2"></i> Back</a>
                 <h4 class="fs-4 m-0 text-center w-100">Invoice</h4>
-                <a href="bill_print.php?id=<?php echo $_GET['invo'] ?>"><button class="btn btn-info">Print</button></a>
 
             </div>
         </div>
