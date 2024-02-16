@@ -81,7 +81,7 @@
                                 <div class="col-8">
                                     <div style="margin: 10px;" class="sparkline" data-type="bar" data-width="60%" data-height="40px" data-bar-Width="5" data-bar-Spacing="9" data-bar-Color="#B5B5B8">
                                         <?php
-                                        $result1 = $db->prepare("SELECT  sum(amount) FROM sales GROUP BY date ORDER BY date DESC LIMIT 20 ");
+                                        $result1 = $db->prepare("SELECT  sum(amount) FROM payment WHERE  pay_type = 'cash' GROUP BY date ORDER BY date DESC LIMIT 20 ");
                                         $result1->bindParam(':userid', $date);
                                         $result1->execute();
                                         for ($i = 0; $row1 = $result1->fetch(); $i++) {
