@@ -5,7 +5,7 @@ $text='Hi *beautiful*, \n Your appointment was booked .Liyathra salon will be de
 //whatsApp('94779252594',$text,'LIYATHRA_BOOKING.png');
 function whatsApp($number , $text, $img) {
     $response='Invalid Host - '.$_SERVER['SERVER_NAME'];
-    if($_SERVER['SERVER_NAME']=='localhost'){
+    if($_SERVER['SERVER_NAME']=='liyathra.colorbiz.org'){
    
 
         $curl = curl_init();
