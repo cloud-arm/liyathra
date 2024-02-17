@@ -140,13 +140,18 @@
                         for ($i = 0; $r = $res->fetch(); $i++) {
                             $img = $r['img'];
                         }
+                        if ($img == '') {
+                            $path = 'img/rice.png';
+                        } else {
+                            $path = 'product_img/' . $img;
+                        }
                     ?>
                         <div class="col-12 col-md-6 col-lg-4 record ajk_sdy">
                             <div class="info-box" id="info-<?php echo $row['id']; ?>">
                                 <div class="row w-100">
                                     <div class="col-3">
                                         <div class="inb_img-box">
-                                            <img src="img/chicken.png" alt="">
+                                            <img src="<?php echo $path; ?>" alt="">
                                         </div>
                                     </div>
                                     <div class="col-9 as_jdk">
