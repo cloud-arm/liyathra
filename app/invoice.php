@@ -27,6 +27,7 @@
     $result->execute();
     for ($i = 0; $row = $result->fetch(); $i++) {
         $total = $row['sum(amount)'];
+        $bill_total = $row['sum(amount)'];
     }
 
     $sql = "SELECT * FROM sales WHERE invoice_number='$invo'";
@@ -90,6 +91,17 @@
         </div>
 
     <?php } ?>
+<?php $pay_total=0;
+$result = $db->prepare('SELECT sum(amount) FROM payment WHERE  invoice_no=:id ');
+$result->bindParam(':id', $invo);
+$result->execute();
+for($i=0; $row = $result->fetch(); $i++){ $pay_total=$row['sum(amount)']; }
+if($bill_total<=$pay_total){
+?>
+<div class="container-fluid my-4 flex">
+        <a href="index.php" class="cate-info active" style="width: 90%;justify-content: center;font-size: 25px; color: rgb(var(--bg-white)); font-weight: 600;">Home</a>
+    </div>
+<?php }else{ ?>
 
     <div class="container-fluid down-up" id="down-up" style="transform: translateY(0px);">
         <form action="save_bill.php" method="POST" class="w-100 d-flex justify-content-center">
@@ -122,7 +134,7 @@
         </form>
         <div id="container" onclick="containerDown()"></div>
     </div>
-
+<?php } ?>
     <div class="container-fluid mb-3">
         <div class="box">
             <div class="box-body">
