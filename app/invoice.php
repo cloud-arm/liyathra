@@ -76,7 +76,7 @@
                         for ($i = 0; $row = $result->fetch(); $i++) { ?>
                             <tr>
                                 <td><?php echo $i + 1; ?></td>
-                                <td><?php echo $row['pay_type']; ?></td>
+                                <th><?php echo $row['pay_type']; ?></th>
                                 <td><?php echo $row['amount']; ?></td>
                                 <td><?php echo $row['pay_amount'];
                                     $tot += $row['pay_amount']; ?></td>
