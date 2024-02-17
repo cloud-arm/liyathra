@@ -56,6 +56,41 @@
         </div>
     </div>
 
+
+    <?php if (isset($_GET['end'])) { ?>
+
+        <div class="container my-3">
+            <div class="box room-container">
+                <div class="box-body room " style="padding: 30px 10px;">
+                    <div class="logo flex">
+                        <h1>Payment</h1>
+                    </div>
+
+                    <p>All payment type</p>
+
+                    <table class="w-100 mb-2">
+                        <?php $tot = 0;
+                        $result = $db->prepare("SELECT * FROM payment WHERE invoice_no = :id ");
+                        $result->bindParam(':id', $invo);
+                        $result->execute();
+                        for ($i = 0; $row = $result->fetch(); $i++) { ?>
+                            <tr>
+                                <td><?php echo $i + 1; ?></td>
+                                <td><?php echo $row['pay_type']; ?></td>
+                                <td><?php echo $row['amount']; ?></td>
+                                <td><?php echo $row['pay_amount'];
+                                    $tot += $row['pay_amount']; ?></td>
+                            </tr>
+                        <?php } ?>
+                    </table>
+                    <h2 style="font-size: 40px;">Rs.<?php echo number_format($tot, 2); ?></h2>
+
+                </div>
+            </div>
+        </div>
+
+    <?php } ?>
+
     <div class="container-fluid down-up" id="down-up" style="transform: translateY(0px);">
         <form action="save_bill.php" method="POST" class="w-100 d-flex justify-content-center">
             <div class="up-content">

@@ -312,7 +312,7 @@ if ($pay_amount > 0) {
 
 if ($sales_amount > 0) {
 
-    header("location: invoice.php?invo=$invoice");
+    header("location: invoice.php?invo=$invoice&end");
 } else {
 
     $now = date("H.i");
