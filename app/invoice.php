@@ -132,8 +132,14 @@
                     $result = $db->prepare($sql);
                     $result->bindParam(':userid', $date);
                     $result->execute();
-
                     for ($i = 0; $row = $result->fetch(); $i++) {
+                        $pid = $row['product_id'];
+                        $res = $db->prepare("SELECT * FROM product WHERE product_id=:id ");
+                        $res->bindParam(':id', $pid);
+                        $res->execute();
+                        for ($i = 0; $r = $res->fetch(); $i++) {
+                            $img = $r['img'];
+                        }
                     ?>
                         <div class="col-12 col-md-6 col-lg-4 record ajk_sdy">
                             <div class="info-box" id="info-<?php echo $row['id']; ?>">
