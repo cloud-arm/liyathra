@@ -45,7 +45,7 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     $cus_id = $row['cus_id'];
 }
 
-
+// error with line 48 to 141 
 $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invoice' ");
 $result->bindParam(':userid', $res);
 $result->execute();
@@ -152,7 +152,6 @@ for ($i = 0; $row = $result->fetch(); $i++) {
 
 
 $discount = 0;
-$amount = $amount - $discount;
 
 $balance = $amount - $pay_total;
 
@@ -162,6 +161,7 @@ $sales_amount = $balance;
 
 $payment = 0;
 $sales_id = 0;
+$total_payment=0;
 $result = $db->prepare('SELECT * FROM sales WHERE  invoice_number = :id');
 $result->bindParam(':id', $invoice);
 $result->execute();
@@ -171,6 +171,14 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     $sales_amount = $row['balance'];
     $sales_amount = $sales_amount - $pay_total;
 }
+
+$result = $db->prepare('SELECT sum(amount) FROM payment WHERE  invoice_no=:id ');
+$result->bindParam(':id', $res);
+$result->execute();
+for($i=0; $row = $result->fetch(); $i++){ $total_payment=$row['sum(amount)']; }
+
+//+++++++++++ overpayment checking +++++++++++++//
+if($total_payment < $amount){
 
 
 $payment = $payment + $pay_total;
@@ -309,6 +317,7 @@ if ($pay_amount > 0) {
         $ql = $db->prepare($sql);
         $ql->execute(array('invoice_payment', 'Credit', $invoice, $pay_amount, 0, $bank, 'Bank Transfer', $bank_name, $cr_blc, 'Bank Invoice', 'Bank Transfer', $p, 0, $date, $time, $user_id, $user_name));
     }
+}
 }
 
 if ($sales_amount > 0) {
