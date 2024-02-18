@@ -140,12 +140,13 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     }
 }
 
-$result = $db->prepare("SELECT sum(amount),sum(profit) FROM sales_list WHERE invoice_no = '$invoice' ");
+$result = $db->prepare("SELECT sum(amount),sum(profit),sum(cost) FROM sales_list WHERE invoice_no = '$invoice' ");
 $result->bindParam(':userid', $res);
 $result->execute();
 for ($i = 0; $row = $result->fetch(); $i++) {
     $amount = $row['sum(amount)'];
     $profit = $row['sum(profit)'];
+    $cost = $row['sum(cost)'];
 }
 
 
@@ -176,9 +177,9 @@ $payment = $payment + $pay_total;
 
 if ($sales_id == 0) {
     // query
-    $sql = "INSERT INTO sales (invoice_number,amount,balance,profit,pay_type,pay_amount,date,customer_id,customer_name,action,discount,user_id,cashier,job_no) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO sales (invoice_number,amount,balance,profit,pay_type,pay_amount,date,customer_id,customer_name,action,discount,user_id,cashier,job_no,cost) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     $ql = $db->prepare($sql);
-    $ql->execute(array($invoice, $amount, $balance, $profit, $pay_type, $pay_total, $date, $cus_id, $cus_name, 'active', $discount, $user_id, $user_name, $job));
+    $ql->execute(array($invoice, $amount, $balance, $profit, $pay_type, $pay_total, $date, $cus_id, $cus_name, 'active', $discount, $user_id, $user_name, $job,$cost));
 } else {
 
     $sql = 'UPDATE  sales SET action=?, pay_amount=pay_amount+?, balance=amount-?, pay_type=?, user_id=?  WHERE  invoice_number=? ';
