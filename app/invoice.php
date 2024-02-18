@@ -91,50 +91,50 @@
         </div>
 
     <?php } ?>
-<?php $pay_total=0;
-$result = $db->prepare('SELECT sum(amount) FROM payment WHERE  invoice_no=:id ');
-$result->bindParam(':id', $invo);
-$result->execute();
-for($i=0; $row = $result->fetch(); $i++){ $pay_total=$row['sum(amount)']; }
-if($bill_total<=$pay_total){
-?>
-<div class="container-fluid my-4 flex">
-        <a href="index.php" class="cate-info active" style="width: 90%;justify-content: center;font-size: 25px; color: rgb(var(--bg-white)); font-weight: 600;">Home</a>
-    </div>
-<?php }else{ ?>
+    <?php $pay_total = 0;
+    $result = $db->prepare('SELECT sum(amount) FROM payment WHERE  invoice_no=:id ');
+    $result->bindParam(':id', $invo);
+    $result->execute();
+    for ($i = 0; $row = $result->fetch(); $i++) {
+        $pay_total = $row['sum(amount)'];
+    }
+    if ($bill_total <= $pay_total) {
+    } else { ?>
 
-    <div class="container-fluid down-up" id="down-up" style="transform: translateY(0px);">
-        <form action="save_bill.php" method="POST" class="w-100 d-flex justify-content-center">
-            <div class="up-content">
-                <span class="closer" onclick="containerUp()"></span>
-                <div class="content">
-                    <div class="tot-box">
-                        <span>Total</span>
-                        <span class="tot">LKR. <?php echo $total ?></span>
-                    </div>
-                    <div class="type-box">
-                        <span class="btn click_fun" id="card"><img src="img/visa-card.png" alt=""></span>
-                        <span class="btn click_fun active" id="cash"><img src="img/cash.png" alt=""></span>
-                        <span class="btn click_fun" id="ruPay"><img src="img/LANKAQR_LOGO.png" alt=""></span>
-                        <span class="btn click_fun" id="frimi"><img src="img/frimi.png" alt=""></span>
-                    </div>
-                    <div class="pay-box">
-                        <label class="paid">Pay Amount</label>
-                        <div class="paid-amount">
-                            <label class="lbl">LKR.</label>
-                            <input type="number" class="form-control form-input bg-none" name="amount" id="amount" value="0" onkeyup="checking()">
+        <div class="container-fluid down-up" id="down-up" style="transform: translateY(0px);">
+            <form action="save_bill.php" method="POST" class="w-100 d-flex justify-content-center">
+                <div class="up-content">
+                    <span class="closer" onclick="containerUp()"></span>
+                    <div class="content">
+                        <div class="tot-box">
+                            <span>Total</span>
+                            <span class="tot">LKR. <?php echo $total ?></span>
                         </div>
-                    </div>
-                    <input type="hidden" name="id" value="<?php echo $invo ?>">
-                    <input type="hidden" name="p_type" id="pay_type" value="cash">
+                        <div class="type-box">
+                            <span class="btn click_fun" id="card"><img src="img/visa-card.png" alt=""></span>
+                            <span class="btn click_fun active" id="cash"><img src="img/cash.png" alt=""></span>
+                            <span class="btn click_fun" id="ruPay"><img src="img/LANKAQR_LOGO.png" alt=""></span>
+                            <span class="btn click_fun" id="frimi"><img src="img/frimi.png" alt=""></span>
+                        </div>
+                        <div class="pay-box">
+                            <label class="paid">Pay Amount</label>
+                            <div class="paid-amount">
+                                <label class="lbl">LKR.</label>
+                                <input type="number" class="form-control form-input bg-none" name="amount" id="amount" value="0" onkeyup="checking()">
+                            </div>
+                        </div>
+                        <input type="hidden" name="id" value="<?php echo $invo ?>">
+                        <input type="hidden" name="p_type" id="pay_type" value="cash">
 
-                    <input class="btn   " id="finish" type="submit" value="Finish">
+                        <input class="btn   " id="finish" type="submit" value="Finish">
+                    </div>
                 </div>
-            </div>
-        </form>
-        <div id="container" onclick="containerDown()"></div>
-    </div>
-<?php } ?>
+            </form>
+            <div id="container" onclick="containerDown()"></div>
+        </div>
+
+    <?php } ?>
+
     <div class="container-fluid mb-3">
         <div class="box">
             <div class="box-body">
@@ -194,6 +194,14 @@ if($bill_total<=$pay_total){
             </div>
         </div>
     </div>
+
+    <?php
+    if ($bill_total <= $pay_total) {
+    ?>
+        <div class="container-fluid my-4 flex">
+            <a href="index.php" class="cate-info active" style="width: 90%;justify-content: center;font-size: 25px; color: rgb(var(--bg-white)); font-weight: 600;">Home</a>
+        </div>
+    <?php }  ?>
 
     <!-- Bootstrap 5.3.2-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>

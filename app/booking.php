@@ -30,7 +30,7 @@
         <div class="box">
             <div class="box-header">
                 <h4 class="fs-4 m-0">Explore Appointments</h4>
-                <a class="room-info active" href="customer_checking.php?id=<?php echo $id; ?>">
+                <a class="room-info active" href="appointment_customer_checking.php ">
                     <div class="room-box first">
                         <span><i class="fa-solid fa-plus"></i></span>
                     </div>
