@@ -114,6 +114,9 @@
                                         <div class="sjk_sk">Expenses: <small>Rs.</small> <?php echo number_format($expenses, 2); ?> </div>
                                         <div class="sjk_sk sm">Balance: <small>Rs.</small> <?php echo number_format($collection - $expenses, 2); ?> </div>
                                     </div>
+                                    <a href="collection_user_rp.php?id=<?php echo $user_id; ?>" class="btn" style="background: rgba(var(--bg-dark), 0.1);">
+                                        <span style="color: rgb(var(--bg-theme));font-weight: 600;">View More</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
