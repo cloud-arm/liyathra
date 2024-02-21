@@ -149,6 +149,36 @@ if ($sales_id == 0) {
             $ql = $db->prepare($sql);
             $ql->execute(array($qty, $cod));
         }
+
+        $emp =  $row['emp'];
+        $sup_emp =  $row['sup_emp'];
+
+        $re = $db->prepare("SELECT * FROM product WHERE product_id = :id ");
+        $re->bindParam(':id', $p_id);
+        $re->execute();
+        for ($i = 0; $r = $re->fetch(); $i++) {
+
+            $main_com = $r['emp_commies'];
+            $sup_com = $r['sup_emp_commies'];
+
+            if ($emp > 0) {
+
+                $main_commies = $price * $main_com / 100;
+
+                $sql = "UPDATE sales_list SET emp_commies=? WHERE id=?";
+                $ql = $db->prepare($sql);
+                $ql->execute(array($main_commies, $sl_id));
+            }
+
+            if ($sup_emp > 0) {
+
+                $sup_commies = $price * $sup_com / 100;
+
+                $sql = "UPDATE sales_list SET sup_emp_commies=? WHERE id=?";
+                $ql = $db->prepare($sql);
+                $ql->execute(array($sup_commies, $sl_id));
+            }
+        }
     }
 }
 

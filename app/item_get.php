@@ -129,7 +129,7 @@ if ($unit == 3) {
     $invo = $_GET['invo'];
 
 
-    $sql = "SELECT * FROM sales_list JOIN product ON product.product_id = sales_list.product_id WHERE  sales_list.invoice_no = '$invo' AND view = 0 ";
+    $sql = "SELECT * FROM sales_list JOIN product ON product.product_id = sales_list.product_id WHERE  sales_list.invoice_no = '$invo' AND view = 1 ";
 
     $result = $db->prepare($sql);
     $result->bindParam(':userid', $date);
