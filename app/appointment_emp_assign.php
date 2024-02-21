@@ -12,6 +12,9 @@ $job = $_POST['job'];
 $emp = $_POST['emp'];
 $sup_emp = $_POST['sup_emp'];
 
+$emp_name = '';
+$sup_emp_name = '';
+
 $result = $db->prepare("SELECT * FROM sales_list WHERE id = '$id' ");
 $result->bindParam(':id', $res);
 $result->execute();

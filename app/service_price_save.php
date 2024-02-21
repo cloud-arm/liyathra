@@ -7,7 +7,7 @@ date_default_timezone_set("Asia/Colombo");
 $id = $_GET['id'];
 $price = $_GET['price'];
 $pid = $_GET['pid'];
-$in_id = $_GET['in_id'];
+$invo = $_GET['invo'];
 
 if ($id == 0) {
 
@@ -30,9 +30,9 @@ if ($id == 0) {
     $sup_emp = 0;
 
     // query
-    $sql = "INSERT INTO sales_list (invoice_no,product_id,qty,amount,name,price,profit,code,dic,date,emp,sup_emp,type) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO sales_list (invoice_no,product_id,qty,amount,name,price,profit,code,dic,date,emp,sup_emp,type,view) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     $q = $db->prepare($sql);
-    $q->execute(array($in_id, $pro_id, $qty, $price, $name, $price, $profit, $code, $discount, $date, $emp, $sup_emp, 'Service'));
+    $q->execute(array($invo, $pro_id, $qty, $price, $name, $price, $profit, $code, $discount, $date, $emp, $sup_emp, 'Service', 1));
 } else {
 
     $sql = 'UPDATE sales_list SET amount =?, price =? WHERE id = ? ';
