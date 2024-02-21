@@ -66,7 +66,7 @@ AFTER `emp_commies`;
 --
 -- Update product --
 ALTER TABLE `product`
-ADD `emp_commies` DECIMAL(10, 2) NOT NULL
+ADD `emp_commies` INT(11) NOT NULL
 AFTER `brand`,
-    ADD `sup_emp_commies` DECIMAL(10, 2) NOT NULL
+    ADD `sup_emp_commies` INT(11) NOT NULL
 AFTER `emp_commies`;

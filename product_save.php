@@ -17,19 +17,28 @@ $cost = 0;
 $brand = 0;
 $brand_name = '';
 $serve_type = 0;
+$main_commies = 0;
+$sup_commies = 0;
+
 if ($type == 'Service') {
     $serve_type = $_POST['serve_type'];
+    $main_commies = $_POST['main_commies'];
+    $sup_commies = $_POST['sup_commies'];
 }
 
 if ($type == 'Product') {
     $cost = $_POST['cost'];
     $brand = $_POST['brand'];
+
     $result = $db->prepare('SELECT * FROM brand WHERE  id = :id');
     $result->bindParam(':id', $brand);
     $result->execute();
     for ($i = 0; $row = $result->fetch(); $i++) {
         $brand_name = $row['name'];
     }
+
+    $main_commies = $_POST['main_commies'];
+    $sup_commies = $_POST['sup_commies'];
 }
 
 $type_name = '';
@@ -42,9 +51,9 @@ for ($i = 0; $row = $result->fetch(); $i++) {
 
 if ($id == 0) {
 
-    $sql = "INSERT INTO product (name,job_type,type_name,sell,cost,type,time,brand,brand_id) VALUES (?,?,?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO product (name,job_type,type_name,sell,cost,type,time,brand,brand_id,emp_commies,sup_emp_commies) VALUES (?,??,?,?,?,?,?,?,?,?)";
     $q = $db->prepare($sql);
-    $q->execute(array($name, $serve_type, $type_name, $amount, $cost, $type, $date, $brand_name, $brand));
+    $q->execute(array($name, $serve_type, $type_name, $amount, $cost, $type, $date, $brand_name, $brand, $main_commies, $sup_commies));
 
 
     $result = $db->prepare('SELECT * FROM product ORDER BY product_id DESC LIMIT 1');
@@ -68,9 +77,9 @@ if ($id == 0) {
 } else {
 
 
-    $sql = "UPDATE  product SET name = ?, job_type = ?, type_name = ?, sell = ?, cost = ?, type = ?, brand = ?, brand_id =? WHERE product_id = ?";
+    $sql = "UPDATE  product SET name = ?, job_type = ?, type_name = ?, sell = ?, cost = ?, type = ?, brand = ?, brand_id =?, emp_commies = ?, sup_emp_commies =? WHERE product_id = ?";
     $ql = $db->prepare($sql);
-    $ql->execute(array($name, $serve_type, $type_name, $amount, $cost, $type, $brand, $brand_name, $id));
+    $ql->execute(array($name, $serve_type, $type_name, $amount, $cost, $type, $brand, $brand_name, $main_commies, $sup_commies, $id));
 }
 
 

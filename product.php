@@ -33,6 +33,8 @@ date_default_timezone_set("Asia/Colombo");
         $cost = $row['cost'];
         $type = $row['type'];
         $brand = $row['brand_id'];
+        $com = $row['emp_commies'];
+        $sup_com = $row['sup_emp_commies'];
     }
 
     ?>
@@ -159,6 +161,20 @@ date_default_timezone_set("Asia/Colombo");
                                             </div>
                                         </div>
 
+                                        <div class="col-md-6 product_type serve_type">
+                                            <div class="form-group">
+                                                <label>Main Commies %</label>
+                                                <input type="number" step=".01" value="0" name="main_commies" class="form-control" tabindex="4" autocomplete="off">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 product_type serve_type">
+                                            <div class="form-group">
+                                                <label>Sup Commies %</label>
+                                                <input type="number" step=".01" value="0" name="sup_commies" class="form-control" tabindex="4" autocomplete="off">
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-6" style="height: 70px;display: flex;align-items: end;">
                                             <div class="form-group">
                                                 <input type="hidden" name="id" value="0">
@@ -170,7 +186,7 @@ date_default_timezone_set("Asia/Colombo");
                             </div>
 
                             <div class="col-md-6">
-                                <div class="col-md-12 serve_type" style="background-color: #272727;" id="serve_type2">
+                                <div class="col-md-12 serve_type" style="background-color: #272727;border-radius: 10px;" id="serve_type2">
                                     <h3>Use Materials</h3>
                                     <div class="col-md-6">
                                         <select class="form-control select2" name="category" style="width: 100%;" id="mat_1">
@@ -213,7 +229,7 @@ date_default_timezone_set("Asia/Colombo");
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12 material_type" style="background-color: #272727; display: none;" id="material_type">
+                                <div class="col-md-12 material_type" style="background-color: #272727;border-radius: 10px; display: none;" id="material_type">
                                     <h3>Use Product</h3>
                                     <div class="col-md-6">
                                         <select class="form-control select2" name="category" style="width: 100%;" id="pro_1">
@@ -367,6 +383,20 @@ date_default_timezone_set("Asia/Colombo");
                                             </div>
                                         </div>
 
+                                        <div class="col-md-6 product_type serve_type">
+                                            <div class="form-group">
+                                                <label>Main Commies %</label>
+                                                <input type="number" step=".01" value="<?php echo $com; ?>" name="main_commies" class="form-control" tabindex="4" autocomplete="off">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 product_type serve_type">
+                                            <div class="form-group">
+                                                <label>Sup Commies %</label>
+                                                <input type="number" step=".01" value="<?php echo $sup_com; ?>" name="sup_commies" class="form-control" tabindex="4" autocomplete="off">
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-6" style="height: 70px;display: flex;align-items: end;">
                                             <div class="form-group">
                                                 <input type="hidden" name="id" value="<?php echo $id; ?>">
@@ -380,7 +410,7 @@ date_default_timezone_set("Asia/Colombo");
 
                             <div class="col-md-6">
                                 <?php if ($type == 'Service') { ?>
-                                    <div class="col-md-12 serve_type" style="background-color: #272727;" id="serve_type2">
+                                    <div class="col-md-12 serve_type" style="background-color: #272727;border-radius: 10px;" id="serve_type2">
                                         <h3>Use Materials</h3>
                                         <div class="col-md-6">
                                             <select class="form-control select2" name="category" style="width: 100%;" id="mat_2">
@@ -424,7 +454,7 @@ date_default_timezone_set("Asia/Colombo");
                                         </div>
                                     </div>
                                 <?php } else if ($type == 'Materials') { ?>
-                                    <div class="col-md-12 material_type" style="background-color: #272727;" id="material_type">
+                                    <div class="col-md-12 material_type" style="background-color: #272727;border-radius: 10px;" id="material_type">
                                         <h3>Use Product</h3>
                                         <div class="col-md-6">
                                             <select class="form-control select2" name="category" style="width: 100%;" id="pro_2">
@@ -657,14 +687,14 @@ date_default_timezone_set("Asia/Colombo");
             let val = $('#pro_sel').val();
 
             if (val == 'Service') {
-                $('.serve_type').css('display', 'block');
                 $('.material_type').css('display', 'none');
                 $('.product_type').css('display', 'none');
+                $('.serve_type').css('display', 'block');
             }
             if (val == 'Materials') {
                 $('.serve_type').css('display', 'none');
-                $('.material_type').css('display', 'block');
                 $('.product_type').css('display', 'none');
+                $('.material_type').css('display', 'block');
             }
             if (val == 'Product') {
                 $('.serve_type').css('display', 'none');
