@@ -164,14 +164,14 @@ date_default_timezone_set("Asia/Colombo");
                                         <div class="col-md-6 product_type serve_type">
                                             <div class="form-group">
                                                 <label>Main Commies %</label>
-                                                <input type="number" step=".01" value="0" name="main_commies" class="form-control" tabindex="4" autocomplete="off">
+                                                <input type="number" value="0" name="main_commies" class="form-control" tabindex="4" autocomplete="off">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6 product_type serve_type">
                                             <div class="form-group">
                                                 <label>Sup Commies %</label>
-                                                <input type="number" step=".01" value="0" name="sup_commies" class="form-control" tabindex="4" autocomplete="off">
+                                                <input type="number" value="0" name="sup_commies" class="form-control" tabindex="4" autocomplete="off">
                                             </div>
                                         </div>
 
@@ -386,14 +386,14 @@ date_default_timezone_set("Asia/Colombo");
                                         <div class="col-md-6 product_type serve_type">
                                             <div class="form-group">
                                                 <label>Main Commies %</label>
-                                                <input type="number" step=".01" value="<?php echo $com; ?>" name="main_commies" class="form-control" tabindex="4" autocomplete="off">
+                                                <input type="number" value="<?php echo $com; ?>" name="main_commies" class="form-control" tabindex="4" autocomplete="off">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6 product_type serve_type">
                                             <div class="form-group">
                                                 <label>Sup Commies %</label>
-                                                <input type="number" step=".01" value="<?php echo $sup_com; ?>" name="sup_commies" class="form-control" tabindex="4" autocomplete="off">
+                                                <input type="number" value="<?php echo $sup_com; ?>" name="sup_commies" class="form-control" tabindex="4" autocomplete="off">
                                             </div>
                                         </div>
 
