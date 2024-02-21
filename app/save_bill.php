@@ -199,9 +199,9 @@ if ($total_payment < $amount) {
 
     if ($sales_id == 0) {
         // query
-        $sql = "INSERT INTO sales (invoice_number,amount,balance,profit,pay_type,pay_amount,date,customer_id,customer_name,action,discount,user_id,cashier,job_no,cost) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO sales (invoice_number,amount,balance,profit,pay_type,pay_amount,date,time,customer_id,customer_name,action,discount,user_id,cashier,job_no,cost) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $ql = $db->prepare($sql);
-        $ql->execute(array($invoice, $amount, $balance, $profit, $pay_type, $pay_total, $date, $cus_id, $cus_name, 'active', $discount, $user_id, $user_name, $job, $cost));
+        $ql->execute(array($invoice, $amount, $balance, $profit, $pay_type, $pay_total, $date, $time, $cus_id, $cus_name, 'active', $discount, $user_id, $user_name, $job, $cost));
     } else {
 
         $sql = 'UPDATE  sales SET action=?, pay_amount=pay_amount+?, balance=amount-?, pay_type=?, user_id=?  WHERE  invoice_number=? ';
