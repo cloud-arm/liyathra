@@ -3,10 +3,10 @@
 include("../connect.php");
 
 
-$id = $_REQUEST['id'];
-$emp = $_REQUEST['emp'];
-$sup_emp = $_REQUEST['sup_emp'];
-$job = $_REQUEST['job'];
+$id = $_POST['id'];
+$emp = $_POST['emp'];
+$sup_emp = $_POST['sup_emp'];
+$job = $_POST['job'];
 
 $result = $db->prepare("SELECT * FROM Employees WHERE id = '$emp' ");
 $result->bindParam(':id', $res);
@@ -27,4 +27,14 @@ $sql = "UPDATE sales_list SET emp = ?, sup_emp = ?, emp_name = ?, sup_emp_name =
 $ql = $db->prepare($sql);
 $ql->execute(array($emp, $sup_emp, $emp_name, $sup_emp_name, $id));
 
-header("location: appointment_action.php?id=$job");
+
+if (isset($_POST['pid'])) {
+
+    $invo = $_POST['invo'];
+    $pid = $_POST['pid'];
+    
+    header("location: product_add.php?id=$pid&invo=$invo");
+} else {
+
+    header("location: appointment_action.php?id=$job");
+}

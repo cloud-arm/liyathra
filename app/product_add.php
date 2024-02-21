@@ -11,8 +11,18 @@
     include("../connect.php");
     date_default_timezone_set("Asia/Colombo");
 
+    $user_id = $_SESSION['SESS_MEMBER_ID'];
+    $pos = $_SESSION['SESS_LAST_NAME'];
     $pro_id = $_GET['id'];
     $invo = $_GET['invo'];
+
+    $result = $db->prepare("SELECT * FROM user WHERE id = '$user_id' ");
+    $result->bindParam(':id', $res);
+    $result->execute();
+    for ($i = 0; $row = $result->fetch(); $i++) {
+        $user = $row['emp_id'];
+        $pos = $row['position'];
+    }
 
     $result = $db->prepare("SELECT * FROM product WHERE product_id = :id ");
     $result->bindParam(':id', $pro_id);
@@ -21,14 +31,18 @@
         $name = $row['name'];
     }
 
-    $price = 0;
     $id = 0;
+    $emp = 0;
+    $sup_emp = 0;
+    $price = 0;
     $result = $db->prepare("SELECT * FROM sales_list WHERE product_id = :id AND invoice_no ='$invo' ");
     $result->bindParam(':id', $pro_id);
     $result->execute();
     for ($i = 0; $row = $result->fetch(); $i++) {
         $id = $row['id'];
         $price = $row['price'];
+        $emp = $row['emp'];
+        $sup_emp = $row['sup_emp'];
     }
 
     $result = $db->prepare("SELECT * FROM job WHERE invoice_no =:id ");
@@ -75,6 +89,144 @@
             </div>
         </div>
     </div>
+
+    <?php if ($emp == 0 | $sup_emp == 0) { ?>
+        <?php if ($pos == 'admin') { ?>
+            <div class="container flex mb-3">
+                <div class="box room-container pt-0" style=" min-width: 100%;">
+                    <div class="box-body room mt-0 " style="padding: 30px 10px;">
+                        <div class="logo flex">
+                            <h1>Assign</h1>
+                        </div>
+
+                        <p>Enter an employee for the service </p>
+
+                        <form action="appointment_emp_assign.php" method="POST" style="width: 100%;">
+
+                            <?php if ($emp == 0) { ?>
+
+                                <h2 class="mt-3">Select Employee</span></h2>
+                                <div class="form-group ">
+                                    <label>Employee*</label>
+                                    <select name="emp" class="form-input" id="emp">
+                                        <option value="0"></option>
+                                        <?php
+                                        $result = $db->prepare('SELECT * FROM Employees  ');
+                                        $result->bindParam(':id', $res);
+                                        $result->execute();
+                                        for ($i = 0; $row = $result->fetch(); $i++) { ?>
+                                            <option value="<?php echo $em = $row['id']  ?>" <?php if ($emp == $em) {
+                                                                                                echo 'selected';
+                                                                                            } ?>>
+                                                <?php echo  $row['name'];  ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+
+                            <?php } else { ?>
+                                <input type="hidden" name="emp" value="<?php echo $emp; ?>">
+                            <?php } ?>
+
+                            <?php if ($sup_emp == 0) { ?>
+
+                                <h2 class="mt-3">Select Sub Employee</span></h2>
+                                <div class="form-group ">
+                                    <label>Sub Employee*</label>
+                                    <select name="sup_emp" class="form-input" id="sup_emp">
+                                        <option value="0"></option>
+                                        <?php
+                                        $result = $db->prepare('SELECT * FROM Employees  ');
+                                        $result->bindParam(':id', $res);
+                                        $result->execute();
+                                        for ($i = 0; $row = $result->fetch(); $i++) { ?>
+                                            <option value="<?php echo $sem = $row['id']  ?>" <?php if ($sup_emp == $sem) {
+                                                                                                    echo 'selected';
+                                                                                                } ?>>
+                                                <?php echo  $row['name'];  ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+
+                            <?php } else { ?>
+                                <input type="hidden" name="sup_emp" value="<?php echo $sup_emp; ?>">
+                            <?php } ?>
+
+                            <input type="hidden" name="pid" value="<?php echo $pro_id; ?>">
+                            <input type="hidden" name="invo" value="<?php echo $invo; ?>">
+                            <input type="hidden" name="job" value="<?php echo $job; ?>">
+                            <input type="hidden" name="id" value="<?php echo $id; ?>">
+
+                            <div class="form-group " style="margin-top: 50px; width: 90%">
+                                <input type="submit" class="form-input" value="Assign">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <?php } else { ?>
+            <?php if ($emp == 0) { ?>
+                <div class="container-fluid mt-3">
+                    <div class="box mt-0 pt-0">
+                        <div class="box-body d-block">
+                            <form action="appointment_emp_assign.php" method="POST" style="width: 100%;">
+
+                                <div class="info-box">
+                                    <div class="row w-100">
+                                        <div class="col-9 as_jdk">
+                                            <div class="i_n_b">
+                                                <span class="head">Service provider</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <input type="hidden" name="emp" value="<?php echo $user; ?>">
+                                            <input type="submit" class="bin btn" value="Assign">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="sup_emp" value="<?php echo $sup_emp; ?>">
+                                <input type="hidden" name="pid" value="<?php echo $pro_id; ?>">
+                                <input type="hidden" name="invo" value="<?php echo $invo; ?>">
+                                <input type="hidden" name="job" value="<?php echo $job; ?>">
+                                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if ($sup_emp == 0) { ?>
+                <div class="container-fluid mb-3">
+                    <div class="box mt-0 pt-0">
+                        <div class="box-body d-block">
+                            <form action="appointment_emp_assign.php" method="POST" style="width: 100%;">
+
+                                <div class="info-box">
+                                    <div class="row w-100">
+                                        <div class="col-9 as_jdk">
+                                            <div class="i_n_b">
+                                                <span class="head">Service provider supporter</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <input type="hidden" name="sup_emp" value="<?php echo $user; ?>">
+                                            <input type="submit" class="bin btn" value="Assign">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="emp" value="<?php echo $emp; ?>">
+                                <input type="hidden" name="pid" value="<?php echo $pro_id; ?>">
+                                <input type="hidden" name="invo" value="<?php echo $invo; ?>">
+                                <input type="hidden" name="job" value="<?php echo $job; ?>">
+                                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php } ?>
+    <?php } ?>
 
     <div class="container-lg box-body category my-0 pt-0 room-container" style="overflow-x: scroll;">
         <table>
