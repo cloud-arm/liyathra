@@ -34,6 +34,7 @@ $result->execute();
 for ($i = 0; $row = $result->fetch(); $i++) {
 
     $job = $row['id'];
+    $job_type = $row['job_type'];
 }
 
 if ($sev > 0) {
@@ -54,6 +55,15 @@ if ($sev > 0) {
         $pro_id = $row['product_id'];
         $code = $row['code'];
         $name = $row['name'];
+        $type = $row['job_type'];
+        $type_name = $row['type_name'];
+    }
+
+    if ($job_type == 0) {
+
+        $sql = 'UPDATE job SET job_type =?, type_name =? WHERE id = ? ';
+        $ql = $db->prepare($sql);
+        $ql->execute(array($type, $type_name, $job));
     }
 
     $qty = 1;
