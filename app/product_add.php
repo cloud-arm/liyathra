@@ -59,24 +59,35 @@
 
 <body class="bg-light customer" style="overflow-y: scroll;">
 
-    <div class="container flex mb-0">
-        <div class="box room-container mb-0 pb-0" style=" min-width: 100%;">
-            <div class="box-body room " id="serve_btn" style="padding: 20px 10px;transition: display 2s ease-out; ">
-                <h2 class="mb-0 w-100" onclick="get_service(1)">Service Provider <i class="fa-solid fa-chevron-left me-3 float-end"></i></h2>
-            </div>
 
-            <div class="box-body room mb-0" id="serve_content" style="padding: 20px 10px 30px; transform: translateY(-160%);display: none;transition: transform 2s ease-out, display 2s ease-out; ">
+    <?php if ($emp > 0 | $sup_emp > 0) { ?>
+        <div class="container flex mb-0">
+            <div class="box room-container mb-0 pb-0" style=" min-width: 100%;">
+                <div class="box-body room " id="serve_btn" style="padding: 20px 10px;transition: display 2s ease-out; ">
+                    <h2 class="mb-0 w-100" onclick="get_service(1)">Service Provider <i class="fa-solid fa-chevron-left me-3 float-end"></i></h2>
+                </div>
 
-                <h2 class="mb-4 w-100" onclick="get_service(2)">Service Provider <i class="fa-solid fa-chevron-down me-3 float-end"></i></h2>
+                <div class="box-body room mb-0" id="serve_content" style="padding: 20px 10px 30px; transform: translateY(-160%);display: none;transition: transform 2s ease-out, display 2s ease-out; ">
 
-                <p class="mb-1 mt-4 ms-3">Main Service Provider </p>
-                <h2><i class="fa-solid fa-user mx-3"></i><?php echo $emp_name; ?></h2>
+                    <h2 class="mb-4 w-100" onclick="get_service(2)">Service Provider <i class="fa-solid fa-chevron-down me-3 float-end"></i></h2>
 
-                <p class="mb-1 mt-4 ms-3">Service Supporter </p>
-                <h2><i class="fa-solid fa-user mx-3"></i><?php echo $sup_emp_name; ?></h2>
+                    <?php if ($emp > 0) { ?>
+
+                    <p class="mb-1 mt-4 ms-3">Main Service Provider </p>
+                    <h2><i class="fa-solid fa-user mx-3"></i><?php echo $emp_name; ?></h2>
+
+                    <?php } ?>
+                    <?php if ($sup_emp > 0) { ?>
+
+                    <p class="mb-1 mt-4 ms-3">Service Supporter </p>
+                    <h2><i class="fa-solid fa-user mx-3"></i><?php echo $sup_emp_name; ?></h2>
+
+                    <?php } ?>
+
+                </div>
             </div>
         </div>
-    </div>
+    <?php } ?>
 
     <div class="container-fluid mt-3 pb-0">
         <div class="box mb-0 pb-0">
