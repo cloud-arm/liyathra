@@ -202,9 +202,12 @@
             </a>
           </li>
 
-
-
-
+          <li>
+            <a href="cost_analyzes.php?d1=<?php echo date("Y-m-d"); ?>">
+              <i class="fa fa-line-chart"></i> <span>Cost Analyzes</span>
+              <span class="pull-right-container"></span>
+            </a>
+          </li>
 
           <li>
             <a href="expenses.php?year=<?php echo date("Y"); ?>&month=<?php echo date("m"); ?>">
