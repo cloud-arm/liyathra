@@ -111,6 +111,58 @@ date_default_timezone_set("Asia/Colombo");
             </div>
           </div>
         </div>
+
+
+        <div class="col-md-12 model_add_3" style="display: none;">
+          <div class="box box-primary model_add_3">
+            <div class="box-header with-border">
+              <h3 class="box-title">New Meter Reading Bill</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" onclick="model_cl(3)" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+
+            <div class="box-body">
+
+              <form method="POST" action="expenses_save.php">
+
+                <div class="row" style="display: flex; align-items: end;">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Utility Name</label>
+                      <input type="text" name="util_name" value="" class="form-control" autocomplete="off">
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Last Meter</label>
+                      <input type="text" name="last_meter" value="" class="form-control" autocomplete="off">
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Unit Price</label>
+                      <input type="number" name="unit_price" value="" class="form-control" autocomplete="off">
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="hidden" name="unit" value="4">
+                      <input type="submit" value="Save" class="btn btn-info">
+                    </div>
+                  </div>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- SELECT2 EXAMPLE -->
@@ -119,6 +171,7 @@ date_default_timezone_set("Asia/Colombo");
           <h3 class="box-title">Expenses
             <span class="btn btn-success" id="model_btn_1" onclick="model_btn(1)" style="margin: 10px 20px;">Add Utility Bill</span>
             <span class="btn btn-success" id="model_btn_2" onclick="model_btn(2)" style="margin: 10px 20px;">Add Expenses Type</span>
+            <span class="btn btn-success" id="model_btn_3" onclick="model_btn(3)" style="margin: 10px 20px;">Add Meter Reading Utility Bill</span>
           </h3>
         </div>
 

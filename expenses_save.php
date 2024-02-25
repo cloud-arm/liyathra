@@ -173,6 +173,30 @@ if ($unit == 3) {
     }
 }
 
+if ($unit == 4) {
+
+    $util_name = $_POST['util_name'];
+    $last_meter = $_POST['last_meter'];
+    $unit_price = $_POST['unit_price'];
+
+    $date = date('Y-m-d');
+    $name = strtoupper($util_name);
+
+    $id = 0;
+    $re = $db->prepare("SELECT * FROM utility_bill WHERE name=:id ");
+    $re->bindParam(':id', $name);
+    $re->execute();
+    for ($i = 0; $r = $re->fetch(); $i++) {
+        $id = $r['id'];
+    }
+
+    if ($id == 0) {
+        $sql = "INSERT INTO utility_bill  (name, action, meter, unit_price, last_date) VALUES (?,?,?,?,?) ";
+        $ql = $db->prepare($sql);
+        $ql->execute(array($name, 1, $last_meter, $unit_price, $date));
+    }
+}
+
 $Y = date("Y");
 $m = date("m");
 header("location: expenses.php?year=$Y&month=$m");
