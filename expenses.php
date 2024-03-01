@@ -171,7 +171,7 @@ date_default_timezone_set("Asia/Colombo");
           <h3 class="box-title">Expenses
             <span class="btn btn-success" id="model_btn_1" onclick="model_btn(1)" style="margin: 10px 20px;">Add Utility Bill</span>
             <span class="btn btn-success" id="model_btn_2" onclick="model_btn(2)" style="margin: 10px 20px;">Add Expenses Type</span>
-            <span class="btn btn-success" id="model_btn_3" onclick="model_btn(3)" style="margin: 10px 20px;">Add Meter Reading Utility Bill</span>
+            <span class="btn btn-success hidden" id="model_btn_3" onclick="model_btn(3)" style="margin: 10px 20px;">Add Meter Reading Utility Bill</span>
           </h3>
         </div>
 
