@@ -45,7 +45,6 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     $cus_id = $row['cus_id'];
 }
 
-// error with line 48 to 141 
 
 $sales_id = 0;
 $result = $db->prepare('SELECT * FROM sales WHERE  invoice_number = :id');
